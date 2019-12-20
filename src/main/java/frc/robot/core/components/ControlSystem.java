@@ -31,6 +31,10 @@ public class ControlSystem{
         }
     }
 
+    private double getAxis(Joystick joystick, int rawAxis){
+        return joystick.getRawAxis(rawAxis);
+    }
+
     public double getJoystickAxis(Controllers controller, Axis axis){
         switch(controller){
             case DRIVER:
@@ -44,9 +48,22 @@ public class ControlSystem{
         }
     }
 
+    public double getJoystickAxis(Controllers controller, int rawAxis){
+        switch(controller){
+            case DRIVER:
+                return getAxis(driver, rawAxis);
+
+            case AUXILLARY:
+                return getAxis(auxillary, rawAxis);
+            
+            default:
+                return 0;
+        }
+    }
+
     public boolean getButton(DriverButtons button){
         switch(button){
-            case TEMP:
+            case GYRO_LOCK:
                 return driver.getRawButton(button.getPort());
             
             default:
@@ -66,6 +83,19 @@ public class ControlSystem{
         }
     }
 
+    public int getPOV(Controllers controller){
+        switch(controller){
+            case DRIVER:
+                driver.getPOV();
+            
+            case AUXILLARY:
+                driver.getPOV();
+
+            default:
+                return 0;
+        }
+    }
+
 
     enum Controllers{
         DRIVER, AUXILLARY
@@ -76,7 +106,7 @@ public class ControlSystem{
     }
 
     enum DriverButtons{
-        TEMP(0);
+        GYRO_LOCK(0);
 
         int port;
         private DriverButtons(int port){

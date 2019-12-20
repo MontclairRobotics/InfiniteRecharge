@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.components.ControlSystem;
+import frc.robot.core.components.Drivetrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,8 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public static ControlSystem controlSystem;
+  
+  private Drivetrain drivetrain;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -33,12 +36,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
     controlSystem = new ControlSystem();
     controlSystem.robotInit();
+
+    drivetrain = new Drivetrain();
+    drivetrain.robotInit();
   
   }
 
@@ -94,6 +100,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    drivetrain.teleopPeriodic();
   }
 
   /**
