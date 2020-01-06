@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.core.Robot;
 import frc.robot.core.components.ControlSystem.Controllers;
@@ -15,12 +17,10 @@ import frc.robot.core.utils.Component;
 
 public class Drivetrain implements Component, PIDOutput {
 
-    MecanumDrive mecanumDrive;
+    DifferentialDrive differentialDrive;
 
-    WPI_TalonSRX frontLeft;
-    WPI_TalonSRX frontRight;
-    WPI_TalonSRX backLeft;
-    WPI_TalonSRX backRight;
+    SpeedControllerGroup left;
+    SpeedControllerGroup right;
 
     private AHRS navx;
     private PIDController turnController;
@@ -32,12 +32,10 @@ public class Drivetrain implements Component, PIDOutput {
     @Override
     public void robotInit() {
 
-        frontLeft = new WPI_TalonSRX(0);
-        frontRight = new WPI_TalonSRX(0);
-        backLeft = new WPI_TalonSRX(0);
-        backRight = new WPI_TalonSRX(0);
-
-        mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+        left = new SpeedControllerGroup(new WPI_TalonSRX(0), new WPI_TalonSRX(0));
+        right = new SpeedControllerGroup(new WPI_TalonSRX(0), new WPI_TalonSRX(0));
+        
+        differentialDrive = new DifferentialDrive(left, right);
 
         try {
             navx = new AHRS(SPI.Port.kMXP); 
@@ -56,12 +54,10 @@ public class Drivetrain implements Component, PIDOutput {
     public void teleopPeriodic() {
 
         if(Robot.controlSystem.getButton(DriverButtons.GYRO_LOCK)){
-            lockAngle(Robot.controlSystem.getPOV(Controllers.DRIVER));
+            lockAngle(0);
         }else{
-            mecanumDrive.driveCartesian(Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0),
-                Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0),
-                calcCurrentRotationRate(),
-                navx.getAngle());
+            differentialDrive.arcadeDrive((Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0)), 
+            calcCurrentRotationRate());
         }
 
     }
