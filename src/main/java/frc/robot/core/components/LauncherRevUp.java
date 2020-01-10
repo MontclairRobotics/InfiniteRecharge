@@ -17,7 +17,7 @@ public class LauncherRevUp implements LauncherState {
     public LauncherState run() {
         motor.set(1);
         if(encoder.getRate() > 10){
-            LauncherShoot state = new LauncherShoot(null);
+            LauncherShoot state = new LauncherShoot(null, 1, 3);// need to edit based on other variables
         }
         return this;
     }
