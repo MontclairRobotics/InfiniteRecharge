@@ -18,6 +18,8 @@ public class LauncherShoot implements LauncherState{
         //wait until total # of balls(burst) are fired 
         motor.notify();
         motor.set(0);
+        LauncherState state = new LauncherRest();
+        state = state.run();
     }
 
     public LauncherState run(){
