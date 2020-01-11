@@ -58,6 +58,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    Drivetrain drivetrain = new Drivetrain();
+    drivetrain.teleopPeriodic();
   }
 
   /**
