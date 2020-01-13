@@ -36,10 +36,10 @@ public class Drivetrain implements Component, PIDOutput {
 
         SpeedControllerGroup right;
         SpeedControllerGroup left;
-        frontLeft = new WPI_TalonSRX(0);
-        frontRight = new WPI_TalonSRX(0);
+        frontLeft = new WPI_TalonSRX(1);
+        frontRight = new WPI_TalonSRX(3);
         backLeft = new WPI_TalonSRX(0);
-        backRight = new WPI_TalonSRX(0);
+        backRight = new WPI_TalonSRX(4);
         left = new SpeedControllerGroup(frontLeft, backLeft);
         right = new SpeedControllerGroup(frontRight, backRight);
 
