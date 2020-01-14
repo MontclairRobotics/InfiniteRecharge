@@ -62,6 +62,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+      drivetrain.robotPeriodic();
+
       LauncherState state = new LauncherRest();
       state = state.run();
   }
@@ -79,6 +81,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+      drivetrain.autonomousInit();
+
     m_autoSelected = m_chooser.getSelected();
     // autoSelected = SmartDashboard.getString("Auto Selector",
     // defaultAuto);
@@ -90,6 +94,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+      drivetrain.autonomousPeriodic();
+
     switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
@@ -114,5 +120,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    drivetrain.testPeriodic();
   }
 }
