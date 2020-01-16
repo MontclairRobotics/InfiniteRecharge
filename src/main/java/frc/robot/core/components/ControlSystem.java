@@ -97,15 +97,15 @@ public class ControlSystem{
     }
 
 
-    enum Controllers{
+    public enum Controllers{
         DRIVER, AUXILLARY
     }
 
-    enum Axis{
+    public enum Axis{
         X, Y, Z
     }
 
-    enum DriverButtons{
+    public enum DriverButtons{
         GYRO_LOCK(0);
 
         int port;
@@ -118,7 +118,7 @@ public class ControlSystem{
         }
     }
 
-    enum AuxillaryButtons{
+    public enum AuxillaryButtons{
         TEMP(0);
 
         int port;
