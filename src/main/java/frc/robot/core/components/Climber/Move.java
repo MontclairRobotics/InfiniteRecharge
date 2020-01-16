@@ -1,16 +1,24 @@
 package frc.robot.core.components.Climber;
 
-interface moverBase {
+import edu.wpi.first.wpilibj.SpeedController;
+import frc.robot.core.components.ControlSystem;
+import frc.robot.core.components.ControlSystem.Axis;
+import frc.robot.core.components.ControlSystem.Controllers;
+
+interface MoverBase {
     void balance();
     void shift(double speed, double distance);
 }
     
-public class Mover implements moverBase {
-    public void balance() {
+public class Move implements MoverBase {
+    ControlSystem moverControls;
+    SpeedController moverController;
 
+    public void balance() {
+        
     }
     
     public void shift(double speed, double distance) {
-
+        moverController.set(moverControls.getJoystickAxis(Controllers.DRIVER, Axis.Y));
     }
 }

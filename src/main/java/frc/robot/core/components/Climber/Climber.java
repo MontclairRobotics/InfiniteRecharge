@@ -9,11 +9,6 @@ interface climberBase {
     void climb(double height, double speed);
 }
 
-
-
-
-
-
 public class Climber implements climberBase {
     public void armUp() {
 
