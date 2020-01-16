@@ -13,7 +13,7 @@ class Launcher implements LauncherBase{
         motor = null;
         encoder = null;
         transport = null;
-        state = new LauncherRest();
+        state = new LauncherRest(this);
         desiredSpeed = 0;
         shooterQueueLength = 0;
 
@@ -24,7 +24,7 @@ class Launcher implements LauncherBase{
         this.motor = motor;
         this.encoder = encoder;
         this.transport = transport;
-        state = new LauncherRest();
+        state = new LauncherRest(this);
         desiredSpeed = 0;
         shooterQueueLength = 0;
 
@@ -33,7 +33,7 @@ class Launcher implements LauncherBase{
     private SpeedController motor;
     private Encoder encoder;
     private Transport transport;
-    private LauncherStateMachine state;
+    private StateMachineBase<Launcher> state;
     private double desiredSpeed;
     private int shooterQueueLength;
 

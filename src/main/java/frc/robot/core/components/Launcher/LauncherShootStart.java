@@ -1,12 +1,17 @@
 //PACKAGE//
 package frc.robot.core.components.Launcher;
 
-//CLASSES//
-class LauncherShootStart implements LauncherStateMachine{
-    public LauncherStateMachine run( Launcher launcher ) {
+import frc.robot.core.utils.StateMachine.*;
 
-        launcher.getMotor().set(launcher.getDesiredSpeed());
-        return new LauncherRevUp();
+//CLASSES//
+class LauncherShootStart extends StateMachineBase<Launcher>{
+    public LauncherShootStart(Launcher launcher){super(launcher);}
+
+    @Override
+    public StateMachineBase<Launcher> run() {
+
+        caller.getMotor().set(caller.getDesiredSpeed());
+        return new LauncherRevUp(caller);
 
     }
 }

@@ -1,8 +1,13 @@
 //PACKAGE//
 package frc.robot.core.components.Launcher;
 
-class LauncherRest implements LauncherStateMachine{
-    public LauncherStateMachine run( Launcher launcher ) {
+import frc.robot.core.utils.StateMachine.*;
+
+class LauncherRest extends StateMachineBase<Launcher>{
+    public LauncherRest(Launcher launcher){super(launcher);}
+
+    @Override
+    public StateMachineBase<Launcher> run() {
 
         return this;
 

@@ -1,14 +1,19 @@
 //PACKAGE//
 package frc.robot.core.components.Launcher;
 
-class LauncherRevUp implements LauncherStateMachine{
-    public LauncherStateMachine run( Launcher launcher ) {
+import frc.robot.core.utils.StateMachine.*;
 
-        LauncherStateMachine nextState = new LauncherRevUp();
+class LauncherRevUp extends StateMachineBase<Launcher>{
+    public LauncherRevUp(Launcher launcher){super(launcher);}
 
-        if( launcher.getEncoder().get() >= 10) { //Change constant
+    @Override
+    public StateMachineBase<Launcher> run() {
 
-            nextState = new LauncherShoot();
+        StateMachineBase<Launcher> nextState = new LauncherRevUp(caller);
+
+        if( caller.getEncoder().get() >= 10) { //Change constant
+
+            nextState = new LauncherShoot(caller);
 
         }
 

@@ -1,12 +1,17 @@
 //PACKAGE//
 package frc.robot.core.components.Launcher;
 
-class LauncherShoot implements LauncherStateMachine{
-    public LauncherStateMachine run( Launcher launcher ) {
+import frc.robot.core.utils.StateMachine.*;
 
-        LauncherStateMachine nextState = new LauncherShooting();
+class LauncherShoot extends StateMachineBase<Launcher>{
+    public LauncherShoot(Launcher launcher){super(launcher);}
 
-        launcher.getTransport().output();
+    @Override
+    public StateMachineBase<Launcher> run() {
+
+        StateMachineBase<Launcher> nextState = new LauncherShooting(caller);
+
+        caller.getTransport().output();
 
         return nextState;
 
