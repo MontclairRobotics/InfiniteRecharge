@@ -6,17 +6,12 @@ import frc.robot.core.components.ControlSystem.Axis;
 import frc.robot.core.components.ControlSystem.Controllers;
 
 interface MoverBase {
-    void balance();
     void shift(double speed, double distance);
 }
     
-public class Move implements MoverBase {
+public class Mover implements MoverBase {
     ControlSystem moverControls;
     SpeedController moverController;
-
-    public void balance() {
-        
-    }
     
     public void shift(double speed, double distance) {
         moverController.set(moverControls.getJoystickAxis(Controllers.DRIVER, Axis.Y));
