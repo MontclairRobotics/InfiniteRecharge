@@ -112,7 +112,7 @@ public class Winch implements WinchBase{
 
     public void periodic() {
 
-        state = state.run();
+        state = state.run(this);
 
     }
 
