@@ -8,10 +8,14 @@
 package frc.robot.core;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.components.ControlSystem;
 import frc.robot.core.components.Drivetrain;
+import frc.robot.core.components.LauncherRest;
+import frc.robot.core.components.LauncherRevUp;
+import frc.robot.core.components.LauncherState;
 
 /**
  * The VM is configured to automatically run this class, and to call the
