@@ -2,6 +2,8 @@ package frc.robot.core.components;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
@@ -19,10 +21,10 @@ public class Drivetrain implements Component, PIDOutput {
 
     DifferentialDrive differentialDrive;
 
-    WPI_TalonSRX frontLeft;
-    WPI_TalonSRX frontRight;
-    WPI_TalonSRX backLeft;
-    WPI_TalonSRX backRight;
+    CANSparkMax frontLeft;
+    CANSparkMax frontRight;
+    CANSparkMax backLeft;
+    CANSparkMax backRight;
 
     private AHRS navx;
     private PIDController turnController;
@@ -36,10 +38,12 @@ public class Drivetrain implements Component, PIDOutput {
 
         SpeedControllerGroup right;
         SpeedControllerGroup left;
-        frontLeft = new WPI_TalonSRX(1);
-        frontRight = new WPI_TalonSRX(3);
-        backLeft = new WPI_TalonSRX(0);
-        backRight = new WPI_TalonSRX(4);
+
+        frontLeft = new CANSparkMax(0, MotorType.kBrushless);
+        frontRight = new CANSparkMax(1, MotorType.kBrushless);
+        backLeft = new CANSparkMax(2, MotorType.kBrushless);
+        backRight = new CANSparkMax(3, MotorType.kBrushless);
+
         left = new SpeedControllerGroup(frontLeft, backLeft);
         right = new SpeedControllerGroup(frontRight, backRight);
 
