@@ -1,8 +1,6 @@
 package frc.robot.core.components.Climber;
 
 import frc.robot.core.components.*;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 interface climberControls {
     double getJoystickAxis(ControlSystem.Controllers joystick, ControlSystem.Axis axis);

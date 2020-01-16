@@ -1,7 +1,5 @@
 package frc.robot.core.components.Climber;
 
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import frc.robot.core.components.ControlSystem;
 import frc.robot.core.components.ControlSystem.Axis;
