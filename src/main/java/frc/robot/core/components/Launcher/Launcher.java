@@ -3,6 +3,7 @@ package frc.robot.core.components.Launcher;
 
 //IMPORTS//
 import frc.robot.core.components.Transport.*;
+import frc.robot.core.utils.StateMachine.*;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -46,20 +47,20 @@ class Launcher implements LauncherBase{
 
     public boolean finishedShooting() {
 
-        return (state.equals(new LauncherRest()));
+        return (state.equals(new LauncherRest(this)));
 
     }
     
     void periodic() {
 
-        if(state.equals(new LauncherRest()) && shooterQueueLength > 0) {
+        if(state.equals(new LauncherRest(this)) && shooterQueueLength > 0) {
 
-            state = new LauncherShootStart();
+            state = new LauncherShootStart(this);
             shooterQueueLength--;
 
         }
 
-        state = state.run(this);
+        state = state.run();
 
     }
 
