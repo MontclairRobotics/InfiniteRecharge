@@ -7,16 +7,16 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
 
-interface WheelArmInterface {
+/*interface WheelArmInterface {
     void Raise();
     void Lower();
     void RotateControl();
     void RotateForColor(char colorForField);
     char GetColorFromSensor();
-}
-class WheelArm implements WheelArmInterface {
-    TalonSRX ArmMover;
-    TalonSRX WheelMover;
+}*/
+class WheelArm /*implements WheelArmInterface */{
+    private TalonSRX ArmMover;
+    private TalonSRX WheelMover;
     
     int spinCount = 0;
     public void Raise() {
@@ -28,11 +28,15 @@ class WheelArm implements WheelArmInterface {
     }
     public void RotateControl() {
         char startColor = GetColorFromSensor();
+        boolean ifTurned = false;
         WheelMover.set(ControlMode.PercentOutput, 0.2);
         if (spinCount == 7) {
             WheelMover.set(ControlMode.PercentOutput, 0);
-        } else if (GetColorFromSensor() == startColor) {
+        } else if (GetColorFromSensor() == startColor && ifTurned == true) {
             spinCount ++;
+            ifTurned = false;
+        } else {
+            ifTurned = true;
         }
      }
 
@@ -53,8 +57,19 @@ class WheelArm implements WheelArmInterface {
             WheelMover.set(ControlMode.PercentOutput, 0);
         }
     }
-    public char GetColorFromSensor() {
-        final I2C.Port i2cPort = I2C.Port.kOnboard;// need to change later
+    /**
+     * Returns the color that the color sensor is reading
+     * 
+     * y - yellow (red > .3 , green > .5)
+     * r - red    (red > .4)
+     * g - green  (green > .5)
+     * b - blue   (blue > .4)
+     * 
+     * All values were obtained through testing at one light condition
+     * @return a charachter pertaining to the color that the light sensor is reading (y, r, g, b)
+     */
+    public char GetColorFromSensor() { 
+        final I2C.Port i2cPort = I2C.Port.kOnboard;// TODO: need to change later
         final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
         Color detectedColor = m_colorSensor.getColor();
         double redVal = detectedColor.red;
