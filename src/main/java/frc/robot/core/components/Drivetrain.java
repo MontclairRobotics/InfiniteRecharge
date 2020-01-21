@@ -1,6 +1,5 @@
 package frc.robot.core.components;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -13,15 +12,13 @@ import frc.robot.core.Robot;
 import frc.robot.core.components.ControlSystem.Controllers;
 import frc.robot.core.components.ControlSystem.DriverButtons;
 import frc.robot.core.utils.Component;
+import frc.robot.core.utils.Hardware;
 
 public class Drivetrain implements Component /*PIDOutput*/ {
 
     DifferentialDrive differentialDrive;
 
-    WPI_TalonSRX frontLeft;
-    WPI_TalonSRX frontRight;
-    WPI_TalonSRX backLeft;
-    WPI_TalonSRX backRight;
+
 
     private AHRS navx;
    //private PIDController turnController;
@@ -35,12 +32,9 @@ public class Drivetrain implements Component /*PIDOutput*/ {
 
         SpeedControllerGroup right;
         SpeedControllerGroup left;
-        frontLeft = new WPI_TalonSRX(1);
-        frontRight = new WPI_TalonSRX(3);
-        backLeft = new WPI_TalonSRX(0);
-        backRight = new WPI_TalonSRX(4);
-        left = new SpeedControllerGroup(frontLeft, backLeft);
-        right = new SpeedControllerGroup(frontRight, backRight);
+       
+        left = new SpeedControllerGroup(Hardware.DT_FL, Hardware.DT_BL);
+        right = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
 
         differentialDrive = new DifferentialDrive(left, right);
 

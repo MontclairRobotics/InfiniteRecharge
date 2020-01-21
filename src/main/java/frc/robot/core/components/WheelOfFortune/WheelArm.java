@@ -1,11 +1,9 @@
 package frc.robot.core.components.WheelOfFortune;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.I2C;
+import frc.robot.core.utils.Hardware;
 import edu.wpi.first.wpilibj.util.Color;
-import com.revrobotics.ColorSensorV3;
+
 
 /*interface WheelArmInterface {
     void Raise();
@@ -15,23 +13,22 @@ import com.revrobotics.ColorSensorV3;
     char GetColorFromSensor();
 }*/
 class WheelArm /*implements WheelArmInterface */{
-    private TalonSRX ArmMover;
-    private TalonSRX WheelMover;
+    
     
     int spinCount = 0;
     public void Raise() {
-        ArmMover.set(ControlMode.PercentOutput, 0.1);
+        Hardware.ArmMover.set(ControlMode.PercentOutput, 0.1);
     }
     
     public void Lower() {
-        ArmMover.set(ControlMode.PercentOutput, -0.1);
+        Hardware.ArmMover.set(ControlMode.PercentOutput, -0.1);
     }
     public void RotateControl() {
         char startColor = GetColorFromSensor();
         boolean ifTurned = false;
-        WheelMover.set(ControlMode.PercentOutput, 0.2);
+        Hardware.WheelMover.set(ControlMode.PercentOutput, 0.2);
         if (spinCount == 7) {
-            WheelMover.set(ControlMode.PercentOutput, 0);
+            Hardware.WheelMover.set(ControlMode.PercentOutput, 0);
         } else if (GetColorFromSensor() == startColor && ifTurned == true) {
             spinCount ++;
             ifTurned = false;
@@ -51,10 +48,10 @@ class WheelArm /*implements WheelArmInterface */{
         } else {
             colorForSensor = 'r';
         }
-        WheelMover.set(ControlMode.PercentOutput, 0.1);
+        Hardware.WheelMover.set(ControlMode.PercentOutput, 0.1);
 
         if (GetColorFromSensor() == colorForSensor) {
-            WheelMover.set(ControlMode.PercentOutput, 0);
+            Hardware.WheelMover.set(ControlMode.PercentOutput, 0);
         }
     }
     /**
@@ -69,9 +66,8 @@ class WheelArm /*implements WheelArmInterface */{
      * @return a charachter pertaining to the color that the light sensor is reading (y, r, g, b)
      */
     public char GetColorFromSensor() { 
-        final I2C.Port i2cPort = I2C.Port.kOnboard;// TODO: need to change later
-        final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-        Color detectedColor = m_colorSensor.getColor();
+        
+        Color detectedColor = Hardware.m_colorSensor.getColor();
         double redVal = detectedColor.red;
         double blueVal = detectedColor.blue;
         double greenVal = detectedColor.green;
