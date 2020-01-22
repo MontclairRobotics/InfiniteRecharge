@@ -6,7 +6,9 @@ public class StateMachineHandler {
 
     ArrayList<StateMachineBase> states = new ArrayList<StateMachineBase>();
 
-    void run() {
+    public
+    
+    public void run() {
 
         for( StateMachineBase state : states ) {
             state = state.run();
