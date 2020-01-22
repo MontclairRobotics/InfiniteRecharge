@@ -14,7 +14,7 @@ class ArmStart extends StateMachineBase<Arm>{
 
     @Override
     public StateMachineBase<Arm> run() {
-        StateMachineBase<Arm> nextState = new ArmWait(caller);
+        StateMachineBase nextState = new ArmWait(caller);
 
         caller.getMotor().set(caller.getDesiredSpeed());
         caller.getEncoder().reset();
@@ -27,7 +27,7 @@ class ArmWait extends StateMachineBase<Arm>{
 
     @Override
     public StateMachineBase<Arm> run() {
-        StateMachineBase<Arm> nextState = new ArmWait(caller);
+        StateMachineBase nextState = new ArmWait(caller);
 
         if(caller.getEncoder().getDistance() > caller.getMaximumRotation()) {nextState = new ArmEnd(caller);}
 
@@ -39,19 +39,11 @@ class ArmEnd extends StateMachineBase<Arm>{
 
     @Override
     public StateMachineBase<Arm> run() {
-        StateMachineBase<Arm> nextState = new ArmRest(caller);
+        StateMachineBase nextState = new RestBase(caller);
 
         caller.getMotor().stopMotor();
 
         return nextState;
-    }
-}
-class ArmRest extends StateMachineBase<Arm>{
-    public ArmRest(Arm arm) {super(arm);}
-
-    @Override
-    public StateMachineBase<Arm> run() {
-        return this;
     }
 }
 
@@ -63,7 +55,7 @@ public class Arm implements ArmBase{
         encoder = null;
         desiredSpeed = 0;
         maximumRotation = 0;
-        state = new ArmRest(this);
+        state = new RestBase(this);
 
     }
 
@@ -73,7 +65,7 @@ public class Arm implements ArmBase{
         this.encoder = encoder;
         desiredSpeed = 0;
         this.maximumRotation = maximumRotation;
-        state = new ArmRest(this);
+        state = new RestBase(this);
 
     }
 
@@ -81,7 +73,7 @@ public class Arm implements ArmBase{
     private Encoder encoder;
     private double desiredSpeed;
     private double maximumRotation;
-    private StateMachineBase<Arm> state = new StateMachineBase<Arm>(this);
+    private StateMachineBase state = new StateMachineBase<Arm>(this);
 
     public SpeedController getMotor() {return motor;}
     public double getDesiredSpeed() {return desiredSpeed;}

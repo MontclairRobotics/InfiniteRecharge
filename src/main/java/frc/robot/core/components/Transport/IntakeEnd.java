@@ -3,14 +3,17 @@ package frc.robot.core.components.Transport;
 
 //IMPORTS//
 import edu.wpi.first.wpilibj.SpeedController;
+import frc.robot.core.utils.StateMachine.*;
 
 
-class IntakeEnd implements TransportStateMachine {
-    public TransportStateMachine run(Transport transport) {
+class IntakeEnd extends StateMachineBase<Transport>{
+    IntakeEnd(Transport caller){super(caller);}
 
-        TransportStateMachine nextState = new TransportRest();
+    public StateMachineBase run() {
 
-        for (SpeedController motor: transport.getIntakeMotors()) {
+        StateMachineBase nextState = new RestBase(this);
+        
+        for (SpeedController motor: caller.getIntakeMotors()) {
 
             motor.stopMotor(); //CHANGE CONSTANT//
 

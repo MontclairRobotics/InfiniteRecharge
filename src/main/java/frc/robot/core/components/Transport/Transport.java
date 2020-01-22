@@ -3,6 +3,7 @@ package frc.robot.core.components.Transport;
 
 //IMPORTS//
 import edu.wpi.first.wpilibj.SpeedController;
+import frc.robot.core.utils.StateMachine.*;
 
 public class Transport implements TransportIntake, TransportOutput{
 
@@ -10,7 +11,7 @@ public class Transport implements TransportIntake, TransportOutput{
     private SpeedController[] intakeMotors;
     private SpeedController[] outputMotors;
     private boolean hasIntaken, hasOutputted;
-    private TransportStateMachine intakeState, outputState;
+    private StateMachineBase intakeState, outputState;
 
     //sesnor thingy
 
@@ -22,8 +23,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        intakeState = new TransportRest();
-        outputState = new TransportRest();
+        intakeState = new RestBase(this);
+        outputState = new RestBase(this);
     }
     Transport( SpeedController intakeMotor, SpeedController outputMotor ) {
         intakeMotors = new SpeedController[]{intakeMotor};
@@ -32,8 +33,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        intakeState = new TransportRest();
-        outputState = new TransportRest();
+        intakeState = new RestBase(this);
+        outputState = new RestBase(this);
     }
     Transport( SpeedController[] intakeMotors, SpeedController[] outputMotors ) {
         this.intakeMotors = intakeMotors;
@@ -42,8 +43,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        intakeState = new TransportRest();
-        outputState = new TransportRest();
+        intakeState = new RestBase(this);
+        outputState = new RestBase(this);
     }
 
     //GETTER-SETTERS//
@@ -54,25 +55,15 @@ public class Transport implements TransportIntake, TransportOutput{
     public void setHasIntaken(boolean value) { hasIntaken = value; }
     public void setHasOutputted(boolean value) { hasOutputted = value; }
 
-    //METHODS//
-    public void peroidic() {
-
-        intakeState = intakeState.run(this);
-        outputState = outputState.run(this);
-
-        //UPDATE HASINPUTTED/HASOUPUTTED//
-
-    }
-
     public void intake() {
      
-        intakeState = new IntakeStart();
+        intakeState = new IntakeStart(this);
 
     }
 
     public void output() {
 
-        outputState = new OutputStart();
+        outputState = new OutputStart(this);
 
     }
 

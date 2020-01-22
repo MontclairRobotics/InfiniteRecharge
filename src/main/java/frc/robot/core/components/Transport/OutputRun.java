@@ -2,15 +2,18 @@
 package frc.robot.core.components.Transport;
 
 //IMPORTS//
+import frc.robot.core.utils.StateMachine.*;
 
-class OutputRun implements TransportStateMachine {
-    public TransportStateMachine run(Transport transport) {
+class IntakeRun extends StateMachineBase<Transport>{
+    public IntakeRun(Transport caller){super(caller);}
 
-        TransportStateMachine nextState = new OutputRun();
+    public StateMachineBase run() {
 
-        if(transport.getHasOutputted()) { 
-            nextState = new OutputEnd(); 
-            transport.setHasOutputted(false);
+        StateMachineBase nextState = new IntakeRun(caller);
+
+        if(caller.getHasIntaken()) { 
+            nextState = new IntakeEnd(caller); 
+            caller.setHasIntaken(false);
         }
 
         return nextState;
