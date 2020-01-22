@@ -4,8 +4,8 @@ package frc.robot.core.components.Transport;
 //IMPORTS//
 import frc.robot.core.utils.StateMachine.*;
 
-class IntakeRun extends StateMachineBase<Transport>{
-    public IntakeRun(Transport caller){super(caller);}
+class OutputRun extends StateMachineBase<Transport>{
+    public OutputRun(Transport caller){super(caller);}
 
     public StateMachineBase run() {
 

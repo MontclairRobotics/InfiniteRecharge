@@ -8,7 +8,7 @@ class LauncherShootStart extends StateMachineBase<Launcher>{
     public LauncherShootStart(Launcher launcher){super(launcher);}
 
     @Override
-    public StateMachineBase<Launcher> run() {
+    public StateMachineBase run() {
 
         caller.getMotor().set(caller.getDesiredSpeed());
         return new LauncherRevUp(caller);

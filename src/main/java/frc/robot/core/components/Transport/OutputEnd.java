@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.SpeedController;
 import frc.robot.core.utils.StateMachine.*;
 
 
-class IntakeEnd extends StateMachineBase<Transport>{
-    IntakeEnd(Transport caller){super(caller);}
+class OutputEnd extends StateMachineBase<Transport>{
+    OutputEnd(Transport caller){super(caller);}
 
     public StateMachineBase run() {
 

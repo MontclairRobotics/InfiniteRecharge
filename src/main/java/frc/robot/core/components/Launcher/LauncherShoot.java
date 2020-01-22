@@ -7,9 +7,9 @@ class LauncherShoot extends StateMachineBase<Launcher>{
     public LauncherShoot(Launcher launcher){super(launcher);}
 
     @Override
-    public StateMachineBase<Launcher> run() {
+    public StateMachineBase run() {
 
-        StateMachineBase<Launcher> nextState = new LauncherShooting(caller);
+        StateMachineBase nextState = new LauncherShooting(caller);
 
         caller.getTransport().output();
 

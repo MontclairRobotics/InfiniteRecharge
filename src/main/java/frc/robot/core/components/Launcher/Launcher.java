@@ -14,7 +14,7 @@ class Launcher implements LauncherBase{
         motor = null;
         encoder = null;
         transport = null;
-        state = new LauncherRest(this);
+        state = new RestBase(this);
         desiredSpeed = 0;
         shooterQueueLength = 0;
 
@@ -25,7 +25,7 @@ class Launcher implements LauncherBase{
         this.motor = motor;
         this.encoder = encoder;
         this.transport = transport;
-        state = new LauncherRest(this);
+        state = new RestBase(this);
         desiredSpeed = 0;
         shooterQueueLength = 0;
 
@@ -34,7 +34,7 @@ class Launcher implements LauncherBase{
     private SpeedController motor;
     private Encoder encoder;
     private Transport transport;
-    private StateMachineBase<Launcher> state;
+    private StateMachineBase state;
     private double desiredSpeed;
     private int shooterQueueLength;
 
@@ -47,20 +47,7 @@ class Launcher implements LauncherBase{
 
     public boolean finishedShooting() {
 
-        return (state.equals(new LauncherRest(this)));
-
-    }
-    
-    void periodic() {
-
-        if(state.equals(new LauncherRest(this)) && shooterQueueLength > 0) {
-
-            state = new LauncherShootStart(this);
-            shooterQueueLength--;
-
-        }
-
-        state = state.run();
+        return (state.equals(new RestBase(this)));
 
     }
 
@@ -74,6 +61,8 @@ class Launcher implements LauncherBase{
 
         desiredSpeed = velocity;
         shooterQueueLength += burstSize;
+
+        state = new LauncherShootStart(this);
 
     }
 

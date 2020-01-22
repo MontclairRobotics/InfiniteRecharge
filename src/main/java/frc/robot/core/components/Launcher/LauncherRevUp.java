@@ -7,9 +7,9 @@ class LauncherRevUp extends StateMachineBase<Launcher>{
     public LauncherRevUp(Launcher launcher){super(launcher);}
 
     @Override
-    public StateMachineBase<Launcher> run() {
+    public StateMachineBase run() {
 
-        StateMachineBase<Launcher> nextState = new LauncherRevUp(caller);
+        StateMachineBase nextState = new LauncherRevUp(caller);
 
         if( caller.getEncoder().get() >= 10) { //Change constant
 

@@ -4,63 +4,53 @@ package frc.robot.core.components.Climber;
 //IMPORTS//
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.core.utils.StateMachine.*;
 
 interface WinchBase {
     void wind(double speed, double distance);
     void reset(double speed);
-    void periodic();
 }
 
-interface WinchStateMachine {
-    WinchStateMachine run(Winch winch);
-}
+class WinchBegin extends StateMachineBase<Winch>{
+    public WinchBegin(Winch caller){super(caller);}
 
-class WinchBegin implements WinchStateMachine {
+    public StateMachineBase run() {
 
-    public WinchStateMachine run(Winch winch) {
+        StateMachineBase nextState = new WinchWaiting(caller);
 
-        WinchStateMachine nextState = new WinchWaiting();
-
-        winch.getMotor().set(winch.getDesiredSpeed());
-        winch.getEncoder().reset();
+        caller.getMotor().set(caller.getDesiredSpeed());
+        caller.getEncoder().reset();
 
         return nextState;
 
     }
 
 }
-class WinchWaiting implements WinchStateMachine {
+class WinchWaiting extends StateMachineBase<Winch> {
+    public WinchWaiting(Winch caller){super(caller);}
 
-    public WinchStateMachine run(Winch winch) {
+    public StateMachineBase run() {
 
-        WinchStateMachine nextState = new WinchWaiting();
+        StateMachineBase nextState = new WinchWaiting(caller);
 
-        if(winch.getEncoder().getDistance() > winch.getDesiredDistance()) {nextState = new WinchEnd();}
-
-        return nextState;
-
-    }
-
-}
-class WinchEnd implements WinchStateMachine {
-
-    public WinchStateMachine run(Winch winch) {
-
-        WinchStateMachine nextState = new WinchRest();
-
-        winch.getMotor().stopMotor();
-        winch.setCurrentDistance(winch.getEncoder().getDistance());
+        if(caller.getEncoder().getDistance() > caller.getDesiredDistance()) {nextState = new WinchEnd(caller);}
 
         return nextState;
 
     }
 
 }
-class WinchRest implements WinchStateMachine {
+class WinchEnd extends StateMachineBase<Winch> {
+    public WinchEnd(Winch caller){super(caller);}
 
-    public WinchStateMachine run(Winch winch) {
+    public StateMachineBase run(Winch winch) {
 
-        return this;
+        StateMachineBase nextState = new RestBase(caller);
+
+        caller.getMotor().stopMotor();
+        caller.setCurrentDistance(caller.getEncoder().getDistance());
+
+        return nextState;
 
     }
 
@@ -70,7 +60,7 @@ public class Winch implements WinchBase{
         
     private SpeedController motor;
     private Encoder encoder;
-    private WinchStateMachine state;
+    private StateMachineBase state;
     private double desiredSpeed;
     private double desiredDistance;
 
@@ -81,7 +71,7 @@ public class Winch implements WinchBase{
 
         motor = null;
         encoder = null;
-        state = new WinchRest();
+        state = new RestBase(this);
         desiredSpeed = 0;
         desiredDistance = 0;
         currentDistance = 0;
@@ -93,7 +83,7 @@ public class Winch implements WinchBase{
 
         this.motor = motor;
         this.encoder = encoder;
-        state = new WinchRest();
+        state = new RestBase(this);
         desiredDistance = 0;
         desiredSpeed = 0;
         this.maximumDistance = maximumDistance;
@@ -110,17 +100,11 @@ public class Winch implements WinchBase{
 
     public void setCurrentDistance(double currentDistance) {this.currentDistance = currentDistance;}
 
-    public void periodic() {
-
-        state = state.run(this);
-
-    }
-
     public void wind(double speed, double distance) {
 
         desiredSpeed = speed;
         desiredDistance = distance;
-        state = new WinchBegin();
+        state = new WinchBegin(this);
 
     }
 
