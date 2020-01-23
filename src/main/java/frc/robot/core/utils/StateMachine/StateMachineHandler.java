@@ -6,13 +6,13 @@ import java.util.Arrays;
 
 public class StateMachineHandler {
 
-    private static Set<StateMachineBase> states = new HashSet<StateMachineBase>();
+    private static Set<StateBase> states = new HashSet<StateBase>();
 
-    public static void instantiateState(StateMachineBase state) {states.add(state);} 
+    public static void instantiateState(StateBase state) {states.add(state);} 
 
-    public static StateMachineBase findState(Object caller, String useId) {
+    public static StateBase findState(Object caller, String useId) {
 
-        for(StateMachineBase state: states) {
+        for(StateBase state: states) {
 
             if(state.getCaller() == caller && state.getUseId() == useId ) {
 
@@ -26,9 +26,26 @@ public class StateMachineHandler {
 
     }
 
-    public static boolean setState(StateMachineBase newState, Object caller, String useId) {
+    public static boolean removeState(Object caller, String useId) {
 
-        for(StateMachineBase state: states) {
+        for(StateBase state: states) {
+
+            if(state.getCaller() == caller && state.getUseId() == useId ) {
+
+                states.remove(state);
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+    public static boolean setState(StateBase newState, Object caller, String useId) {
+
+        for(StateBase state: states) {
 
             if(state.getCaller() == caller && state.getUseId().equals(useId) ) {
 
@@ -43,9 +60,26 @@ public class StateMachineHandler {
 
     }
     
-    public static void run() {
+    public static boolean findAndRun(Object caller, String useId) {
 
-        for( StateMachineBase state : states ) {
+        for(StateBase state: states) {
+
+            if(state.getCaller() == caller && state.getUseId() == useId ) {
+
+                state = state.run();
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+    public static void runAll() {
+
+        for( StateBase state : states ) {
             state = state.run();
         }
 

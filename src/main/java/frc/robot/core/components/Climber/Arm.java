@@ -9,12 +9,12 @@ interface ArmBase {
     void retract();
 }
 
-class ArmStart extends StateMachineBase<Arm>{
+class ArmStart extends StateBase<Arm>{
     public ArmStart(Arm arm, String useId) {super(arm, useId);}
 
     @Override
-    public StateMachineBase<Arm> run() {
-        StateMachineBase nextState = new ArmWait(caller, useId);
+    public StateBase<Arm> run() {
+        StateBase nextState = new ArmWait(caller, useId);
 
         caller.getMotor().set(caller.getDesiredSpeed());
         caller.getEncoder().reset();
@@ -22,24 +22,24 @@ class ArmStart extends StateMachineBase<Arm>{
         return nextState;
     }
 }
-class ArmWait extends StateMachineBase<Arm>{
+class ArmWait extends StateBase<Arm>{
     public ArmWait(Arm arm, String useId) {super(arm, useId);}
 
     @Override
-    public StateMachineBase<Arm> run() {
-        StateMachineBase nextState = new ArmWait(caller, useId);
+    public StateBase<Arm> run() {
+        StateBase nextState = new ArmWait(caller, useId);
 
         if(caller.getEncoder().getDistance() > caller.getMaximumRotation()) {nextState = new ArmEnd(caller, useId);}
 
         return nextState;
     }
 }
-class ArmEnd extends StateMachineBase<Arm>{
+class ArmEnd extends StateBase<Arm>{
     public ArmEnd(Arm arm, String useId) {super(arm, useId);}
 
     @Override
-    public StateMachineBase<Arm> run() {
-        StateMachineBase nextState = new RestBase(caller, useId);
+    public StateBase<Arm> run() {
+        StateBase nextState = new RestState(caller, useId);
 
         caller.getMotor().stopMotor();
 
@@ -55,7 +55,7 @@ public class Arm implements ArmBase{
         encoder = null;
         desiredSpeed = 0;
         maximumRotation = 0;
-        StateMachineHandler.instantiateState(new RestBase(this, null));
+        StateMachineHandler.instantiateState(new RestState(this, null));
 
     }
 
@@ -65,7 +65,7 @@ public class Arm implements ArmBase{
         this.encoder = encoder;
         desiredSpeed = 0;
         this.maximumRotation = maximumRotation;
-        StateMachineHandler.instantiateState(new RestBase(this, null));
+        StateMachineHandler.instantiateState(new RestState(this, null));
 
     }
 

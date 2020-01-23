@@ -22,8 +22,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        StateMachineHandler.instantiateState( new RestBase(this, "i") );
-        StateMachineHandler.instantiateState( new RestBase(this, "u") );
+        StateMachineHandler.instantiateState( new RestState(this, "i") );
+        StateMachineHandler.instantiateState( new RestState(this, "u") );
     }
     Transport( SpeedController intakeMotor, SpeedController outputMotor ) {
         intakeMotors = new SpeedController[]{intakeMotor};
@@ -32,8 +32,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        StateMachineHandler.instantiateState( new RestBase(this, "i") );
-        StateMachineHandler.instantiateState( new RestBase(this, "u") );
+        StateMachineHandler.instantiateState( new RestState(this, "i") );
+        StateMachineHandler.instantiateState( new RestState(this, "u") );
     }
     Transport( SpeedController[] intakeMotors, SpeedController[] outputMotors ) {
         this.intakeMotors = intakeMotors;
@@ -42,8 +42,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        StateMachineHandler.instantiateState( new RestBase(this, "i") );
-        StateMachineHandler.instantiateState( new RestBase(this, "u") );
+        StateMachineHandler.instantiateState( new RestState(this, "i") );
+        StateMachineHandler.instantiateState( new RestState(this, "u") );
     }
 
     //GETTER-SETTERS//

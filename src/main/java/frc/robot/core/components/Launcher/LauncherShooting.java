@@ -3,17 +3,17 @@ package frc.robot.core.components.Launcher;
 
 import frc.robot.core.utils.StateMachine.*;
 
-class LauncherShooting extends StateMachineBase<Launcher>{
+class LauncherShooting extends StateBase<Launcher>{
     public LauncherShooting(Launcher launcher, String useId){super(launcher, useId);}
 
     @Override
-    public StateMachineBase run() {
+    public StateBase run() {
 
-        StateMachineBase nextState = new LauncherShooting(caller, useId);
+        StateBase nextState = new LauncherShooting(caller, useId);
 
         if( 1==1 ) { //CHANGE CONDITION
 
-            nextState = new RestBase(caller, useId);
+            nextState = new RestState(caller, useId);
 
             if(caller.getQueueLength() > 0) {
                 caller.getMotor().stopMotor();

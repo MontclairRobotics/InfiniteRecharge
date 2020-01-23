@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj.SpeedController;
 import frc.robot.core.utils.StateMachine.*;
 
 
-class OutputEnd extends StateMachineBase<Transport>{
+class OutputEnd extends StateBase<Transport>{
     OutputEnd(Transport caller, String useId){super(caller, useId);}
 
-    public StateMachineBase run() {
+    public StateBase run() {
 
-        StateMachineBase nextState = new RestBase(this, useId);
+        StateBase nextState = new RestState(this, useId);
         
         for (SpeedController motor: caller.getOutputMotors()) {
 
