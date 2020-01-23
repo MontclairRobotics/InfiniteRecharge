@@ -14,7 +14,7 @@ class Launcher implements LauncherBase{
         motor = null;
         encoder = null;
         transport = null;
-        StateMachineHandler.instantiateState( RestBase(this, null); );
+        StateMachineHandler.instantiateState( new RestBase(this, null) );
         desiredSpeed = 0;
         shooterQueueLength = 0;
 
@@ -25,7 +25,7 @@ class Launcher implements LauncherBase{
         this.motor = motor;
         this.encoder = encoder;
         this.transport = transport;
-        state = new RestBase(this, null);
+        StateMachineHandler.instantiateState( new RestBase(this, null) );
         desiredSpeed = 0;
         shooterQueueLength = 0;
 
