@@ -11,7 +11,6 @@ public class Transport implements TransportIntake, TransportOutput{
     private SpeedController[] intakeMotors;
     private SpeedController[] outputMotors;
     private boolean hasIntaken, hasOutputted;
-    private StateMachineBase intakeState, outputState;
 
     //sesnor thingy
 
@@ -23,8 +22,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        intakeState = new RestBase(this);
-        outputState = new RestBase(this);
+        StateMachineHandler.instantiateState( new RestBase(this, "i") );
+        StateMachineHandler.instantiateState( new RestBase(this, "u") );
     }
     Transport( SpeedController intakeMotor, SpeedController outputMotor ) {
         intakeMotors = new SpeedController[]{intakeMotor};
@@ -33,8 +32,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        intakeState = new RestBase(this);
-        outputState = new RestBase(this);
+        StateMachineHandler.instantiateState( new RestBase(this, "i") );
+        StateMachineHandler.instantiateState( new RestBase(this, "u") );
     }
     Transport( SpeedController[] intakeMotors, SpeedController[] outputMotors ) {
         this.intakeMotors = intakeMotors;
@@ -43,8 +42,8 @@ public class Transport implements TransportIntake, TransportOutput{
         hasIntaken = false;
         hasOutputted = false;
 
-        intakeState = new RestBase(this);
-        outputState = new RestBase(this);
+        StateMachineHandler.instantiateState( new RestBase(this, "i") );
+        StateMachineHandler.instantiateState( new RestBase(this, "u") );
     }
 
     //GETTER-SETTERS//
@@ -57,13 +56,13 @@ public class Transport implements TransportIntake, TransportOutput{
 
     public void intake() {
      
-        intakeState = new IntakeStart(this);
+        StateMachineHandler.setState(new IntakeStart(this, "i"), this, "i");
 
     }
 
     public void output() {
 
-        outputState = new OutputStart(this);
+        StateMachineHandler.setState(new OutputStart(this, "o"), this, "o");
 
     }
 

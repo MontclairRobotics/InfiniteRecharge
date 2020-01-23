@@ -10,11 +10,11 @@ interface ArmBase {
 }
 
 class ArmStart extends StateMachineBase<Arm>{
-    public ArmStart(Arm arm) {super(arm);}
+    public ArmStart(Arm arm, String useId) {super(arm, useId);}
 
     @Override
     public StateMachineBase<Arm> run() {
-        StateMachineBase nextState = new ArmWait(caller);
+        StateMachineBase nextState = new ArmWait(caller, useId);
 
         caller.getMotor().set(caller.getDesiredSpeed());
         caller.getEncoder().reset();
@@ -23,23 +23,23 @@ class ArmStart extends StateMachineBase<Arm>{
     }
 }
 class ArmWait extends StateMachineBase<Arm>{
-    public ArmWait(Arm arm) {super(arm);}
+    public ArmWait(Arm arm, String useId) {super(arm, useId);}
 
     @Override
     public StateMachineBase<Arm> run() {
-        StateMachineBase nextState = new ArmWait(caller);
+        StateMachineBase nextState = new ArmWait(caller, useId);
 
-        if(caller.getEncoder().getDistance() > caller.getMaximumRotation()) {nextState = new ArmEnd(caller);}
+        if(caller.getEncoder().getDistance() > caller.getMaximumRotation()) {nextState = new ArmEnd(caller, useId);}
 
         return nextState;
     }
 }
 class ArmEnd extends StateMachineBase<Arm>{
-    public ArmEnd(Arm arm) {super(arm);}
+    public ArmEnd(Arm arm, String useId) {super(arm, useId);}
 
     @Override
     public StateMachineBase<Arm> run() {
-        StateMachineBase nextState = new RestBase(caller);
+        StateMachineBase nextState = new RestBase(caller, useId);
 
         caller.getMotor().stopMotor();
 
@@ -55,7 +55,7 @@ public class Arm implements ArmBase{
         encoder = null;
         desiredSpeed = 0;
         maximumRotation = 0;
-        state = new RestBase(this);
+        StateMachineHandler.instantiateState(new RestBase(this, null));
 
     }
 
@@ -65,7 +65,7 @@ public class Arm implements ArmBase{
         this.encoder = encoder;
         desiredSpeed = 0;
         this.maximumRotation = maximumRotation;
-        state = new RestBase(this);
+        StateMachineHandler.instantiateState(new RestBase(this, null));
 
     }
 
@@ -73,7 +73,6 @@ public class Arm implements ArmBase{
     private Encoder encoder;
     private double desiredSpeed;
     private double maximumRotation;
-    private StateMachineBase state = new StateMachineBase<Arm>(this);
 
     public SpeedController getMotor() {return motor;}
     public double getDesiredSpeed() {return desiredSpeed;}
@@ -82,12 +81,12 @@ public class Arm implements ArmBase{
 
     public void extend() {
         desiredSpeed = 0.1;
-        state = new ArmStart(this);
+        StateMachineHandler.setState(new ArmStart(this, null), this, null);
         // need to change
     }
     
     public void retract() {
         desiredSpeed = -0.1;// need to change
-        state = new ArmStart(this);
+        StateMachineHandler.setState(new ArmStart(this, null), this, null);
     }
 }

@@ -5,14 +5,14 @@ package frc.robot.core.components.Transport;
 import frc.robot.core.utils.StateMachine.*;
 
 class IntakeRun extends StateMachineBase<Transport>{
-    public IntakeRun(Transport caller){super(caller);}
+    public IntakeRun(Transport caller, String useId){super(caller, useId);}
 
     public StateMachineBase run() {
 
-        StateMachineBase nextState = new IntakeRun(caller);
+        StateMachineBase nextState = new IntakeRun(caller, useId);
 
         if(caller.getHasIntaken()) { 
-            nextState = new IntakeEnd(caller); 
+            nextState = new IntakeEnd(caller, useId); 
             caller.setHasIntaken(false);
         }
 

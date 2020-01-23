@@ -5,13 +5,13 @@ import frc.robot.core.utils.StateMachine.*;
 
 //CLASSES//
 class LauncherShootStart extends StateMachineBase<Launcher>{
-    public LauncherShootStart(Launcher launcher){super(launcher);}
+    public LauncherShootStart(Launcher launcher, String useId){super(launcher, useId);}
 
     @Override
     public StateMachineBase run() {
 
         caller.getMotor().set(caller.getDesiredSpeed());
-        return new LauncherRevUp(caller);
+        return new LauncherRevUp(caller, useId);
 
     }
 }

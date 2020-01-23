@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.SpeedController;
 import frc.robot.core.utils.StateMachine.*;
 
 class IntakeStart extends StateMachineBase<Transport> {
-    public IntakeStart(Transport caller){super(caller);}
+    public IntakeStart(Transport caller, String useId){super(caller, useId);}
 
     public StateMachineBase run() {
 
-        StateMachineBase nextState = new IntakeRun(caller);
+        StateMachineBase nextState = new IntakeRun(caller, useId);
 
         for (SpeedController motor: caller.getIntakeMotors()) {
 

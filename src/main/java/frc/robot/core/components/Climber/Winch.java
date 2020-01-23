@@ -12,11 +12,11 @@ interface WinchBase {
 }
 
 class WinchBegin extends StateMachineBase<Winch>{
-    public WinchBegin(Winch caller){super(caller);}
+    public WinchBegin(Winch caller, String useId){super(caller, useId);}
 
     public StateMachineBase run() {
 
-        StateMachineBase nextState = new WinchWaiting(caller);
+        StateMachineBase nextState = new WinchWaiting(caller, useId);
 
         caller.getMotor().set(caller.getDesiredSpeed());
         caller.getEncoder().reset();
@@ -27,13 +27,13 @@ class WinchBegin extends StateMachineBase<Winch>{
 
 }
 class WinchWaiting extends StateMachineBase<Winch> {
-    public WinchWaiting(Winch caller){super(caller);}
+    public WinchWaiting(Winch caller, String useId){super(caller, useId);}
 
     public StateMachineBase run() {
 
-        StateMachineBase nextState = new WinchWaiting(caller);
+        StateMachineBase nextState = new WinchWaiting(caller, useId);
 
-        if(caller.getEncoder().getDistance() > caller.getDesiredDistance()) {nextState = new WinchEnd(caller);}
+        if(caller.getEncoder().getDistance() > caller.getDesiredDistance()) {nextState = new WinchEnd(caller, useId);}
 
         return nextState;
 
@@ -41,11 +41,11 @@ class WinchWaiting extends StateMachineBase<Winch> {
 
 }
 class WinchEnd extends StateMachineBase<Winch> {
-    public WinchEnd(Winch caller){super(caller);}
+    public WinchEnd(Winch caller, String useId){super(caller, useId);}
 
     public StateMachineBase run(Winch winch) {
 
-        StateMachineBase nextState = new RestBase(caller);
+        StateMachineBase nextState = new RestBase(caller, useId);
 
         caller.getMotor().stopMotor();
         caller.setCurrentDistance(caller.getEncoder().getDistance());
@@ -71,7 +71,7 @@ public class Winch implements WinchBase{
 
         motor = null;
         encoder = null;
-        state = new RestBase(this);
+        StateMachineHandler.instantiateState(new RestBase(this,null));
         desiredSpeed = 0;
         desiredDistance = 0;
         currentDistance = 0;
@@ -83,7 +83,7 @@ public class Winch implements WinchBase{
 
         this.motor = motor;
         this.encoder = encoder;
-        state = new RestBase(this);
+        StateMachineHandler.instantiateState(new RestBase(this,null));
         desiredDistance = 0;
         desiredSpeed = 0;
         this.maximumDistance = maximumDistance;
@@ -104,7 +104,7 @@ public class Winch implements WinchBase{
 
         desiredSpeed = speed;
         desiredDistance = distance;
-        state = new WinchBegin(this);
+        StateMachineHandler.setState(new RestBase(this,null),this,null);
 
     }
 

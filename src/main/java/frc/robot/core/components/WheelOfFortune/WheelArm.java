@@ -3,7 +3,7 @@ package frc.robot.core.components.WheelOfFortune;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.core.utils.Hardware;
 import edu.wpi.first.wpilibj.util.Color;
-
+import com.revrobotics.Color.//fixthisplease;
 
 /*interface WheelArmInterface {
     void Raise();
