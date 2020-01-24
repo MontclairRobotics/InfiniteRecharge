@@ -5,6 +5,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.I2C;
 import com.revrobotics.ColorSensorV3;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.DriverStation;
+
+
 
 public class Hardware {
     //TODO All device ids need to be changed
@@ -13,6 +18,13 @@ public class Hardware {
     public final static CANSparkMax DT_BR = new CANSparkMax(1, MotorType.kBrushless);
     public final static CANSparkMax DT_FL = new CANSparkMax(2, MotorType.kBrushless);
     public final static CANSparkMax DT_BL = new CANSparkMax(3, MotorType.kBrushless);
+    public static AHRS navx; {
+    try {
+        navx = new AHRS(SPI.Port.kMXP); 
+    } catch (RuntimeException ex ) {
+        DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+    }
+    }
     //Climber
     public final static TalonSRX ClimbArm_L = new TalonSRX(0);
     public final static TalonSRX ClimbArm_R = new TalonSRX(1);
