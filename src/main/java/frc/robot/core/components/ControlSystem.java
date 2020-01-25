@@ -107,8 +107,7 @@ public class ControlSystem{
     }
 
     public enum DriverButtons{
-        GYRO_LOCK(0);
-
+        GYRO_LOCK(0), Calibrating_Sensors(1);
         int port;
         private DriverButtons(int port){
             this.port = port;

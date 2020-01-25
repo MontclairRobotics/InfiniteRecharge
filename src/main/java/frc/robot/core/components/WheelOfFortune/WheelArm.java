@@ -1,8 +1,9 @@
 package frc.robot.core.components.WheelOfFortune;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.core.utils.Hardware;
+import frc.robot.core.utils.*;
 import edu.wpi.first.wpilibj.util.Color;
+
 
 /*interface WheelArmInterface {
     void Raise();
@@ -70,15 +71,16 @@ class WheelArm /*implements WheelArmInterface */{
         double redVal = detectedColor.red;
         double blueVal = detectedColor.blue;
         double greenVal = detectedColor.green;
+
         char returnVal = 'n';
 
-        if (redVal > 0.3 && greenVal > 0.5) {
+        if (redVal > resetSensors.redValForY && greenVal > resetSensors.greenValForY) {
             returnVal = 'y';
-        } else if (redVal > 0.4) {
+        } else if (redVal > resetSensors.redValForR) {
             returnVal = 'r';
-        } else if (greenVal > 0.5) {
+        } else if (greenVal > resetSensors.greenValForG) {
             returnVal = 'g';
-        } else if (blueVal > 0.4) {
+        } else if (blueVal > resetSensors.blueValForB) {
             returnVal = 'b';
         }
         return(returnVal);
