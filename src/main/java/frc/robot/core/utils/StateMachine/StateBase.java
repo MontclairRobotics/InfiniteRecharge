@@ -2,7 +2,7 @@ package frc.robot.core.utils.StateMachine;
 
 //STATE MACHINE BASE//
 
-public abstract class StateBase<T> implements StateInterface {
+public abstract class StateBase<T> implements StateMachineInterface {
 
     public StateBase(T caller, String useId) {
 

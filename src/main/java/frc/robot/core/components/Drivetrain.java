@@ -1,11 +1,8 @@
 package frc.robot.core.components;
 
-import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.PIDController;
 //import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.core.Robot;
@@ -20,7 +17,6 @@ public class Drivetrain implements Component /*PIDOutput*/ {
 
 
 
-    private AHRS navx;
    //private PIDController turnController;
     private double rotateToAngleRate;
     private boolean rotateToAngle;
@@ -38,11 +34,7 @@ public class Drivetrain implements Component /*PIDOutput*/ {
 
         differentialDrive = new DifferentialDrive(left, right);
 
-        try {
-            navx = new AHRS(SPI.Port.kMXP); 
-        } catch (RuntimeException ex ) {
-            DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
-        }
+        
 
         /*turnController = new PIDController(0, 0, 0, 0, navx, this);
         turnController.setInputRange(-180.0f,  180.0f);
@@ -60,13 +52,13 @@ public class Drivetrain implements Component /*PIDOutput*/ {
             differentialDrive.tankDrive(Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0),
                 Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0));
                 calcCurrentRotationRate();
-                navx.getAngle();
+                Hardware.navx.getAngle();
         }
 
     }
 
     public void lockAngle(double angle){
-        navx.reset();
+        Hardware.navx.reset();
         //turnController.setSetpoint(angle);
         rotateToAngle = true;
     }
