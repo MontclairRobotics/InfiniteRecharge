@@ -2,7 +2,7 @@ package frc.robot.core.utils.StateMachine;
 
 //STATE MACHINE INTERFACE//
 
-public interface StateInterface {
+public interface StateMachineInterface {
     
     public StateBase run();
 
