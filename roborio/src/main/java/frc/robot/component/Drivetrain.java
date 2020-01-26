@@ -5,6 +5,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -13,6 +14,9 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.utils.Controls;
+import frc.robot.utils.RobotComponent;
+import frc.robot.utils.Utils;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
@@ -20,7 +24,7 @@ import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
 
-public class Drivetrain{
+public class Drivetrain implements RobotComponent{
 
     private DifferentialDrive differentialDrive;
 
@@ -45,8 +49,24 @@ public class Drivetrain{
 
     private AHRS navx;
 
-    private PIDController turnController;
+    private PIDController gyroTurnController;
     private PIDController distanceController;
+    private PIDController powerCellTurnController;
+    private PIDController fuelPortTurnController;
+
+
+    enum KnownResetPositions{
+        START_LEFT(new Pose2d(0,0, new Rotation2d(0))),
+        START_RIGHT(new Pose2d(0,0, new Rotation2d(0))),
+        START_MID(new Pose2d(0,0, new Rotation2d(0)));
+
+        //TODO: Add More i.e. color wheel and shooting position
+
+        Pose2d pose2d;
+        private KnownResetPositions(Pose2d pose2d){
+            this.pose2d = pose2d;
+        }
+    }
 
     // Odometry class for tracking robot pose
     private final DifferentialDriveOdometry m_odometry;
@@ -74,38 +94,81 @@ public class Drivetrain{
             DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
         }
 
-        turnController = new PIDController(0.05, 0, 0.007);
-        turnController.setTolerance(2);
-        turnController.enableContinuousInput(-180, 180);
+        gyroTurnController = new PIDController(0.05, 0, 0.007);
+        gyroTurnController.setTolerance(2);
+        gyroTurnController.enableContinuousInput(-180, 180);
 
         distanceController = new PIDController(0.1, 0, 10);
         distanceController.setTolerance(1); // TODO: Tune
+
+        powerCellTurnController = new PIDController(0.05, 0, 0.007); //TODO : Tune
+        powerCellTurnController.setTolerance(2); //TODO: Tune
+        powerCellTurnController.enableContinuousInput(-180, 180); //TODO: Tune
+
+        fuelPortTurnController = new PIDController(0.05, 0, 0.007); //TODO : Tune
+        fuelPortTurnController.setTolerance(2); //TODO: Tune
+        fuelPortTurnController.enableContinuousInput(-180, 180); //TODO: Tune
 
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(navx.getYaw()));
         resetOdometry(new Pose2d(0,0,new Rotation2d(0)));
     }
 
-    public void teleopDrive() {
-        SmartDashboard.putNumber("Left Encoder", leftEncoder.getPosition());
-        SmartDashboard.putNumber("Right Encoder", rightEncoder.getPosition());
+    @Override
+    public void teleopPeriodic() {
         double rotation;
-        if (Controls.driver.getRawButton(1) || (Math.abs(Controls.driver.getRawAxis(4))< 0.3 && Math.abs(Controls.driver.getRawAxis(1))>0.7)){
-            turnController.setSetpoint(0);
-            rotation = turnController.calculate(navx.getYaw());
+        if(Controls.driver.getStickButton(GenericHID.Hand.kLeft) || Utils.threshold(Math.abs(Controls.driver.getY(GenericHID.Hand.kLeft)),0.3,0.7)){
+            gyroTurnController.setSetpoint(0);
+            rotation = gyroTurnController.calculate(navx.getYaw());
+        } else if(Controls.driver.getPOV()!= -1){
+            switch(Controls.driver.getPOV()){
+                case 0:
+                    gyroTurnController.setSetpoint(0);
+                    rotation = gyroTurnController.calculate(navx.getYaw());
+                    break;
+
+                case 90:
+                    gyroTurnController.setSetpoint(90);
+                    rotation = gyroTurnController.calculate(navx.getYaw());
+                    break;
+
+                case 180:
+                    gyroTurnController.setSetpoint(180);
+                    rotation = gyroTurnController.calculate(navx.getYaw());
+                    break;
+
+                case 270:
+                    gyroTurnController.setSetpoint(270);
+                    rotation = gyroTurnController.calculate(navx.getYaw());
+                    break;
+
+                default:
+                    rotation = Controls.driver.getX(GenericHID.Hand.kRight);
+            }
+
+        } else if(SmartDashboard.getBoolean("Fuel Port Found",false) && Controls.driver.getBumper(GenericHID.Hand.kLeft)){
+            powerCellTurnController.setSetpoint(0); //TODO: Tune
+            rotation = powerCellTurnController.calculate(SmartDashboard.getNumber("Power Cell X", 0)); // TODO: Tune
+        } else if(SmartDashboard.getBoolean("Fuel Port Found",false) && Controls.driver.getBumper(GenericHID.Hand.kLeft)){
+            fuelPortTurnController.setSetpoint(0); //TODO: Tune
+            rotation = fuelPortTurnController.calculate(SmartDashboard.getNumber("Fuel Port X", 0)); // TODO: Tune
         } else {
             navx.reset();
-            rotation = Controls.driver.getRawAxis(4);
+            rotation = Controls.driver.getX(GenericHID.Hand.kRight);
         }
 
-        differentialDrive.arcadeDrive(Controls.driver.getRawAxis(1),
+        differentialDrive.arcadeDrive(Controls.driver.getY(GenericHID.Hand.kLeft),
                 rotation);
     }
 
-    public void update(){
+    @Override
+    public void robotPeriodic() {
         m_odometry.update(Rotation2d.fromDegrees(navx.getYaw()), leftEncoder.getPosition(),
                 rightEncoder.getPosition());
+
         SmartDashboard.putNumber("Odometry X", m_odometry.getPoseMeters().getTranslation().getX());
-        SmartDashboard.putNumber("Odometry X", m_odometry.getPoseMeters().getTranslation().getY());
+        SmartDashboard.putNumber("Odometry Y", m_odometry.getPoseMeters().getTranslation().getY());
+        SmartDashboard.putNumber("Left Encoder", leftEncoder.getPosition());
+        SmartDashboard.putNumber("Right Encoder", rightEncoder.getPosition());
     }
 
     //TODO: idk if trajectory output is position or velocity
@@ -145,28 +208,10 @@ public class Drivetrain{
     }
 
     /**
-     * Test Mode: driving a certain amount of distance
-     */
-    public void testPIDDrive(){
-        double input;
-        if(Controls.driver.getRawButton(2)){
-            distanceController.setSetpoint(12*TICKS_PER_INCH);
-            SmartDashboard.putNumber("Distance Controller Output", distanceController.calculate((Math.abs(leftEncoder.getPosition())+rightEncoder.getPosition())/2));
-            differentialDrive.arcadeDrive(-distanceController.calculate((Math.abs(leftEncoder.getPosition())+rightEncoder.getPosition())/2),0);
-            SmartDashboard.putNumber("Approx Inch Travled", leftEncoder.getPosition()/TICKS_PER_INCH );
-            SmartDashboard.putBoolean("Test Mode", true);
-        }else{
-            differentialDrive.arcadeDrive(0,0);
-            resetEncoders();
-            SmartDashboard.putBoolean("Test Mode", false);
-        }
-    }
-
-    /**
      * Test Mode: Turn and Drive PID control on polar vector component inputs, tests autoDrive() method for autonomous
      */
     public void testAutoDrive(){
-        if(Controls.driver.getRawButton(2)){
+        if(Controls.driver.getAButton()){
             autoDrive(12,0);
         }else{
             differentialDrive.arcadeDrive(0,0);
@@ -180,33 +225,31 @@ public class Drivetrain{
     }
     
     public boolean autoDrive(double distance, double angle){
-        turnController.setSetpoint(angle%180);
-        if(turnController.atSetpoint()){
+        gyroTurnController.setSetpoint(angle%180);
+        if(gyroTurnController.atSetpoint()){
             leftEncoder.setPosition(0);
             rightEncoder.setPosition(0);
             distanceController.setSetpoint(distance/TICKS_PER_INCH);
             if(distanceController.atSetpoint()){
                 differentialDrive.arcadeDrive(distanceController.calculate((leftEncoder.getPosition()+rightEncoder.getPosition())/2),
-                turnController.calculate(navx.getYaw()));
+                        gyroTurnController.calculate(navx.getYaw()));
                 return false;
             }else{
                 return true;
             }
         }else{
-            differentialDrive.arcadeDrive(0, turnController.calculate(navx.getYaw()));
+            differentialDrive.arcadeDrive(0, gyroTurnController.calculate(navx.getYaw()));
             return false;
         }
-        
-    
-        
+
     }
 
-    public void resetEncoders(){
+    private void resetEncoders(){
         leftEncoder.setPosition(0);
         rightEncoder.setPosition(0);
     }
 
-    public void resetOdometry(Pose2d pose) {
+    private void resetOdometry(Pose2d pose) {
         resetEncoders();
         m_odometry.resetPosition(pose, Rotation2d.fromDegrees(navx.getYaw()));
     }

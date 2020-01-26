@@ -3,8 +3,12 @@ package frc.robot.component;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.CAN;
+import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.utils.RobotComponent;
 
-public class Climber {
+import java.sql.Driver;
+
+public class Climber implements RobotComponent {
 
     CANSparkMax winchMotor;
     CANSparkMax armMotor;
@@ -16,5 +20,13 @@ public class Climber {
         //TODO
     }
 
-    //TODO ... Need More Info
+    @Override
+    public void teleopPeriodic() {
+
+    }
+
+    @Override
+    public void robotPeriodic() {
+
+    }
 }

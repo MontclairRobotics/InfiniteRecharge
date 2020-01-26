@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.component.Controls;
+import frc.robot.utils.Controls;
 import frc.robot.component.Drivetrain;
 import frc.robot.utils.fsm.stateMachines.DriveToLine;
 
@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    drivetrain.update();
+    drivetrain.robotPeriodic();
   }
 
   /**
@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    drivetrain.teleopDrive();
+    drivetrain.teleopPeriodic();
   }
 
   /**
@@ -111,7 +111,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-//    drivetrain.testPIDDrive();
     drivetrain.testAutoDrive();
   }
 

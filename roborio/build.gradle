@@ -40,7 +40,8 @@ deploy {
 
 repositories {
     maven {
-        url 'https://dev.imjac.in/maven'
+//        url 'https://dev.imjac.in/maven',
+        url 'http://www.revrobotics.com/content/sw/color-sensor-v3/sdk/maven/'
     }
 }
 
