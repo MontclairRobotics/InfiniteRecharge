@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.util.Color;
 
 
 public class resetSensors {
-    public static double redValForY;
-    public static double greenValForY;
-    public static double redValForR;
-    public static double greenValForG;
-    public static double blueValForB;
+    public static double redValForY = 0.3;
+    public static double greenValForY = 0.5;
+    public static double redValForR = 0.4;
+    public static double greenValForG = 0.5;
+    public static double blueValForB = 0.4;
 
     resetSensors() {
         Hardware.navx.reset();
