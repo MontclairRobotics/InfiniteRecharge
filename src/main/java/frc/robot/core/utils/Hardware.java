@@ -8,6 +8,7 @@ import com.revrobotics.ColorSensorV3;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 
 
 
@@ -33,6 +34,7 @@ public class Hardware {
     public static TalonSRX ClimbMover = new TalonSRX(4);
     //Launcher
     public static TalonSRX LauncherMotor = new TalonSRX(5);
+    public static Encoder LauncherEncoder = new Encoder(null, null);
     //Transport
     public static TalonSRX TransportIntake = new TalonSRX(6);
     public static TalonSRX TransportOutput = new TalonSRX(7);

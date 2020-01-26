@@ -11,6 +11,7 @@ public class Transport implements TransportIntake, TransportOutput{
     private SpeedController[] intakeMotors;
     private SpeedController[] outputMotors;
     private boolean hasIntaken, hasOutputted;
+    public int ballCount = 0;
 
     //sesnor thingy
 
@@ -25,7 +26,7 @@ public class Transport implements TransportIntake, TransportOutput{
         StateMachineHandler.instantiateState( new RestState(this, "i") );
         StateMachineHandler.instantiateState( new RestState(this, "u") );
     }
-    Transport( SpeedController intakeMotor, SpeedController outputMotor ) {
+    public Transport( SpeedController intakeMotor, SpeedController outputMotor ) {
         intakeMotors = new SpeedController[]{intakeMotor};
         outputMotors = new SpeedController[]{outputMotor};
 

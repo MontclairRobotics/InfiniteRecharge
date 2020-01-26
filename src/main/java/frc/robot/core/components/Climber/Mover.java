@@ -7,13 +7,13 @@ import frc.robot.core.Robot;
 
 
 interface MoverBase {
-    void shift(double speed, double distance);
+    void shift();
 }
     
 public class Mover implements MoverBase {
     SpeedController moverController;
     
-    public void shift(double speed, double distance) {
-        moverController.set(Robot.controlSystem.getJoystickAxis(Controllers.AUXILLARY, Axis.X));
+    public void shift() {
+        moverController.set(Robot.controlSystem.getJoystickAxis(Controllers.AUXILLARY, Axis.X) / 2);
     }
 }

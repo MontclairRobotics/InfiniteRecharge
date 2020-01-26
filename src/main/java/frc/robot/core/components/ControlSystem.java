@@ -119,7 +119,7 @@ public class ControlSystem{
     }
 
     public enum AuxillaryButtons{
-        TEMP(0);
+        TEMP(0), Fire(1), Intake(2), ColorWheel(3), Climb(4);
 
         int port;
         private AuxillaryButtons(int port){

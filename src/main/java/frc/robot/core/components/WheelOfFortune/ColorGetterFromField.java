@@ -5,7 +5,7 @@ interface ColorGetterFromFieldrinterface {
     char getColorToFind();
 }
 
-class ColorGetterFromField implements ColorGetterFromFieldrinterface {
+public class ColorGetterFromField implements ColorGetterFromFieldrinterface {
     public char getColorToFind() {
         char returnVal = 'n';
         String gameData;

@@ -12,6 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.components.ControlSystem;
 import frc.robot.core.components.Drivetrain;
+import frc.robot.core.components.Climber.Climber;
+import frc.robot.core.components.ControlSystem.AuxillaryButtons;
+import frc.robot.core.components.Launcher.Launcher;
+import frc.robot.core.components.Transport.Transport;
+import frc.robot.core.utils.Hardware;
+import frc.robot.core.components.WheelOfFortune.ColorGetterFromField;
+import frc.robot.core.components.WheelOfFortune.WheelArm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,7 +36,12 @@ public class Robot extends TimedRobot {
   public static ControlSystem controlSystem;
   
   private Drivetrain drivetrain;
-
+  private Launcher launcher;
+  private Transport transport;
+  private Climber climber;
+  private boolean isClimbed = false;
+  private WheelArm colorArm;
+  private ColorGetterFromField FieldColor;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -45,7 +57,13 @@ public class Robot extends TimedRobot {
 
     drivetrain = new Drivetrain();
     drivetrain.robotInit();
-  
+
+    launcher = new Launcher(Hardware.LauncherMotor, Hardware.LauncherEncoder, transport);
+
+    climber = new Climber();
+    
+    colorArm = new WheelArm();
+
   }
 
   /**
@@ -58,8 +76,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    Drivetrain drivetrain = new Drivetrain();
-    drivetrain.teleopPeriodic();
+
   }
 
   /**
@@ -103,6 +120,29 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     drivetrain.teleopPeriodic();
+    if (controlSystem.getButton(AuxillaryButtons.Fire)) {
+      if (1==1) {//need to change to if aim is right... if button pressed the robot fires all of it's current balls
+        launcher.shoot(0.1, transport.ballCount);//need to velocity based upon the aiming
+      }
+  }
+    if (controlSystem.getButton(AuxillaryButtons.Intake)) {// if button pressed the robot intakes
+      transport.intake();
+    }
+    if (controlSystem.getButton(AuxillaryButtons.ColorWheel)) {
+      colorArm.Lower();
+      if (FieldColor.getColorToFind() != 'n') {
+        colorArm.RotateForColor(FieldColor.getColorToFind());
+      } else {
+      colorArm.RotateControl();
+      }
+    }
+    if (controlSystem.getButton(AuxillaryButtons.Climb)) {//if button pressed then climb!
+      climber.climb(6.5, 0.5);
+      isClimbed = true;
+    }
+    if (isClimbed == true) {//if climbed then move along bar!!
+      climber.move();
+    }
   }
 
   /**

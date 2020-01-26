@@ -41,7 +41,9 @@ public class Climber implements climberBase {
         rightWinch.wind(speed, height);
         leftWinch.wind(speed, height);
     }
-
+    public void move() {
+        mover.shift();
+    }
     
 
 

@@ -4,10 +4,12 @@ package frc.robot.core.components.Launcher;
 //IMPORTS//
 import frc.robot.core.components.Transport.*;
 import frc.robot.core.utils.StateMachine.*;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
 
-class Launcher implements LauncherBase{
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Encoder;
+
+public class Launcher implements LauncherBase{
 
     Launcher() {
 
@@ -20,9 +22,9 @@ class Launcher implements LauncherBase{
 
     }
 
-    Launcher(SpeedController motor, Encoder encoder, Transport transport) {
+    public Launcher(TalonSRX launcherMotor, Encoder encoder, Transport transport) {
 
-        this.motor = motor;
+        this.motor = launcherMotor;
         this.encoder = encoder;
         this.transport = transport;
         StateMachineHandler.instantiateState(new RestState(this, null));
@@ -31,14 +33,14 @@ class Launcher implements LauncherBase{
 
     }
 
-    private SpeedController motor;
+    private TalonSRX motor;
     private Encoder encoder;
     private Transport transport;
     private double desiredSpeed;
     private int shooterQueueLength;
 
     //GETTER-SETTERS//
-    public SpeedController getMotor() {return motor;}
+    public TalonSRX getMotor() {return motor;}
     public Encoder getEncoder() {return encoder;}
     public double getDesiredSpeed() {return desiredSpeed;}
     public Transport getTransport() {return transport;}

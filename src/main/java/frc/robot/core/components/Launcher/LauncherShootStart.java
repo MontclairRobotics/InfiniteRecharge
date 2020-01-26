@@ -1,6 +1,8 @@
 //PACKAGE//
 package frc.robot.core.components.Launcher;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import frc.robot.core.utils.StateMachine.*;
 
 //CLASSES//
@@ -10,7 +12,7 @@ class LauncherShootStart extends StateBase<Launcher>{
     @Override
     public StateBase run() {
 
-        caller.getMotor().set(caller.getDesiredSpeed());
+        caller.getMotor().set(ControlMode.PercentOutput, caller.getDesiredSpeed());
         return new LauncherRevUp(caller, useId);
 
     }

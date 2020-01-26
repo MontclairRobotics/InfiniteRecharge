@@ -5,14 +5,14 @@ import frc.robot.core.utils.*;
 import edu.wpi.first.wpilibj.util.Color;
 
 
-/*interface WheelArmInterface {
+interface WheelArmInterface {
     void Raise();
     void Lower();
     void RotateControl();
     void RotateForColor(char colorForField);
     char GetColorFromSensor();
-}*/
-class WheelArm /*implements WheelArmInterface */{
+}
+public class WheelArm implements WheelArmInterface {
     
     
     int spinCount = 0;
