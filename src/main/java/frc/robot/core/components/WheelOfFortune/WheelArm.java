@@ -74,13 +74,13 @@ public class WheelArm implements WheelArmInterface {
 
         char returnVal = 'n';
 
-        if (redVal > resetSensors.redValForY && greenVal > resetSensors.greenValForY) {
+        if (redVal > ResetSensors.redValForY && greenVal > ResetSensors.greenValForY) {
             returnVal = 'y';
-        } else if (redVal > resetSensors.redValForR) {
+        } else if (redVal > ResetSensors.redValForR) {
             returnVal = 'r';
-        } else if (greenVal > resetSensors.greenValForG) {
+        } else if (greenVal > ResetSensors.greenValForG) {
             returnVal = 'g';
-        } else if (blueVal > resetSensors.blueValForB) {
+        } else if (blueVal > ResetSensors.blueValForB) {
             returnVal = 'b';
         }
         return(returnVal);

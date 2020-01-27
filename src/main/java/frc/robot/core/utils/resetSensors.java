@@ -6,17 +6,22 @@ import frc.robot.core.Robot;
 import edu.wpi.first.wpilibj.util.Color;
 
 
-public class resetSensors {
+public class ResetSensors {
     public static double redValForY = 0.3;
     public static double greenValForY = 0.5;
     public static double redValForR = 0.4;
     public static double greenValForG = 0.5;
     public static double blueValForB = 0.4;
 
-    resetSensors() {
+    public void resetSensors() {
         Hardware.navx.reset();
         SmartDashboard.putString("SettingColorSensor", "Put the color sensor 3-4 inches above the yellow color");
         SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
+
+        calibrateColor();
+    }
+
+    public void calibrateColor() {
         char currentColorTesting = 'y';
         boolean activeCalibration = false;
         Color detectedColor = Hardware.m_colorSensor.getColor();
@@ -35,6 +40,7 @@ public class resetSensors {
             currentColorTesting = 'r';
             activeCalibration = false;
         }
+
         SmartDashboard.putString("SettingColorSensor", "Move the sensor over the red color");
         SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
         if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'r') {
@@ -47,6 +53,7 @@ public class resetSensors {
             currentColorTesting = 'g';
             activeCalibration = false;
         }
+
         SmartDashboard.putString("SettingColorSensor", "Move the sensor over the green color");
         SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
         if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'g') {
@@ -59,6 +66,7 @@ public class resetSensors {
             currentColorTesting = 'b';
             activeCalibration = false;
         }
+
         SmartDashboard.putString("SettingColorSensor", "Move the sensor over the blue color");
         SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
         if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'b') {
@@ -71,6 +79,7 @@ public class resetSensors {
             currentColorTesting = 'd';
             activeCalibration = false;
         }
+        
         SmartDashboard.putString("SettingColorSensor", "All done!");
     }
 }
