@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
     drivetrain.teleopPeriodic();
     if (controlSystem.getButton(AuxillaryButtons.Fire)) {
       if (1==1) {//need to change to if aim is right... if button pressed the robot fires all of it's current balls
-        launcher.shoot(0.1, transport.ballCount);//need to velocity based upon the aiming
+        launcher.shoot(0.1);//need to velocity based upon the aiming
       }
   }
     if (controlSystem.getButton(AuxillaryButtons.Intake)) {// if button pressed the robot intakes

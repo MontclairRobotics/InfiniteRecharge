@@ -11,7 +11,6 @@ public class Transport implements TransportIntake, TransportOutput{
     private SpeedController[] intakeMotors;
     private SpeedController[] outputMotors;
     private boolean hasIntaken, hasOutputted;
-    public int ballCount = 0;
 
     //sesnor thingy
 
