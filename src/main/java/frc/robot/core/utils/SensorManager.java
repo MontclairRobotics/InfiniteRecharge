@@ -24,7 +24,7 @@ public class SensorManager {
     //RESETTERS//
     public static void resetSensors() {
         Hardware.navx.reset();
-        Hardware.m_colorSensor.resetCoefficients();
+        Hardware.m_colorSensor.calibrateFunctions(new Color(255,255,255), new Color(0,0,0));
         SmartDashboard.putString("SettingColorSensor", "Put the color sensor 3-4 inches above the yellow color");
         SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
     }
@@ -39,67 +39,8 @@ public class SensorManager {
     }
 
     public static void calibrateColor() {
-        
-        /*char currentColorTesting = 'y';
-        boolean activeCalibration = false;
-        Color detectedColor = Hardware.m_colorSensor.getColor();
 
-        if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'y') {
-            redValForY = detectedColor.red;
-            greenValForY = detectedColor.green;
-            activeCalibration = true;
-            if (detectedColor.red < redValForY) {
-                redValForY = detectedColor.red;
-            }
-            if (detectedColor.green < redValForY) {
-                redValForY = detectedColor.red;
-            }
-        } else {
-            currentColorTesting = 'r';
-            activeCalibration = false;
-        }
-
-        SmartDashboard.putString("SettingColorSensor", "Move the sensor over the red color");
-        SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
-        if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'r') {
-            redValForR = detectedColor.red;
-            activeCalibration = true;
-            if (detectedColor.red < redValForR) {
-                redValForR = detectedColor.red;
-            }
-        } else {
-            currentColorTesting = 'g';
-            activeCalibration = false;
-        }
-
-        SmartDashboard.putString("SettingColorSensor", "Move the sensor over the green color");
-        SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
-        if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'g') {
-            greenValForG = detectedColor.green;
-            activeCalibration = true;
-            if (detectedColor.green < greenValForG) {
-                greenValForG = detectedColor.green;
-            }
-        } else {
-            currentColorTesting = 'b';
-            activeCalibration = false;
-        }
-
-        SmartDashboard.putString("SettingColorSensor", "Move the sensor over the blue color");
-        SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
-        if (Robot.controlSystem.getButton(DriverButtons.Calibrating_Sensors) || activeCalibration == false && currentColorTesting == 'b') {
-            blueValForB = detectedColor.blue;
-            activeCalibration = true;
-            if (detectedColor.blue < blueValForB) {
-                blueValForB = detectedColor.blue;
-            }
-        } else {
-            currentColorTesting = 'd';
-            activeCalibration = false;
-        }
-        
-        SmartDashboard.putString("SettingColorSensor", "All done!");*/
-
+        Hardware.m_colorSensor.calibrateFunctions(SensorManager.colorSensorCalibrate_White, SensorManager.colorSensorCalibrate_Black);
 
     }
 
