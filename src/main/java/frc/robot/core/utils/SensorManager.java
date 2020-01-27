@@ -6,23 +6,41 @@ import frc.robot.core.Robot;
 import edu.wpi.first.wpilibj.util.Color;
 
 
-public class ResetSensors {
-    public static double redValForY = 0.3;
-    public static double greenValForY = 0.5;
-    public static double redValForR = 0.4;
-    public static double greenValForG = 0.5;
-    public static double blueValForB = 0.4;
+public class SensorManager {
 
-    public void resetSensors() {
-        Hardware.navx.reset();
-        SmartDashboard.putString("SettingColorSensor", "Put the color sensor 3-4 inches above the yellow color");
-        SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
+    private static Color colorSensorCalibrate_White, colorSensorCalibrate_Black;
 
-        calibrateColor();
+    //KEY VALUES//
+    public static class KeyColorSensorValues {
+
+        public static double redValForY = 0.3;
+        public static double greenValForY = 0.5;
+        public static double redValForR = 0.4;
+        public static double greenValForG = 0.5;
+        public static double blueValForB = 0.4;
+
     }
 
-    public void calibrateColor() {
-        char currentColorTesting = 'y';
+    //RESETTERS//
+    public static void resetSensors() {
+        Hardware.navx.reset();
+        Hardware.m_colorSensor.resetCoefficients();
+        SmartDashboard.putString("SettingColorSensor", "Put the color sensor 3-4 inches above the yellow color");
+        SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");
+    }
+
+    //CALIBRATORS//
+    public static void setBlackColor() {
+        SensorManager.colorSensorCalibrate_Black = Hardware.m_colorSensor.getColorSensorV3().getColor();
+    }
+
+    public static void setWhiteColor() {
+        SensorManager.colorSensorCalibrate_White = Hardware.m_colorSensor.getColorSensorV3().getColor();
+    }
+
+    public static void calibrateColor() {
+        
+        /*char currentColorTesting = 'y';
         boolean activeCalibration = false;
         Color detectedColor = Hardware.m_colorSensor.getColor();
 
@@ -80,6 +98,9 @@ public class ResetSensors {
             activeCalibration = false;
         }
         
-        SmartDashboard.putString("SettingColorSensor", "All done!");
+        SmartDashboard.putString("SettingColorSensor", "All done!");*/
+
+
     }
+
 }
