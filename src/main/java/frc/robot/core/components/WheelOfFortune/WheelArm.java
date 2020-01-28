@@ -2,6 +2,7 @@ package frc.robot.core.components.WheelOfFortune;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.core.utils.*;
+import frc.robot.core.utils.SensorManager.KeyColorSensorValues;
 import edu.wpi.first.wpilibj.util.Color;
 
 
@@ -74,13 +75,13 @@ public class WheelArm implements WheelArmInterface {
 
         char returnVal = 'n';
 
-        if (redVal > ResetSensors.redValForY && greenVal > ResetSensors.greenValForY) {
+        if (redVal > KeyColorSensorValues.redValForY && greenVal > KeyColorSensorValues.greenValForY) {
             returnVal = 'y';
-        } else if (redVal > ResetSensors.redValForR) {
+        } else if (redVal > KeyColorSensorValues.redValForR) {
             returnVal = 'r';
-        } else if (greenVal > ResetSensors.greenValForG) {
+        } else if (greenVal > KeyColorSensorValues.greenValForG) {
             returnVal = 'g';
-        } else if (blueVal > ResetSensors.blueValForB) {
+        } else if (blueVal > KeyColorSensorValues.blueValForB) {
             returnVal = 'b';
         }
         return(returnVal);

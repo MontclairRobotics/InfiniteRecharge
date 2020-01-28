@@ -8,6 +8,7 @@
 package frc.robot.core;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.components.ControlSystem;
@@ -122,26 +123,34 @@ public class Robot extends TimedRobot {
     drivetrain.teleopPeriodic();
     if (controlSystem.getButton(AuxillaryButtons.Fire)) {
       if (true){// TODO: need to change to if aim is right... if button pressed the robot fires all of it's current balls
-        launcher.shoot(0.1);//need to velocity based upon the aiming
+        //launcher.shoot(0.1);//need to velocity based upon the aiming
+        SmartDashboard.putString("CurrentObjective", "Shooting");
       }
   }
     if (controlSystem.getButton(AuxillaryButtons.Intake)) {// if button pressed the robot intakes
-      transport.intake();
+      //transport.intake();
+      SmartDashboard.putString("CurrentObjective", "Intaking");
+
     }
     if (controlSystem.getButton(AuxillaryButtons.ColorWheel)) {
-      colorArm.Lower();
+      //colorArm.Lower();
       if (FieldColor.getColorToFind() != 'n') {
-        colorArm.RotateForColor(FieldColor.getColorToFind());
+        //colorArm.RotateForColor(FieldColor.getColorToFind());
+        SmartDashboard.putString("CurrentObjective", "RotateForColor");
       } else {
-      colorArm.RotateControl();
+      //colorArm.RotateControl();
+        SmartDashboard.putString("CurrentObjective", "RotateControl");
       }
+      //colorArm.Raise();
     }
     if (controlSystem.getButton(AuxillaryButtons.Climb)) {//if button pressed then climb!
-      climber.climb(6.5, 0.5);
+      //climber.climb(6.5, 0.5);
+      SmartDashboard.putString("CurrentObjective", "Climbing");
       isClimbed = true;
     }
     if (isClimbed == true) {//if climbed then move along bar!!
-      climber.move();
+      //climber.move();
+      SmartDashboard.putString("CurrentObjective", "Moving");
     }
   }
 
