@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public class SensorManager {
 
-    private static Color colorSensorCalibrate_White, colorSensorCalibrate_Black;
+    private static double willConverted = 255/(2^13);
+    private static Color colorSensorCalibrate_White = new Color(171*willConverted,350*willConverted,200*willConverted);
+    private static Color colorSensorCalibrate_Black = new Color(7400*willConverted,14800*willConverted,7200*willConverted);
 
     //KEY VALUES//
     public static class KeyColorSensorValues {
@@ -23,6 +25,7 @@ public class SensorManager {
 
     //RESETTERS//
     public static void resetSensors() {
+
         Hardware.navx.reset();
         Hardware.m_colorSensor.calibrateFunctions(new Color(255,255,255), new Color(0,0,0));
         SmartDashboard.putString("SettingColorSensor", "Put the color sensor 3-4 inches above the yellow color");
