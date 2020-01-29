@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public class SensorManager {
 
-    private static Color colorSensorCalibrate_White, colorSensorCalibrate_Black;
+    private static double willConverted = 255/(2^13);
+    private static Color colorSensorCalibrate_White = new Color(171*willConverted,350*willConverted,200*willConverted);
+    private static Color colorSensorCalibrate_Black = new Color(7400*willConverted,14800*willConverted,7200*willConverted);
 
     //KEY VALUES//
     public static class KeyColorSensorValues {
@@ -23,7 +25,11 @@ public class SensorManager {
 
     //RESETTERS//
     public static void resetSensors() {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+
+>>>>>>> Dylan-Cleanup
         Hardware.navx.reset();
 =======
 

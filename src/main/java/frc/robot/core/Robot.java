@@ -18,6 +18,7 @@ import frc.robot.core.components.ControlSystem.AuxillaryButtons;
 import frc.robot.core.components.Launcher.Launcher;
 import frc.robot.core.components.Transport.Transport;
 import frc.robot.core.utils.Hardware;
+import frc.robot.core.utils.SensorManager;
 import frc.robot.core.components.WheelOfFortune.ColorGetterFromField;
 import frc.robot.core.components.WheelOfFortune.WheelArm;
 
@@ -49,6 +50,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+
      m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -120,7 +123,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    drivetrain.teleopPeriodic();
+    /*drivetrain.teleopPeriodic();
     if (controlSystem.getButton(AuxillaryButtons.Fire)) {
       if (true){// TODO: need to change to if aim is right... if button pressed the robot fires all of it's current balls
         //launcher.shoot(0.1);//need to velocity based upon the aiming
@@ -160,6 +163,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
     SensorManager.calibrateColor();
@@ -168,5 +172,9 @@ public class Robot extends TimedRobot {
     System.out.println("b"+Hardware.m_colorSensor.getBlue());
 
 >>>>>>> Stashed changes
+=======
+    SensorManager.calibrateColor();
+
+>>>>>>> Dylan-Cleanup
   }
 }
