@@ -23,7 +23,12 @@ public class SensorManager {
 
     //RESETTERS//
     public static void resetSensors() {
+<<<<<<< Updated upstream
         Hardware.navx.reset();
+=======
+
+        //Hardware.navx.reset();
+>>>>>>> Stashed changes
         Hardware.m_colorSensor.calibrateFunctions(new Color(255,255,255), new Color(0,0,0));
         SmartDashboard.putString("SettingColorSensor", "Put the color sensor 3-4 inches above the yellow color");
         SmartDashboard.putString("SettingColorSensor", "Now press and hold the red button");

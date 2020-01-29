@@ -29,10 +29,10 @@ public class Drivetrain implements Component /*PIDOutput*/ {
         SpeedControllerGroup right;
         SpeedControllerGroup left;
        
-        left = new SpeedControllerGroup(Hardware.DT_FL, Hardware.DT_BL);
-        right = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
+        //left = new SpeedControllerGroup(Hardware.DT_FL, Hardware.DT_BL);
+        //right = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
 
-        differentialDrive = new DifferentialDrive(left, right);
+        //differentialDrive = new DifferentialDrive(left, right);
 
         
 
@@ -52,13 +52,13 @@ public class Drivetrain implements Component /*PIDOutput*/ {
             differentialDrive.tankDrive(Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0),
                 Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0));
                 calcCurrentRotationRate();
-                Hardware.navx.getAngle();
+                //Hardware.navx.getAngle();
         }
 
     }
 
     public void lockAngle(double angle){
-        Hardware.navx.reset();
+        //Hardware.navx.reset();
         //turnController.setSetpoint(angle);
         rotateToAngle = true;
     }

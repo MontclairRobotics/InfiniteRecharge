@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
     drivetrain = new Drivetrain();
     drivetrain.robotInit();
 
-    launcher = new Launcher(Hardware.LauncherMotor, Hardware.LauncherEncoder, transport);
+    //launcher = new Launcher(Hardware.LauncherMotor, Hardware.LauncherEncoder, transport);
 
     climber = new Climber();
     
@@ -151,13 +151,22 @@ public class Robot extends TimedRobot {
     if (isClimbed == true) {//if climbed then move along bar!!
       //climber.move();
       SmartDashboard.putString("CurrentObjective", "Moving");
-    }
+    }*/
   }
 
   /**
    * This function is called periodically during test mode.
    */
+
   @Override
   public void testPeriodic() {
+<<<<<<< Updated upstream
+=======
+    SensorManager.calibrateColor();
+    System.out.println("r"+Hardware.m_colorSensor.getRed());
+    System.out.println("g"+Hardware.m_colorSensor.getGreen());
+    System.out.println("b"+Hardware.m_colorSensor.getBlue());
+
+>>>>>>> Stashed changes
   }
 }
