@@ -3,7 +3,6 @@ package frc.robot.core.components.WheelOfFortune;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.core.utils.*;
 import frc.robot.core.utils.SensorManager.KeyColorSensorValues;
-import edu.wpi.first.wpilibj.util.Color;
 
 
 interface WheelArmInterface {
@@ -68,10 +67,10 @@ public class WheelArm implements WheelArmInterface {
      */
     public char GetColorFromSensor() { 
         
-        Color detectedColor = Hardware.m_colorSensor.getColor();
-        double redVal = detectedColor.red;
-        double blueVal = detectedColor.blue;
-        double greenVal = detectedColor.green;
+   
+        double redVal = Hardware.m_colorSensor.getRed();
+        double blueVal = Hardware.m_colorSensor.getBlue();
+        double greenVal = Hardware.m_colorSensor.getGreen();
 
         char returnVal = 'n';
 

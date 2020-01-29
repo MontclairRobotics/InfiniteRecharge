@@ -19,9 +19,6 @@ public class ColorSensor{
     public double getBlue() { return colorSensor.getBlue() * kB + oB; }
     public double getGreen() { return colorSensor.getGreen() * kG + oG; }
     public double getIR() { return colorSensor.getIR(); }
-    public Color getColor() {
-        return new Color(getRed(),getGreen(),getBlue());
-    }
 
     public ColorSensorV3 getColorSensorV3() {return colorSensor;}
 
