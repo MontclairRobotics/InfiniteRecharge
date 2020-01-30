@@ -1,8 +1,9 @@
 package frc.robot.core.components.Climber;
 
 import edu.wpi.first.wpilibj.SpeedController;
-import frc.robot.core.components.ControlSystem.Axis;
-import frc.robot.core.components.ControlSystem.Controllers;
+import frc.robot.core.utils.ControlSystem.Axis;
+import frc.robot.core.utils.ControlSystem.Controllers;
+import frc.robot.core.utils.ControlSystem;
 import frc.robot.core.Robot;
 
 

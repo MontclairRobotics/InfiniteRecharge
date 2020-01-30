@@ -16,5 +16,8 @@ public class Utils {
         double diff=max-min;
         return ((val-min)%diff+diff)%diff+min;
     }
+    public static boolean threshold(double input, double min, double max){
+        return (input>=min && input<=max);
+    }
 
 }

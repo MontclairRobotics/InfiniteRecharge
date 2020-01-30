@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class ControlSystem{
 
-    private Joystick driver;
-    private Joystick auxillary;
+    public static Joystick driver;
+    public static Joystick auxillary;
     
 
     public ControlSystem() {
     }
 
-    public void robotInit() {
-        this.driver = new Joystick(0);
-        this.auxillary = new Joystick(0);
+    public static void robotInit() {
+        driver = new Joystick(0);
+        auxillary = new Joystick(0);
     }
 
-    private double getAxis(Joystick joystick, Axis axis){
+    private static double getAxis(Joystick joystick, Axis axis){
         switch(axis){
             case X:
                 return joystick.getX();
@@ -32,11 +32,11 @@ public class ControlSystem{
         }
     }
 
-    private double getAxis(Joystick joystick, int rawAxis){
+    private static double getAxis(Joystick joystick, int rawAxis){
         return joystick.getRawAxis(rawAxis);
     }
 
-    public double getJoystickAxis(Controllers controller, Axis axis){
+    public static double getJoystickAxis(Controllers controller, Axis axis){
         switch(controller){
             case DRIVER:
                 return getAxis(driver, axis);
@@ -49,7 +49,7 @@ public class ControlSystem{
         }
     }
 
-    public double getJoystickAxis(Controllers controller, int rawAxis){
+    public static double getJoystickAxis(Controllers controller, int rawAxis){
         switch(controller){
             case DRIVER:
                 return getAxis(driver, rawAxis);
@@ -62,7 +62,7 @@ public class ControlSystem{
         }
     }
 
-    public boolean getButton(DriverButtons button){
+    public static boolean getButton(DriverButtons button){
         switch(button){
             case GYRO_LOCK:
                 return driver.getRawButton(button.getPort());
@@ -73,7 +73,7 @@ public class ControlSystem{
         }
     }
 
-    public boolean getButton(AuxillaryButtons button){
+    public static boolean getButton(AuxillaryButtons button){
         switch(button){
             case TEMP:
                 return driver.getRawButton(button.getPort());
@@ -84,7 +84,7 @@ public class ControlSystem{
         }
     }
 
-    public int getPOV(Controllers controller){
+    public static int getPOV(Controllers controller){
         switch(controller){
             case DRIVER:
                 driver.getPOV();

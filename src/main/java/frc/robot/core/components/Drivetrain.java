@@ -1,25 +1,25 @@
 package frc.robot.core.components;
 
-
+import edu.wpi.first.wpilibj.GenericHID;
 //import edu.wpi.first.wpilibj.PIDController;
 //import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.core.Robot;
-import frc.robot.core.components.ControlSystem.Controllers;
-import frc.robot.core.components.ControlSystem.DriverButtons;
 import frc.robot.core.utils.Component;
+import frc.robot.core.utils.ControlSystem;
 import frc.robot.core.utils.Hardware;
+import frc.robot.core.utils.Utils;
+import frc.robot.core.utils.ControlSystem.Controllers;
+import frc.robot.core.utils.ControlSystem.DriverButtons;
 
-public class Drivetrain implements Component /*PIDOutput*/ {
+public class Drivetrain implements Component  {
 
     DifferentialDrive differentialDrive;
 
-
-
-   //private PIDController turnController;
-    private double rotateToAngleRate;
-    private boolean rotateToAngle;
+    //Turn controller for gyro lock
+    private PIDController gyroController;
 
     public Drivetrain(){}
 
@@ -33,54 +33,55 @@ public class Drivetrain implements Component /*PIDOutput*/ {
         right = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
 
         differentialDrive = new DifferentialDrive(left, right);
-
-        
-
-        /*turnController = new PIDController(0, 0, 0, 0, navx, this);
-        turnController.setInputRange(-180.0f,  180.0f);
-        turnController.setOutputRange(-1.0, 1.0);
-        turnController.setAbsoluteTolerance(5);
-        turnController.setContinuous(true);*/
+    }
+    public void teleopInit() {
+        //TODO: Tune values with final robot, as they are likely to be different because of mass and friction
+        //Values taken from Will's branch
+        gyroController = new PIDController(0.5, 0, 0.07);
+        gyroController.setTolerance(2); //Not tuned
+        gyroController.enableContinuousInput(-180.0, 180.0);
     }
 
     @Override
     public void teleopPeriodic() {
+        double rotation;
+        if(ControlSystem.driver.getRawButton(DriverButtons.GYRO_LOCK.getPort()) || Utils.threshold(Math.abs(ControlSystem.driver.getY(GenericHID.Hand.kLeft)),0.3,0.7)) {
+            gyroController.setSetpoint(0);
+            rotation = gyroController.calculate(Hardware.navx.getYaw());
+        } else if(ControlSystem.driver.getPOV()!= -1){
+            switch(ControlSystem.driver.getPOV()){
+                case 0:
+                    gyroController.setSetpoint(0);
+                    rotation = gyroController.calculate(Hardware.navx.getYaw());
+                    break;
 
-        if(Robot.controlSystem.getButton(DriverButtons.GYRO_LOCK)){
-            lockAngle(Robot.controlSystem.getPOV(Controllers.DRIVER));
-        }else{
-            differentialDrive.tankDrive(Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0),
-                Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0));
-                calcCurrentRotationRate();
-                Hardware.navx.getAngle();
+                case 90:
+                    gyroController.setSetpoint(90);
+                    rotation = gyroController.calculate(Hardware.navx.getYaw());
+                    break;
+
+                case 180:
+                    gyroController.setSetpoint(180);
+                    rotation = gyroController.calculate(Hardware.navx.getYaw());
+                    break;
+
+                case 270:
+                    gyroController.setSetpoint(270);
+                    rotation = gyroController.calculate(Hardware.navx.getYaw());
+                    break;
+
+                default:
+                    rotation = ControlSystem.driver.getX(GenericHID.Hand.kRight);
+            }
+            differentialDrive.arcadeDrive(ControlSystem.driver.getY(GenericHID.Hand.kLeft),
+                rotation);
         }
 
-    }
-
-    public void lockAngle(double angle){
-        Hardware.navx.reset();
-        //turnController.setSetpoint(angle);
-        rotateToAngle = true;
-    }
-
-    public double calcCurrentRotationRate(){
-        if ( rotateToAngle ) {
-             // turnController.enable();
-              return rotateToAngleRate;
-        } else {
-              //turnController.disable();
-              return Robot.controlSystem.getJoystickAxis(Controllers.DRIVER, 0);
-        }
     }
 
     @Override
     public void autonomousPeriodic() {
 
     }
-
-    //@Override
-   /* public void pidWrite(double output) {
-        rotateToAngleRate = output;
-    }*/
 
 }
