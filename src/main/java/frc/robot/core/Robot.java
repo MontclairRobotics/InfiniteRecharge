@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.core.components.ControlSystem;
-import frc.robot.core.components.Drivetrain;
+import frc.robot.core.components.Drivetrain.Drivetrain;;
 import frc.robot.core.components.Climber.Climber;
 import frc.robot.core.components.ControlSystem.AuxillaryButtons;
 import frc.robot.core.components.Launcher.Launcher;
