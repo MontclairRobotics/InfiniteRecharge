@@ -1,6 +1,7 @@
 package frc.robot.core.utils;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.I2C;
@@ -19,6 +20,8 @@ public class Hardware {
     public static CANSparkMax DT_BR = new CANSparkMax(1, MotorType.kBrushless);
     public static CANSparkMax DT_FL = new CANSparkMax(2, MotorType.kBrushless);
     public static CANSparkMax DT_BL = new CANSparkMax(3, MotorType.kBrushless);
+    public static CANEncoder rightEncoder = new CANEncoder(DT_FR);
+    public static CANEncoder leftEncoder = new CANEncoder(DT_FL);
     public static AHRS navx; {
     try {
         navx = new AHRS(SPI.Port.kMXP); 
