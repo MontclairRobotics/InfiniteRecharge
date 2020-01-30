@@ -13,7 +13,7 @@ import frc.robot.core.components.*;
 
 
 public class Hardware {
-    //TODO All device ids need to be changed
+    //TODO: All device ids need to be changed
     //DriveTrain
     public static CANSparkMax DT_FR = new CANSparkMax(0, MotorType.kBrushless);
     public static CANSparkMax DT_BR = new CANSparkMax(1, MotorType.kBrushless);

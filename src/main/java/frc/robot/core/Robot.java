@@ -10,13 +10,13 @@ package frc.robot.core;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.core.components.ControlSystem;
 import frc.robot.core.components.Drivetrain;
 import frc.robot.core.components.Climber.Climber;
-import frc.robot.core.components.ControlSystem.AuxillaryButtons;
 import frc.robot.core.components.Launcher.Launcher;
 import frc.robot.core.components.Transport.Transport;
+import frc.robot.core.utils.ControlSystem;
 import frc.robot.core.utils.Hardware;
+import frc.robot.core.utils.ControlSystem.AuxillaryButtons;
 import frc.robot.core.components.WheelOfFortune.ColorGetterFromField;
 import frc.robot.core.components.WheelOfFortune.WheelArm;
 
@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  public static ControlSystem controlSystem;
+  public static frc.robot.core.utils.ControlSystem controlSystem;
   
   private Drivetrain drivetrain;
   private Launcher launcher;
