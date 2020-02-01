@@ -5,9 +5,9 @@ package frc.robot.core.components.Launcher;
 import frc.robot.core.components.Transport.*;
 import frc.robot.core.utils.StateMachine.*;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 
-import edu.wpi.first.wpilibj.Encoder;
 
 public class Launcher implements LauncherBase{
 
@@ -22,7 +22,7 @@ public class Launcher implements LauncherBase{
 
     }
 
-    public Launcher(TalonSRX launcherMotor, Encoder encoder, Transport transport) {
+    public Launcher(CANSparkMax launcherMotor, CANEncoder encoder, Transport transport) {
 
         this.motor = launcherMotor;
         this.encoder = encoder;
@@ -33,15 +33,15 @@ public class Launcher implements LauncherBase{
 
     }
 
-    private TalonSRX motor;
-    private Encoder encoder;
+    private CANSparkMax motor;
+    private CANEncoder encoder;
     private Transport transport;
     private double desiredSpeed;
     private int shooterQueueLength;
 
     //GETTER-SETTERS//
-    public TalonSRX getMotor() {return motor;}
-    public Encoder getEncoder() {return encoder;}
+    public CANSparkMax getMotor() { return motor; }
+    public CANEncoder getEncoder() {return encoder; }
     public double getDesiredSpeed() {return desiredSpeed;}
     public Transport getTransport() {return transport;}
     public int getQueueLength() {return shooterQueueLength;}

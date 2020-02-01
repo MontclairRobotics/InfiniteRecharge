@@ -26,9 +26,9 @@ public class WheelArm implements WheelArmInterface {
     public void RotateControl() {
         char startColor = GetColorFromSensor();
         boolean ifTurned = false;
-        Hardware.WheelMover.set(ControlMode.PercentOutput, 0.2);
+        Hardware.WheelMover.set(0.2);
         if (spinCount == 7) {
-            Hardware.WheelMover.set(ControlMode.PercentOutput, 0);
+            Hardware.WheelMover.set(0);
         } else if (GetColorFromSensor() == startColor && ifTurned == true) {
             spinCount ++;
             ifTurned = false;
@@ -48,10 +48,10 @@ public class WheelArm implements WheelArmInterface {
         } else {
             colorForSensor = 'r';
         }
-        Hardware.WheelMover.set(ControlMode.PercentOutput, 0.1);
+        Hardware.WheelMover.set(0.1);
 
         if (GetColorFromSensor() == colorForSensor) {
-            Hardware.WheelMover.set(ControlMode.PercentOutput, 0);
+            Hardware.WheelMover.set(0);
         }
     }
     /**

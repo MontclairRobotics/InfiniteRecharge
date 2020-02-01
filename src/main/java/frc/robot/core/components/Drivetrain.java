@@ -6,12 +6,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.core.Robot;
 import frc.robot.core.utils.Component;
 import frc.robot.core.utils.ControlSystem;
 import frc.robot.core.utils.Hardware;
 import frc.robot.core.utils.Utils;
-import frc.robot.core.utils.ControlSystem.Controllers;
 import frc.robot.core.utils.ControlSystem.DriverButtons;
 
 public class Drivetrain implements Component  {

@@ -11,7 +11,6 @@ class LauncherShoot extends StateBase<Launcher>{
 
         StateBase nextState = new LauncherShooting(caller,useId);
 
-        caller.getTransport().output();
 
         return nextState;
 
