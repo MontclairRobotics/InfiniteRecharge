@@ -1,16 +1,16 @@
-//PACKAGE//
 package frc.robot.core.components.Transport;
 
+import frc.robot.core.utils.Hardware;
 //IMPORTS//
 import frc.robot.core.utils.StateMachine.*;
 
-class IntakeEnd extends StateBase<Transport>{
-    IntakeEnd(Transport caller, String useId){super(caller, useId);}
+class MovementEnd extends StateBase<Transport>{
+    MovementEnd(Transport caller, String useId){super(caller, useId);}
 
     public StateBase run() {
 
         StateBase nextState = new RestState(this, useId);
-        caller.getBall.stopIntaking();
+        Hardware.AllTransport.set(0);
 
         return nextState;
 

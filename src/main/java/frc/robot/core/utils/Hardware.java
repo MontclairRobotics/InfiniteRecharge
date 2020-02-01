@@ -37,8 +37,7 @@ public class Hardware {
     public static CANEncoder LauncherEncoder = new CANEncoder(LauncherMotor);
     //Transport
     public static CANSparkMax TransportIntakeWheel = new CANSparkMax(6, MotorType.kBrushless);
-    public static TalonSRX IntakeArmRight = new TalonSRX(5);
-    public static TalonSRX IntakeArmLeft = new TalonSRX(6);
+    public static TalonSRX IntakeArm = new TalonSRX(5);
     public static CANSparkMax AllTransport = new CANSparkMax(7, MotorType.kBrushless);
     //WheelOfFortune
     public static TalonSRX ArmMover = new TalonSRX(8);

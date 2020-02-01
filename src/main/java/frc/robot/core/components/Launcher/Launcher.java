@@ -10,17 +10,13 @@ import com.revrobotics.CANSparkMax;
 
 
 public class Launcher implements LauncherBase{
+  
+    private CANSparkMax motor;
+    private CANEncoder encoder;
+    private Transport transport;
+    private double desiredSpeed;
+    private int shooterQueueLength;
 
-    Launcher() {
-
-        motor = null;
-        encoder = null;
-        transport = null;
-        StateMachineHandler.instantiateState( new RestState(this, null) );
-        desiredSpeed = 0;
-        shooterQueueLength = 0;
-
-    }
 
     public Launcher(CANSparkMax launcherMotor, CANEncoder encoder, Transport transport) {
 
@@ -33,11 +29,7 @@ public class Launcher implements LauncherBase{
 
     }
 
-    private CANSparkMax motor;
-    private CANEncoder encoder;
-    private Transport transport;
-    private double desiredSpeed;
-    private int shooterQueueLength;
+
 
     //GETTER-SETTERS//
     public CANSparkMax getMotor() { return motor; }

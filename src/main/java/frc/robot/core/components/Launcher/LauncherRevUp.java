@@ -11,7 +11,7 @@ class LauncherRevUp extends StateBase<Launcher>{
 
         StateBase nextState = new LauncherRevUp(caller,useId);
 
-        if( caller.getEncoder().getVelocity() >= 10) { // Change constant
+        if( caller.getEncoder().getVelocity() >= 2500) { // TODO Change constant
 
             nextState = new LauncherShoot(caller, useId);
 
