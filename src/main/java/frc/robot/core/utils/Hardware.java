@@ -1,6 +1,7 @@
 package frc.robot.core.utils;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.I2C;
@@ -8,7 +9,6 @@ import com.revrobotics.ColorSensorV3;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.core.components.*;
 
 
@@ -33,14 +33,16 @@ public class Hardware {
     public static TalonSRX ClimbWinch_R = new TalonSRX(3);
     public static TalonSRX ClimbMover = new TalonSRX(4);
     //Launcher
-    public static TalonSRX LauncherMotor = new TalonSRX(5);
-    public static Encoder LauncherEncoder = new Encoder(null, null);
+    public static CANSparkMax LauncherMotor = new CANSparkMax(4, MotorType.kBrushless);
+    public static CANEncoder LauncherEncoder = new CANEncoder(LauncherMotor);
     //Transport
-    public static TalonSRX TransportIntake = new TalonSRX(6);
-    public static TalonSRX TransportOutput = new TalonSRX(7);
+    public static CANSparkMax TransportIntakeWheel = new CANSparkMax(6, MotorType.kBrushless);
+    public static TalonSRX IntakeArmRight = new TalonSRX(5);
+    public static TalonSRX IntakeArmLeft = new TalonSRX(6);
+    public static CANSparkMax AllTransport = new CANSparkMax(7, MotorType.kBrushless);
     //WheelOfFortune
     public static TalonSRX ArmMover = new TalonSRX(8);
-    public static TalonSRX WheelMover = new TalonSRX(9);
+    public static CANSparkMax WheelMover = new CANSparkMax(8, MotorType.kBrushed);
     public static I2C.Port i2cPort = I2C.Port.kOnboard;
     public static ColorSensor m_colorSensor = new ColorSensor( new ColorSensorV3(i2cPort) );
 
