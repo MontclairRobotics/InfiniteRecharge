@@ -1,6 +1,9 @@
 package frc.robot.core.components.Climber;
 
-import edu.wpi.first.wpilibj.SpeedController;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.core.utils.StateMachine.*;
 
@@ -16,7 +19,7 @@ class ArmStart extends StateBase<Arm>{
     public StateBase<Arm> run() {
         StateBase nextState = new ArmWait(caller, useId);
 
-        caller.getMotor().set(caller.getDesiredSpeed());
+        caller.getMotor().set(ControlMode.PercentOutput, caller.getDesiredSpeed());
         caller.getEncoder().reset();
 
         return nextState;
@@ -41,7 +44,7 @@ class ArmEnd extends StateBase<Arm>{
     public StateBase<Arm> run() {
         StateBase nextState = new RestState(caller, useId);
 
-        caller.getMotor().stopMotor();
+        caller.getMotor().set(ControlMode.PercentOutput, 0);
 
         return nextState;
     }
@@ -59,7 +62,7 @@ public class Arm implements ArmBase{
 
     }
 
-    public Arm(SpeedController motor, Encoder encoder, double maximumRotation) {
+    public Arm(TalonSRX motor, Encoder encoder, double maximumRotation) {
 
         this.motor = motor;
         this.encoder = encoder;
@@ -69,12 +72,12 @@ public class Arm implements ArmBase{
 
     }
 
-    private SpeedController motor;
+    private TalonSRX motor;
     private Encoder encoder;
     private double desiredSpeed;
     private double maximumRotation;
 
-    public SpeedController getMotor() {return motor;}
+    public TalonSRX getMotor() {return motor;}
     public double getDesiredSpeed() {return desiredSpeed;}
     public double getMaximumRotation() {return maximumRotation;}
     public Encoder getEncoder() {return encoder;}

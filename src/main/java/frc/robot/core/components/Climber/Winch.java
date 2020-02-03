@@ -2,7 +2,9 @@
 package frc.robot.core.components.Climber;
 
 //IMPORTS//
-import edu.wpi.first.wpilibj.SpeedController;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.core.utils.StateMachine.*;
 
@@ -18,7 +20,7 @@ class WinchBegin extends StateBase<Winch>{
 
         StateBase nextState = new WinchWaiting(caller, useId);
 
-        caller.getMotor().set(caller.getDesiredSpeed());
+        caller.getMotor().set(ControlMode.PercentOutput, caller.getDesiredSpeed());
         caller.getEncoder().reset();
 
         return nextState;
@@ -47,7 +49,7 @@ class WinchEnd extends StateBase<Winch> {
 
         StateBase nextState = new RestState(caller, useId);
 
-        caller.getMotor().stopMotor();
+        caller.getMotor().set(ControlMode.PercentOutput, 0);
         caller.setCurrentDistance(caller.getEncoder().getDistance());
 
         return nextState;
@@ -58,7 +60,7 @@ class WinchEnd extends StateBase<Winch> {
 
 public class Winch implements WinchBase{
         
-    private SpeedController motor;
+    private TalonSRX motor;
     private Encoder encoder;
     private StateBase state;
     private double desiredSpeed;
@@ -79,7 +81,7 @@ public class Winch implements WinchBase{
 
     }
 
-    Winch(SpeedController motor, Encoder encoder, double maximumDistance) {
+    Winch(TalonSRX motor, Encoder encoder, double maximumDistance) {
 
         this.motor = motor;
         this.encoder = encoder;
@@ -91,7 +93,7 @@ public class Winch implements WinchBase{
 
     }
 
-    public SpeedController getMotor() {return motor;}
+    public TalonSRX getMotor() {return motor;}
     public Encoder getEncoder() {return encoder;}
     public double getDesiredSpeed() {return desiredSpeed;}
     public double getDesiredDistance() {return desiredDistance;}

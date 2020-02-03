@@ -16,7 +16,7 @@ public class ControlSystem{
         auxillary = new Joystick(0);
     }
 
-    private static double getAxis(Joystick joystick, Axis axis){
+    private double getAxis(Joystick joystick, Axis axis){
         switch(axis){
             case X:
                 return joystick.getX();
@@ -32,11 +32,11 @@ public class ControlSystem{
         }
     }
 
-    private static double getAxis(Joystick joystick, int rawAxis){
+    private double getAxis(Joystick joystick, int rawAxis){
         return joystick.getRawAxis(rawAxis);
     }
 
-    public static double getJoystickAxis(Controllers controller, Axis axis){
+    public double getJoystickAxis(Controllers controller, Axis axis){
         switch(controller){
             case DRIVER:
                 return getAxis(driver, axis);
@@ -49,7 +49,7 @@ public class ControlSystem{
         }
     }
 
-    public static double getJoystickAxis(Controllers controller, int rawAxis){
+    public double getJoystickAxis(Controllers controller, int rawAxis){
         switch(controller){
             case DRIVER:
                 return getAxis(driver, rawAxis);
@@ -62,7 +62,7 @@ public class ControlSystem{
         }
     }
 
-    public static boolean getButton(DriverButtons button){
+    public boolean getButton(DriverButtons button){
         switch(button){
             case GYRO_LOCK:
                 return driver.getRawButton(button.getPort());

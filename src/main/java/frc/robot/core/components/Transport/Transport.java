@@ -1,23 +1,29 @@
 //PACKAGE//
 package frc.robot.core.components.Transport;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+
+import frc.robot.core.components.Transport.BallIntake.BallSuck;
+import frc.robot.core.components.Transport.BallIntake.IntakeArm;
 //IMPORTS//
-import edu.wpi.first.wpilibj.SpeedController;
+import frc.robot.core.utils.Hardware;
 import frc.robot.core.utils.StateMachine.*;
 
-public class Transport implements TransportIntake, TransportOutput{
+public class Transport implements TransportIntake, TransportMovement{
 
     //DECLARATIONS//
-    private SpeedController[] intakeMotors;
-    private SpeedController[] outputMotors;
-    private boolean hasIntaken, hasOutputted;
-
+    private CANSparkMax intakeMotor = Hardware.TransportIntakeWheel;
+    private CANSparkMax MovementMotor = Hardware.AllTransport;
+    public BallSuck getBall;
+    private boolean hasIntaken, hasOutputted, hasMoved;
+    public IntakeArm intakeArm;
     //sesnor thingy
 
     //CONSTRUCTOR//
     Transport() {
-        intakeMotors = null;
-        outputMotors = null;
+        intakeMotor = null;
+        MovementMotor = null;
 
         hasIntaken = false;
         hasOutputted = false;
@@ -25,34 +31,26 @@ public class Transport implements TransportIntake, TransportOutput{
         StateMachineHandler.instantiateState( new RestState(this, "i") );
         StateMachineHandler.instantiateState( new RestState(this, "u") );
     }
-    public Transport( SpeedController intakeMotor, SpeedController outputMotor ) {
-        intakeMotors = new SpeedController[]{intakeMotor};
-        outputMotors = new SpeedController[]{outputMotor};
+    public Transport( CANSparkMax intakeMotor, CANSparkMax MovementMotor, TalonSRX intakeArm) {
 
         hasIntaken = false;
         hasOutputted = false;
+        hasMoved = false;
 
         StateMachineHandler.instantiateState( new RestState(this, "i") );
         StateMachineHandler.instantiateState( new RestState(this, "u") );
     }
-    Transport( SpeedController[] intakeMotors, SpeedController[] outputMotors ) {
-        this.intakeMotors = intakeMotors;
-        this.outputMotors = outputMotors;
 
-        hasIntaken = false;
-        hasOutputted = false;
-
-        StateMachineHandler.instantiateState( new RestState(this, "i") );
-        StateMachineHandler.instantiateState( new RestState(this, "u") );
-    }
 
     //GETTER-SETTERS//
-    public SpeedController[] getIntakeMotors() { return intakeMotors; }
-    public SpeedController[] getOutputMotors() { return outputMotors; }
+    public CANSparkMax getIntakeMotor() { return intakeMotor; }
+    public CANSparkMax getMovementMotor() { return MovementMotor; }
     public boolean getHasIntaken() { return hasIntaken; }
     public boolean getHasOutputted() { return hasOutputted; }
+    public boolean getHasMoved() {return hasMoved;}
     public void setHasIntaken(boolean value) { hasIntaken = value; }
     public void setHasOutputted(boolean value) { hasOutputted = value; }
+    public void setHasMoved(boolean value) {hasMoved = value;}
 
     public void intake() {
      
@@ -60,9 +58,9 @@ public class Transport implements TransportIntake, TransportOutput{
 
     }
 
-    public void output() {
+    public void move() {
 
-        StateMachineHandler.setState(new OutputStart(this, "o"), this, "o");
+        StateMachineHandler.setState(new MovementStart(this, "m"), this, "m");
 
     }
 
