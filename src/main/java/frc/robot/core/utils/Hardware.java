@@ -27,10 +27,10 @@ public class Hardware {
     }
     }
     //Climber
-    public static TalonSRX ClimbArm_L = new TalonSRX(0);
-    public static TalonSRX ClimbArm_R = new TalonSRX(1);
-    public static TalonSRX ClimbWinch_L = new TalonSRX(2);
-    public static TalonSRX ClimbWinch_R = new TalonSRX(3);
+    public static CANSparkMax ClimbArm_L = new CANSparkMax(0, MotorType.kBrushed);
+    public static CANSparkMax ClimbArm_R = new CANSparkMax(1, MotorType.kBrushed);
+    public static CANSparkMax ClimbWinch_L = new CANSparkMax(2, MotorType.kBrushed);
+    public static v ClimbWinch_R = new CANSparkMax(3);
     public static TalonSRX ClimbMover = new TalonSRX(4);
     //Launcher
     public static CANSparkMax LauncherMotor = new CANSparkMax(4, MotorType.kBrushless);
