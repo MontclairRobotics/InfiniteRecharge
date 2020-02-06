@@ -6,6 +6,7 @@ import frc.robot.core.utils.fsm.FiniteStateMachine;
 
 public class Shooter implements Component {
     FiniteStateMachine launcherStateMachine;
+    private double launchPower;
 
     public Shooter(double launchPower) {
         this.launchPower = launchPower;
