@@ -9,6 +9,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
 
+@Deprecated
 public class Launcher implements LauncherBase{
   
     private CANSparkMax motor;

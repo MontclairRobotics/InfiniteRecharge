@@ -10,6 +10,7 @@ import frc.robot.core.components.Transport.BallIntake.IntakeArm;
 import frc.robot.core.utils.Hardware;
 import frc.robot.core.utils.StateMachine.*;
 
+@Deprecated
 public class Transport implements TransportIntake, TransportMovement{
 
     //DECLARATIONS//
