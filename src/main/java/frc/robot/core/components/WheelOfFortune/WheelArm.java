@@ -17,11 +17,11 @@ public class WheelArm implements WheelArmInterface {
     
     int spinCount = 0;
     public void Raise() {
-        Hardware.ArmMover.set(ControlMode.PercentOutput, 0.1);
+        Hardware.ArmMover.set(0.1);
     }
     
     public void Lower() {
-        Hardware.ArmMover.set(ControlMode.PercentOutput, -0.1);
+        Hardware.ArmMover.set(-0.1);
     }
     public void RotateControl() {
         char startColor = GetColorFromSensor();

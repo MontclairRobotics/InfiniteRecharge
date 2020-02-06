@@ -27,21 +27,23 @@ public class Hardware {
     }
     }
     //Climber
+
+    //These IDs haven't been set
     public static CANSparkMax ClimbArm_L = new CANSparkMax(0, MotorType.kBrushed);
     public static CANSparkMax ClimbArm_R = new CANSparkMax(1, MotorType.kBrushed);
     public static CANSparkMax ClimbWinch_L = new CANSparkMax(2, MotorType.kBrushed);
-    public static v ClimbWinch_R = new CANSparkMax(3);
-    public static TalonSRX ClimbMover = new TalonSRX(4);
+    public static CANSparkMax ClimbWinch_R = new CANSparkMax(3, MotorType.kBrushed);
+    public static CANSparkMax ClimbMover = new CANSparkMax(4, MotorType.kBrushed);
     //Launcher
-    public static CANSparkMax LauncherMotor = new CANSparkMax(4, MotorType.kBrushless);
+    public static CANSparkMax LauncherMotor = new CANSparkMax(5, MotorType.kBrushless);
     public static CANEncoder LauncherEncoder = new CANEncoder(LauncherMotor);
     //Transport
     public static CANSparkMax TransportIntakeWheel = new CANSparkMax(6, MotorType.kBrushless);
-    public static TalonSRX IntakeArm = new TalonSRX(5);
-    public static CANSparkMax AllTransport = new CANSparkMax(7, MotorType.kBrushless);
+    public static CANSparkMax IntakeArm = new CANSparkMax(7, MotorType.kBrushless);
+    public static CANSparkMax AllTransport = new CANSparkMax(8, MotorType.kBrushless);
     //WheelOfFortune
-    public static TalonSRX ArmMover = new TalonSRX(8);
-    public static CANSparkMax WheelMover = new CANSparkMax(8, MotorType.kBrushed);
+    public static CANSparkMax ArmMover = new CANSparkMax(9, MotorType.kBrushed);
+    public static CANSparkMax WheelMover = new CANSparkMax(10, MotorType.kBrushed);
     public static I2C.Port i2cPort = I2C.Port.kOnboard;
     public static ColorSensor m_colorSensor = new ColorSensor( new ColorSensorV3(i2cPort) );
 

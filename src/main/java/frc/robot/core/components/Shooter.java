@@ -19,7 +19,7 @@ public class Shooter implements Component {
 
     public void teleopPeriodic() {
         if (ControlSystem.driver.getRawButton(ControlSystem.AuxillaryButtons.Fire.getPort())) {
-            shoot();
+            //shoot();
         }
     }
     public void robotPeriodic() {
