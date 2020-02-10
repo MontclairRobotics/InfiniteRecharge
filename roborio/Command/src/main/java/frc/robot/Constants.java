@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.controller.PIDController;
 
@@ -51,7 +52,12 @@ public final class Constants {
         public static final double kRamseteZeta = 0.7; //TODO
 
     }
-
+    public static final class LauncherConstants {
+        public static final int kLauncherPort = 4;
+        public static final int kIntakeArmPort = 5;
+        public static final int kIntakeWheelPort = 6;
+        public static final int kTransport = 7;
+    }
     public static final class ControlPanelManipulatorConstants {
         public static final I2C.Port kColorSensorPort = I2C.Port.kMXP;
         public static final int kWheelMotorPort = 4;

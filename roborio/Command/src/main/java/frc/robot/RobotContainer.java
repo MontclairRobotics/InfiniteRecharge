@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.HeadingLock;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Launcher;
 
 import static frc.robot.Constants.IOConstants.kDriverControllerPort;
 
@@ -26,6 +27,7 @@ import static frc.robot.Constants.IOConstants.kDriverControllerPort;
 public class RobotContainer {
 
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private final Launcher launcher = new Launcher();
 
   XboxController driverController = new XboxController(kDriverControllerPort);
 
@@ -39,6 +41,8 @@ public class RobotContainer {
             new RunCommand(() -> driveSubsystem
                     .arcadeDrive(driverController.getY(GenericHID.Hand.kLeft),
                             driverController.getX(GenericHID.Hand.kRight)), driveSubsystem));
+    launcher.setDefaultCommand(
+            new RunCommand(() ->launcher.intake()));
 
   }
 
