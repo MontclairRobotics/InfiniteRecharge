@@ -13,7 +13,7 @@ Hardware.TransportIntake.set(ControlMode.PercentOutput, 0.1);
   }         
  }*/
 
-  public SpeedController motor = Hardware.IntakeArm;
+  public SpeedController motor = Hardware.TransportIntakeWheel;
   public double speed = 1;
   
   public void run(boolean pressed) {
