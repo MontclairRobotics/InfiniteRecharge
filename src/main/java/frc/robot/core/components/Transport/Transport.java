@@ -4,8 +4,7 @@ package frc.robot.core.components.Transport;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 
-import frc.robot.core.components.Transport.BallIntake.BallSuck;
-import frc.robot.core.components.Transport.BallIntake.IntakeArm;
+import frc.robot.core.components.Transport.BallIntake.*;
 //IMPORTS//
 import frc.robot.core.utils.Hardware;
 import frc.robot.core.utils.StateMachine.*;
@@ -15,7 +14,7 @@ public class Transport implements TransportIntake, TransportMovement{
 
     //DECLARATIONS//
     private CANSparkMax intakeMotor = Hardware.TransportIntakeWheel;
-    private CANSparkMax MovementMotor = Hardware.AllTransport;
+    private CANSparkMax MovementMotor = Hardware.TransportBelt;
     public BallSuck getBall;
     private boolean hasIntaken, hasOutputted, hasMoved;
     public IntakeArm intakeArm;
