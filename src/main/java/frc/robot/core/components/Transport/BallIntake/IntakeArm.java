@@ -15,13 +15,19 @@ public class IntakeArm {
 
     if(Math.abs(joystickYAxis) > inputThreshold) {
 
-      motor.set(joystickYAxis);
+      motor.set(joystickYAxis*speedMultiplier);
 
     } else {
 
       motor.stopMotor();
 
     }
+
+  }
+
+  public boolean isInThreshold(double num) {
+
+    return Math.abs(num) < inputThreshold;
 
   }
 

@@ -10,6 +10,8 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.core.components.*;
+import frc.robot.core.components.Transport.BallIntake.BallSuck;
+import frc.robot.core.components.Transport.BallIntake.IntakeArm;
 
 
 public class Hardware {
@@ -41,6 +43,8 @@ public class Hardware {
     public final static CANSparkMax TransportIntakeWheel = new CANSparkMax(11, MotorType.kBrushless);
     public final static CANSparkMax IntakeArm = new CANSparkMax(12, MotorType.kBrushless);
     public final static CANSparkMax TransportBelt = new CANSparkMax(13, MotorType.kBrushless);
+    public final static BallSuck BallIntakeHandler = new BallSuck();
+    public final static IntakeArm IntakeArmHandler = new IntakeArm();
     //WheelOfFortune
     //public final static CANSparkMax ArmMover = new CANSparkMax(14, MotorType.kBrushed);
     //public final static CANSparkMax WheelMover = new CANSparkMax(15, MotorType.kBrushed);

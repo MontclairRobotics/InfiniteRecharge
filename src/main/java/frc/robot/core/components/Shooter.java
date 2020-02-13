@@ -3,10 +3,8 @@ package frc.robot.core.components;
 import frc.robot.core.utils.Component;
 import frc.robot.core.utils.ControlSystem;
 import frc.robot.core.utils.Hardware;
-import frc.robot.core.utils.fsm.FiniteStateMachine;
 
 public class Shooter implements Component {
-    FiniteStateMachine launcherStateMachine;
     
     private double launchPower;
 
@@ -22,21 +20,46 @@ public class Shooter implements Component {
     }
 
     public void teleopPeriodic() {
-        if (ControlSystem.driver.getRawButton(ControlSystem.AuxillaryButtons.Fire.getPort())) {
-            
-        }
+
+        shoot();
+        transportBall();
+        intakeBall();
+
     }
     public void robotPeriodic() {
         //SmartDashboard things go here
     }
     public void autonomousPeriodic() {}
 
-    public void belt() {
-        //TODO: Tune
-        Hardware.TransportBelt.set(0.1);
-    }
-    public void shoot() {
+    public void intakeBall() {
+        //TODO: change the negative 69
+        Hardware.BallIntakeHandler.run( ControlSystem.auxillary.getRawButton(-69) );
+        Hardware.IntakeArmHandler.run( ControlSystem.auxillary.getY() );
+
     }
 
+    public void transportBall() {
+
+        if( ControlSystem.auxillary.getRawButton(ControlSystem.AuxillaryButtons.Intake.getPort()) ) { 
+            
+            Hardware.TransportBelt.set(0.1);
+
+        } else {
+
+            Hardware.TransportBelt.set(0);
+
+        }
+
+    }
+
+    public void shoot() {
+
+        if (ControlSystem.driver.getRawButton(ControlSystem.AuxillaryButtons.Fire.getPort())) {
+            
+            //TODO: this
+
+        }
+
+    }
 
 }
