@@ -38,5 +38,15 @@ public class Shooter implements Component {
     public void shoot() {
     }
 
+    public void shooterRotate(double velocity) {
+        if (ControlSystem.auxillary.getRawButton(ControlSystem.AuxillaryButtons.TEMP2ELECTRICBOOGALOO.getPort())) {
+            Hardware.Rotator.set(velocity);
+        } else if (ControlSystem.auxillary.getRawButton(ControlSystem.AuxillaryButtons.TEMP3.getPort())) {
+            Hardware.Rotator.set(-velocity);
+        } else {
+            Hardware.Rotator.set(0);
+        }
+    }
+
 
 }

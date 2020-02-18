@@ -36,6 +36,7 @@ public class Hardware {
     public final static CANSparkMax ClimbMover = new CANSparkMax(9, MotorType.kBrushed);
     //Launcher
     public final static CANSparkMax LauncherMotor = new CANSparkMax(10, MotorType.kBrushless);
+    public final static CANSparkMax Rotator = new CANSparkMax(50, MotorType.kBrushless);
     public final static CANEncoder LauncherEncoder = new CANEncoder(LauncherMotor);
     //Transport
     public final static CANSparkMax TransportIntakeWheel = new CANSparkMax(11, MotorType.kBrushless);
