@@ -2,7 +2,7 @@ package frc.robot.core.utils.StateMachine;
 
 import java.util.Set;
 import java.util.HashSet;
-
+@Deprecated
 public class StateMachineHandler {
 
     private static Set<StateBase> states = new HashSet<StateBase>();
