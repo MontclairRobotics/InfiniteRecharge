@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.HeadingLock;
+import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.LowerIntake;
 import frc.robot.commands.PortLock;
 import frc.robot.commands.RaiseIntake;
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.*;
 
 import static frc.robot.Constants.IOConstants.kAuxiliaryControllerPort;
@@ -90,6 +92,15 @@ public class RobotContainer {
     // Lower Intake
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperRight.value)
             .whenPressed(new LowerIntake());
+
+    // Intake Balls
+    new JoystickButton(auxiliaryController, XboxController.Button.kA.value)
+            .whenPressed(new IntakeBalls());
+
+    // Shoot
+    new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
+            .whenPressed(new Shoot());
+
 
   }
 

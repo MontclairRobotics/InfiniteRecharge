@@ -7,9 +7,7 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.controller.PIDController;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean

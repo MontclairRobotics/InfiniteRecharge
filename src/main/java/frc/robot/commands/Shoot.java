@@ -10,8 +10,11 @@ public class Shoot extends CommandBase {
 
     @Override
     public void execute() {
-        launcherSubsystem.setSpeed(1);
-        transportSubsystem.setTransportSpeed(1);
+        double speed = 1;// TODO need to add in ratio of distance we are away:speed of motor
+        launcherSubsystem.setSpeed(speed);
+        if (Math.abs(launcherSubsystem.getEncoder() - speed) < 0.1) {
+            transportSubsystem.setTransportSpeed(1);
+        }
     }
 
     @Override
