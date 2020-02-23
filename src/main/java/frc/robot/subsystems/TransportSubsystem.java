@@ -13,6 +13,8 @@ public class TransportSubsystem extends SubsystemBase{
     private final CANSparkMax top = new CANSparkMax(kTransportTopPort, kBrushless);
     private final CANSparkMax bot = new CANSparkMax(kTransportBotPort, kBrushless);
     private final AnalogInput ultraSonicSensor = new AnalogInput(0);
+    public  int ballCount = 0;
+
 
     public void setTransportSpeed(double speed) {
         top.set(speed);
@@ -38,7 +40,6 @@ public class TransportSubsystem extends SubsystemBase{
 
     }
     public int getBallCount() {
-        int ballCount = 0;
         boolean hadSpace = true;
         if (getIsBall() && hadSpace == true) {
             ballCount = ballCount + 1;
@@ -48,5 +49,6 @@ public class TransportSubsystem extends SubsystemBase{
         }
         return ballCount;
     }
+
 
 }

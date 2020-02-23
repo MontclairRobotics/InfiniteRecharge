@@ -22,6 +22,7 @@ public class Shoot extends CommandBase {
         launcherSubsystem.setSpeed(-0.1);
         rumbleDriver(false);
         rumbleAux(false);
+        transportSubsystem.ballCount = 0;
     }
 
 }
