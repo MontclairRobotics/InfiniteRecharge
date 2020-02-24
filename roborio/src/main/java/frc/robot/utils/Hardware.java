@@ -13,7 +13,12 @@ public class Hardware {
     public static final CANSparkMax transportTop  = new CANSparkMax(5, MotorType.kBrushless);
     public static final CANSparkMax shooter = new CANSparkMax(6, MotorType.kBrushless);
 
-    public static final CANSparkMax lift = new CANSparkMax(4, MotorType.kBrushless);
-    public Hardware() {}
+    public static final CANSparkMax leftWinch = new CANSparkMax(10, MotorType.kBrushless);
+    public static final CANSparkMax rightWinch = new CANSparkMax(11, MotorType.kBrushless);
     
+    public static final CANSparkMax leftLiftArm = new CANSparkMax(12, MotorType.kBrushless);
+    public static final CANSparkMax rightLiftArm = new CANSparkMax(13, MotorType.kBrushless);
+
+    public Hardware() {}
+
 }
