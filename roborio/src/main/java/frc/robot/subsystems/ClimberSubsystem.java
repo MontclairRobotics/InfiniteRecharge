@@ -1,44 +1,44 @@
 package frc.robot.subsystems;
 
+import java.util.Objects;
+
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubsystem extends SubsystemBase {
-    
-    private double climbTarget = 0, armTarget = 0, shimmyTarget = 0;
-    private ArmPosition position = ArmPosition.DOWN;
-    private boolean canAscend = true;
-    private boolean canDescend = false;
 
-    public enum ArmPosition{
-        UP(true), DOWN(false);
-        boolean value;
-        private ArmPosition(boolean value) {this.value = value;}
-    }
+    private boolean fullyRaised = false;
+    private final double winchSpeed;
+    private SpeedController winchMotor, armMotor;
 
-    public boolean setArmPosition(boolean position) {
+    public boolean raiseArm() {
 
     }
 
-    public ArmPosition getArmPosition() {
-        return position; 
+    public boolean lowerArm() {
+
     }
 
     public boolean climbUp() {
-        if(!canAscend)
+        if(!fullyRaised)
             return false;
-        climb(false);
+        climb(winchSpeed);
         return true;
     }
 
     public boolean climbDown() {
-        if(!canDescend)
+        if(!fullyRaised)
             return false;
-        climb(true);
+        climb(-winchSpeed);
         return true;
     }
 
-    private void climb(boolean isDown) {
-
+    private void climb(double velocity) {
+        
     }
+
+    public ClimberSubsystem() {this(0,null,null);}
+    public ClimberSubsystem(double speed) {this(0,Hardware.,)}
+    public ClimberSubsystem(double speed, SpeedController winchMotor, SpeedController armMotor) {winchSpeed = speed;}
 
 }
