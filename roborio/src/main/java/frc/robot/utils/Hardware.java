@@ -15,7 +15,5 @@ public class Hardware {
 
     public static final CANSparkMax lift = new CANSparkMax(4, MotorType.kBrushless);
     public Hardware() {}
-
-    public static void robotInit() {
-    }
+    
 }
