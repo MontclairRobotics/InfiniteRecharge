@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static frc.robot.Constants.VisionPIDConstants.*;
 import static frc.robot.RobotContainer.*;
-import static frc.robot.utils.Utils.rumbleAux;
-import static frc.robot.utils.Utils.rumbleDriver;
+import static frc.robot.utils.Utils.*;
 
 public class PortLock extends CommandBase {
 
@@ -46,8 +45,7 @@ public class PortLock extends CommandBase {
     @Override
     public boolean isFinished() {
         boolean isFinished = dist.atSetpoint() && turn.atSetpoint();
-        rumbleDriver(isFinished);
-        rumbleAux(isFinished);
+        rumble(isFinished);
         return isFinished;
     }
 }

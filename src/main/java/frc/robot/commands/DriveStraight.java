@@ -12,7 +12,7 @@ public class DriveStraight extends CommandBase {
 
     public DriveStraight(double distance){
         distanceController = new PIDController(1,0,0);
-        distanceController.setSetpoint(distance);
+        distanceController.setSetpoint(distance*1/0.3); // TODO: Tune rot/meter
         distanceController.setTolerance(0.1);
     }
 

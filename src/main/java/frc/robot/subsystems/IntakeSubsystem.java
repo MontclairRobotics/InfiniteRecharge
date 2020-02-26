@@ -11,7 +11,7 @@ import static frc.robot.Constants.IntakeConstants.*;
 public class IntakeSubsystem extends SubsystemBase {
 
     private final CANSparkMax deployLeft = new CANSparkMax(kIntakeDeployLeftPort, kBrushed);
-    private final CANSparkMax deployRight = new CANSparkMax(kIntakeDeployLeftPort, kBrushed);
+    private final CANSparkMax deployRight = new CANSparkMax(kIntakeDeployRightPort, kBrushed);
 
     private final CANSparkMax intake = new CANSparkMax(kIntakeWheelPort, kBrushed);
 

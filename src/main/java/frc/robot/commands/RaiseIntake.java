@@ -9,7 +9,7 @@ public class RaiseIntake extends CommandBase {
 
     @Override
     public void execute() {
-        intakeSubsystem.setDeploySpeed(-0.8);
+        intakeSubsystem.setDeploySpeed(-0.5);
     }
 
     @Override

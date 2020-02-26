@@ -10,13 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
-import frc.robot.commands.sequences.AutoTest;
+import frc.robot.commands.sequences.AutoDrive;
 import frc.robot.subsystems.*;
 
 import static frc.robot.Constants.IOConstants.kAuxiliaryControllerPort;
@@ -48,7 +47,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
 
-    autoChooser.setDefaultOption("Auto Test", new AutoTest());
+    autoChooser.setDefaultOption("Auto Test", new AutoDrive());
     SmartDashboard.putData("Auto Modes", autoChooser);
 
     driveSubsystem.setDefaultCommand(
@@ -77,7 +76,7 @@ public class RobotContainer {
             .whenPressed(() -> driveSubsystem.setMaxOutput(0.5))
             .whenReleased(() -> driveSubsystem.setMaxOutput(1));
 
-    // 1/4
+    // 1/4 Speed
     new JoystickButton(driverController, XboxController.Button.kBumperLeft.value)
             .whenPressed(() -> driveSubsystem.setMaxOutput(0.25))
             .whenReleased(() -> driveSubsystem.setMaxOutput(1));
@@ -98,9 +97,14 @@ public class RobotContainer {
 
     // -------------------------------- Auxiliary Controller ---------------------------------------------------
 
-    // Raise Lift
-    new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
+    // Raise Lift Main // THERE IS NO AUTOMATED STOP
+    new JoystickButton(auxiliaryController, XboxController.Button.kY.value)
             .whenPressed(new RunCommand( ()-> liftSubsystem.setMainSpeed(1)))
+            .whenReleased(new RunCommand( ()-> liftSubsystem.setMainSpeed(0)));
+
+    // Lower Lift Main // THERE IS NO AUTOMATED STOP
+    new JoystickButton(auxiliaryController, XboxController.Button.kA.value)
+            .whenPressed(new RunCommand( ()-> liftSubsystem.setMainSpeed(-1)))
             .whenReleased(new RunCommand( ()-> liftSubsystem.setMainSpeed(0)));
 
     // Lower Intake
@@ -110,6 +114,11 @@ public class RobotContainer {
     // Raise Intake
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperRight.value)
             .whenPressed(new RaiseIntake());
+
+    // Manual Intake Test (Delete once other stuffs work)
+    new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
+            .whenPressed(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(1)))
+            .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
 
   }
 
