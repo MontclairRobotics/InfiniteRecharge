@@ -8,17 +8,16 @@ public class RaiseIntake extends CommandBase {
 
     @Override
     public void execute() {
-        intakeSubsystem.setIntakeArmSpeed(-0.8);
-        intakeSubsystem.setIntakeWheelSpeed(1);
+        intakeSubsystem.setDeploySpeed(-0.5);
     }
 
     @Override
     public void end(boolean interrupted) {
-        intakeSubsystem.setIntakeArmSpeed(0);
+        intakeSubsystem.setIntakeSpeed(0);
     }
 
     @Override
     public boolean isFinished() {
-        return intakeSubsystem.getUpperLimit();
+        return intakeSubsystem.getLimitSwitch();
     }
 }

@@ -9,7 +9,7 @@ import frc.robot.utils.Utils;
 import static frc.robot.Constants.ControlPanelManipulatorConstants.kColorSensorPort;
 import static frc.robot.Constants.ControlPanelManipulatorConstants.kWheelMotorPort;
 
-public class ColorArm extends SubsystemBase {
+public class ColorArmSubsystem extends SubsystemBase {
 
     private final ColorSensorV3 colorSensor = new ColorSensorV3(kColorSensorPort);
 

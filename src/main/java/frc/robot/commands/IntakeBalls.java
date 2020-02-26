@@ -12,7 +12,7 @@ public class IntakeBalls extends CommandBase {
         double topTranportSpeed = 0;
         double botTransportSpeed = 0;
         boolean hadSpace = true;
-        intakeSubsystem.setIntakeWheelSpeed(0.5);
+        intakeSubsystem.setIntakeSpeed(0.5);
         topTranportSpeed = 0.7;
         botTransportSpeed = -0.7;
         if (transportSubsystem.getIsBall() && hadSpace == true) {

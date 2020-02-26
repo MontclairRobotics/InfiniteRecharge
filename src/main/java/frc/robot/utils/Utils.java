@@ -31,4 +31,9 @@ public class Utils {
         }
     }
 
+    public static void rumble(boolean rumble){
+        rumbleDriver(rumble);
+        rumbleAux(rumble);
+    }
+
 }
