@@ -46,6 +46,16 @@ public class DriveSubsystem extends SubsystemBase {
         differentialDrive.arcadeDrive(fwd, rot);
     }
 
+    public void arcadeDrive(double fwd, double rot, boolean inverted){
+        if(inverted){
+            differentialDrive.arcadeDrive(-fwd,-rot);
+        } else {
+            arcadeDrive(fwd, rot);
+        }
+    }
+
+
+
     public void resetEncoders() {
         leftEncoder.setPosition(0);
         rightEncoder.setPosition(0);

@@ -30,7 +30,7 @@ import static frc.robot.Constants.IOConstants.kDriverControllerPort;
 public class RobotContainer {
 
   public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-  public static final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
+  public static final Shooter shooterSubsystem = new Shooter();
   public static final TransportSubsystem transportSubsystem = new TransportSubsystem();
   public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public static final ColorArm colorArm = new ColorArm();
@@ -54,6 +54,8 @@ public class RobotContainer {
                     driverController.getY(Hand.kRight),
                     driverController.getY(Hand.kRight))));
 
+    shooterSubsystem.setDefaultCommand(
+            new RunCommand(()-> shooterSubsystem.setSpeed(1)));
   }
 
   /**

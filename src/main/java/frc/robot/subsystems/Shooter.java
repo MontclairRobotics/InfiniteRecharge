@@ -5,10 +5,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless;
+import static frc.robot.Constants.ShooterConstants.kShooterPort;
 
-public class LauncherSubsystem extends SubsystemBase {
+public class Shooter extends SubsystemBase {
 
-    private final CANSparkMax launcher = new CANSparkMax(Constants.LauncherConstants.kLauncherPort, kBrushless);
+    private final CANSparkMax launcher = new CANSparkMax(kShooterPort, kBrushless);
 
     public void setSpeed(double speed){
         launcher.set(speed);

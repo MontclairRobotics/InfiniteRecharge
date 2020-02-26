@@ -19,6 +19,6 @@ public class LowerIntake extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return intakeSubsystem.getLowerLimit();
+        return intakeSubsystem.getLimitSwitch();
     }
 }

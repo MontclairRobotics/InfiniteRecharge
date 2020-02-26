@@ -24,7 +24,7 @@ public final class Constants {
         public static final int kFrontLeftMotorPort = 7;
         public static final int kFrontRightMotorPort = 1;
         public static final int kBackLeftMotorPort = 9;
-        public static final int kBackRightMotorPort = 2;
+        public static final int kBackRightMotorPort = 3;
 
         public static final int kEncoderCPR = 1024;
         public static final double kWheelDiameterInches = 6;
@@ -53,8 +53,8 @@ public final class Constants {
 
     }
 
-    public static final class LauncherConstants {
-        public static final int kLauncherPort = 6;
+    public static final class ShooterConstants {
+        public static final int kShooterPort = 6;
     }
 
     public static final class TransportConstants {
@@ -63,8 +63,10 @@ public final class Constants {
     }
 
     public static final class IntakeConstants{
-        public static final int kIntakeArmPort = 7;
-        public static final int kIntakeWheelPort = 7;
+        public static final int kIntakeDeployLeftPort = 13;
+        public static final int kIntakeDeployRightPort = 4;
+        public static final int kIntakeWheelPort = 10; //TODO: TBD
+        public static final int kIntakeDeployLimitSwitchPort = 0;
     }
 
     public static final class ControlPanelManipulatorConstants {

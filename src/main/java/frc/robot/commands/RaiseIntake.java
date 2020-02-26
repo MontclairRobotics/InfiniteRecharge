@@ -20,6 +20,6 @@ public class RaiseIntake extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return intakeSubsystem.getUpperLimit();
+        return intakeSubsystem.getLimitSwitch();
     }
 }
