@@ -10,13 +10,14 @@ public class Shoot extends CommandBase {
 
     @Override
     public void execute() {
-        launcherSubsystem.setSpeed(1);
+        shooterSubsystem.setSpeed(1);
         transportSubsystem.setTransportSpeed(1);
     }
 
     @Override
     public void end(boolean interrupted) {
-        launcherSubsystem.setSpeed(-0.1);
+        shooterSubsystem.setSpeed(-0.01);
+        transportSubsystem.setTransportSpeed(0);
         rumbleDriver(false);
         rumbleAux(false);
     }

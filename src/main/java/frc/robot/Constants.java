@@ -69,6 +69,11 @@ public final class Constants {
         public static final int kIntakeDeployLimitSwitchPort = 0;
     }
 
+    public static final class LiftConstants{
+        public static final int kLiftMainPort = 2;
+        public static final int kLiftWinchPort = 4; //TODO: TBD
+    }
+
     public static final class ControlPanelManipulatorConstants {
         public static final I2C.Port kColorSensorPort = I2C.Port.kMXP;
         public static final int kWheelMotorPort = 4;

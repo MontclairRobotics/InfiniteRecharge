@@ -9,13 +9,12 @@ public class RaiseIntake extends CommandBase {
 
     @Override
     public void execute() {
-        intakeSubsystem.setIntakeArmSpeed(-0.8);
-        intakeSubsystem.setIntakeWheelSpeed(1);
+        intakeSubsystem.setDeploySpeed(-0.8);
     }
 
     @Override
     public void end(boolean interrupted) {
-        intakeSubsystem.setIntakeArmSpeed(0);
+        intakeSubsystem.setIntakeSpeed(0);
     }
 
     @Override
