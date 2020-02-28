@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.LiftArm;
+import frc.robot.commands.LowerArm;
 import frc.robot.utils.Hardware;
 import frc.robot.utils.Constants.LiftConstants;
 
@@ -31,18 +31,12 @@ public class ClimberSubsystem extends SubsystemBase {
         Hardware.rightLiftArm.set(0);
     }
 
-    public boolean getLimitSwitch() {
-        return Hardware.leftLimitSwitch.get();
+    public boolean getFullyLimited() {
+        return Hardware.leftLimitSwitch.get() && Hardware.rightLimitSwitch.get();
     }
-    // public void climbUp() {
-    //     currentWinchDirection = Direction.UP;
-    // }
 
-    // public void climbDown() {
-    //     currentWinchDirection = Direction.DOWN;
-    // }
+    public boolean getLimited() {
+        return Hardware.leftLimitSwitch.get() || Hardware.rightLimitSwitch.get();
+    }
 
-    // public void climbStop() {
-    //     currentWinchDirection = Direction.STOPPED;
-    // }
 }

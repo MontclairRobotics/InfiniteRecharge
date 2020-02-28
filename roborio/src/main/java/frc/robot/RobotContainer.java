@@ -8,10 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.LiftArm;
+import frc.robot.commands.LowerArm;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -21,11 +26,10 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-
+  private final LiftArm liftArm = new LiftArm(climberSubsystem);
+  private final LowerArm lowerArm = new LowerArm(climberSubsystem);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -35,6 +39,12 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  private final Joystick driver = new Joystick(1);
+  private final Joystick auxillary = new Joystick(2);
+
+  private final JoystickButton climberUp = new JoystickButton(driver, 1);
+  private final JoystickButton climberDown = new JoystickButton(driver, 2);
+
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -42,6 +52,11 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    climberUp.whenPressed(liftArm);
+    climberUp.negate().cancelWhenActive(liftArm);
+
+    climberDown.whenPressed(lowerArm);
+    climberDown.negate().cancelWhenActive(lowerArm);
   }
 
 
@@ -52,6 +67,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
