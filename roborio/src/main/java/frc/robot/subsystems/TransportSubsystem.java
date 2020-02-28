@@ -14,14 +14,13 @@ public class TransportSubsystem extends SubsystemBase{
         topTransport = new SpeedControllerGroup(Hardware.transportTop);
         
     }
-    public void actTransport(boolean in){
-        if(in){
+    public void actTransport(){
             bottomTransport.set(Constants.TransportConstants.kIntakeSpeed);
             topTransport.set(-(Constants.TransportConstants.kIntakeSpeed));
         }
-        else{
-            bottomTransport.set(0);
-            topTransport.set(0);
-        }
+    public void deactTransport(){
+        bottomTransport.set(0);
+        topTransport.set(0);
+    }
     }
 }

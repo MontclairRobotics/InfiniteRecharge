@@ -12,6 +12,10 @@ public class Transport extends CommandBase{
     }
     @Override
     public void execute(){
-        m_transport.actTransport(true);
+        m_transport.actTransport();
+    }
+    @Override
+    public void end(boolean interupted){
+        m_transport.deactTransport();
     }
 }
