@@ -10,9 +10,6 @@ public class ClimberSubsystem extends SubsystemBase {
     //SpeedControllerGroup armMotors;
     //SpeedControllerGroup winchMotors;
 
-    private LiftArm liftCommand;
-    private LowerArm lowerCommand;
-
     public ClimberSubsystem() {        
     }
 
