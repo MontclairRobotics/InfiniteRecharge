@@ -2,10 +2,13 @@ package frc.robot.utils;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.DigitalInput;
+import frc.robot.utils.Constants.Ports;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+public final class Hardware {
 
-public class Hardware {
+    //IDs might not be final, check with electronics before testing.
+    //MAKE SURE MOTORS ARE SET TO THE CORRECT PREFERENCE (BRUSHED/BRUSHLESS ON THE REV ROBOTICS SOFTWARE)
     public static final CANSparkMax DT_FL = new CANSparkMax(2, MotorType.kBrushless);
     public static final CANSparkMax DT_FR = new CANSparkMax(1, MotorType.kBrushless);
     public static final CANSparkMax DT_BL = new CANSparkMax(9, MotorType.kBrushless);
@@ -17,12 +20,10 @@ public class Hardware {
 
     public static final CANSparkMax leftWinch = new CANSparkMax(10, MotorType.kBrushless);
     public static final CANSparkMax rightWinch = new CANSparkMax(11, MotorType.kBrushless);
-    public static final SpeedControllerGroup winches = new SpeedControllerGroup(leftWinch, rightWinch);
     
     public static final CANSparkMax leftLiftArm = new CANSparkMax(12, MotorType.kBrushless);
     public static final CANSparkMax rightLiftArm = new CANSparkMax(13, MotorType.kBrushless);
-    public static final SpeedControllerGroup liftArms = new SpeedControllerGroup(leftLiftArm, rightLiftArm);
 
-    public Hardware() {}
-
+    public static final DigitalInput leftLimitSwitch = new DigitalInput(Ports.kLeftLiftLimit);
+    public static final DigitalInput rightLimitSwitch = new DigitalInput(Ports.kRightLiftLimit);
 }

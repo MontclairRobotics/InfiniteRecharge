@@ -16,4 +16,20 @@ package frc.robot.utils;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final class LiftConstants {
+        public static final double kLiftSpeed = 1; //TODO: Tune
+        public static final double kClimbSpeed = 1; //TODO: Tune
+    }
+    public static final class Ports {
+        //None of these ports are final
+        public static final int kFrontLeft = 1;
+        public static final int kBackLeft = 2;
+        public static final int kFrontRight = 3;
+        public static final int kDT_BackRight = 4;
+
+        public static final int kIntakeLimit = 1;
+        public static final int kLeftLiftLimit = 2;
+        public static final int kRightLiftLimit = 3;
+    }
+
 }
