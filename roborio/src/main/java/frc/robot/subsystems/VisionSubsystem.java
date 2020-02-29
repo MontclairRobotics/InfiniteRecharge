@@ -12,7 +12,7 @@ public class VisionSubsystem extends SubsystemBase {
 
     //TODO: implement funcs
     public boolean getTargetVisible() {
-        return null;
+        return null; //TODO: implement
     }
 
     public boolean getAligned() {
@@ -24,12 +24,12 @@ public class VisionSubsystem extends SubsystemBase {
                ) <= Constants.VisionConstants.kAlignmentThreshold;
     }
 
-    public double[] getTargetPosition() /*RETURN [x,y(,confidence)]*/ {
-        return null;
+    public double[] getTargetPosition() /*RETURN [x,y]*/ {
+        return null; //TODO: implement
     }
 
-    public double[] getCenteredTargetPosition() /*RETURN [x,y(,confidence)]*/ {
-        return getTargetPosition();
+    public double[] getCenteredTargetPosition() /*RETURN [x,y]*/ {
+        return getTargetPosition(); //TODO: implement
     }
 
 }
