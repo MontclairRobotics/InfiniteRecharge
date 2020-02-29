@@ -40,6 +40,6 @@ public final class Constants {
     }
     public static final class VisionConstants {
         public static final double kAlignmentThreshold = 1;
-        public static final double[] kImageCenter = {-1,2};
+        public static final double[] kImageCenter = new double[]{-1,2}; //must be two long
     }
 }
