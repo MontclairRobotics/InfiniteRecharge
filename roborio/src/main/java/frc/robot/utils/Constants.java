@@ -38,4 +38,8 @@ public final class Constants {
         public static final double kLauncherSpeed = 1; //TODO: Tune
         public static final double kLauncherError = 0; //TODO: Tune
     }
+    public static final class VisionConstants {
+        public static final double kAlignmentThreshold = 1;
+        public static final double[] kImageCenter = {-1,2};
+    }
 }
