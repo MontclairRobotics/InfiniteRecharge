@@ -12,14 +12,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DoFor;
 import frc.robot.commands.Drive;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Launch;
 import frc.robot.commands.LiftArm;
 import frc.robot.commands.LowerArm;
 import frc.robot.commands.Transport;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -53,6 +51,7 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  //TODO: FINALIZE PORTS
   private final Joystick driver = new Joystick(1);
   private final Joystick auxillary = new Joystick(2);
 
