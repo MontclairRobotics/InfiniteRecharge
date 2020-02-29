@@ -23,7 +23,7 @@ public class DoFor extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return timeToWait >= startTime - System.currentTimeMillis();
+        return timeToWait >= System.currentTimeMillis() - startTime;
     }
 
     @Override
