@@ -24,7 +24,7 @@ public class VisionSubsystem extends SubsystemBase {
                ) <= Constants.VisionConstants.kAlignmentThreshold;
     }
 
-    public double[] getTargetPosition() {
+    public double[] getTargetPosition() /*RETURN [x,y(,confidence)]*/ {
         return null;
     }
 
