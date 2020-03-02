@@ -29,9 +29,6 @@ public final class Constants {
 
         public static final int kIntakeLimit = 1;
         public static final int kLiftLimit = 2;
-
-        public static final int kDriver = 1;
-        public static final int kOperator = 2;
     }
     public static final class TransportConstants{
         public static final int kIntakeSpeed = 1;
