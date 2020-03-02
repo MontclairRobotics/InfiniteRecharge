@@ -52,9 +52,6 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  private final Joystick driver = new Joystick(Ports.kDriver);
-  private final Joystick auxillary = new Joystick(Ports.kOperator);
-
   //TODO: FINALIZE PORTS
   private final JoystickButton liftArmButton = new JoystickButton(driver, 1);
   private final JoystickButton lowerArmButton = new JoystickButton(driver, 2);
