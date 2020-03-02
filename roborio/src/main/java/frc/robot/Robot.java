@@ -7,7 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -19,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot{
   private Command m_autonomousCommand;
+  private Joystick test = new Joystick(0);
 
   private RobotContainer m_robotContainer;
 
@@ -58,6 +61,8 @@ public class Robot extends TimedRobot{
 
   @Override
   public void disabledPeriodic() {
+    
+
   }
 
   /**
@@ -96,7 +101,8 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void teleopPeriodic() {
-  }
+    SmartDashboard.putBoolean("A", test.getRawButton(0));
+    }
 
   @Override
   public void testInit() {
