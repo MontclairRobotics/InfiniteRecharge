@@ -16,12 +16,13 @@ public class DriveSubsystem extends SubsystemBase{
         rightMotors = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
         driveTrain = new DifferentialDrive(leftMotors, rightMotors);
     }
-    public void arDrive(double forward, double rotation, boolean in){
-        if(in){
+    public void arcadeDrive(double forward, double rotation, boolean inverted){
+        if(inverted){
             driveTrain.arcadeDrive(-forward, -rotation);
         }
         else{
             driveTrain.arcadeDrive(forward, rotation);
         }
     }
+    
 }

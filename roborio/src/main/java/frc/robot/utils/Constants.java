@@ -25,11 +25,13 @@ public final class Constants {
         public static final int kFrontLeft = 1;
         public static final int kBackLeft = 2;
         public static final int kFrontRight = 3;
-        public static final int kDT_BackRight = 4;
+        public static final int kBackRight = 4;
 
         public static final int kIntakeLimit = 1;
-        public static final int kLeftLiftLimit = 2;
-        public static final int kRightLiftLimit = 3;
+        public static final int kLiftLimit = 2;
+
+        public static final int kDriver = 1;
+        public static final int kOperator = 2;
     }
     public static final class TransportConstants{
         public static final int kIntakeSpeed = 1;

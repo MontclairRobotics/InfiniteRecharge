@@ -9,12 +9,12 @@ public final class Hardware {
 
     //IDs might not be final, check with electronics before testing.
     //MAKE SURE MOTORS ARE SET TO THE CORRECT PREFERENCE (BRUSHED/BRUSHLESS ON THE REV ROBOTICS SOFTWARE)
-    public static final CANSparkMax DT_FL = new CANSparkMax(2, MotorType.kBrushless);
-    public static final CANSparkMax DT_FR = new CANSparkMax(1, MotorType.kBrushless);
-    public static final CANSparkMax DT_BL = new CANSparkMax(9, MotorType.kBrushless);
-    public static final CANSparkMax DT_BR = new CANSparkMax(7, MotorType.kBrushless);
+    public static final CANSparkMax DT_FL = new CANSparkMax(Ports.kFrontLeft, MotorType.kBrushless);
+    public static final CANSparkMax DT_FR = new CANSparkMax(Ports.kFrontRight, MotorType.kBrushless);
+    public static final CANSparkMax DT_BL = new CANSparkMax(Ports.kBackLeft, MotorType.kBrushless);
+    public static final CANSparkMax DT_BR = new CANSparkMax(Ports.kBackRight, MotorType.kBrushless);
 
-    public static final CANSparkMax transportBottom = new CANSparkMax(3, MotorType.kBrushless); //Not final ID;
+    public static final CANSparkMax transportBottom = new CANSparkMax(3, MotorType.kBrushless);
     public static final CANSparkMax transportTop  = new CANSparkMax(5, MotorType.kBrushless);
     public static final CANSparkMax shooter = new CANSparkMax(6, MotorType.kBrushless);
 
@@ -24,6 +24,5 @@ public final class Hardware {
     public static final CANSparkMax leftLiftArm = new CANSparkMax(12, MotorType.kBrushless);
     public static final CANSparkMax rightLiftArm = new CANSparkMax(13, MotorType.kBrushless);
 
-    public static final DigitalInput leftLimitSwitch = new DigitalInput(Ports.kLeftLiftLimit);
-    public static final DigitalInput rightLimitSwitch = new DigitalInput(Ports.kRightLiftLimit);
+    public static final DigitalInput liftLimit = new DigitalInput(Ports.kLiftLimit);
 }

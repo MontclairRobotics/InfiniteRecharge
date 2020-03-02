@@ -17,6 +17,6 @@ public Drive(DriveSubsystem subsystem, DoubleSupplier forward, DoubleSupplier ro
 }
 @Override
 public void execute(){
-    m_drive.arDrive(m_forward.getAsDouble(), m_rotation.getAsDouble(), true);//may change false boolean later
+    m_drive.arcadeDrive(m_forward.getAsDouble(), m_rotation.getAsDouble(), false);
 }
 }

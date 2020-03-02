@@ -27,7 +27,7 @@ public class LowerArm extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return climber.getFullyLimited();
+        return climber.getLimitSwitch();
     }
 
 }

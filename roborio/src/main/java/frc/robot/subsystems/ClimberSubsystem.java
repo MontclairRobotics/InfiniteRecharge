@@ -30,11 +30,5 @@ public class ClimberSubsystem extends SubsystemBase {
         Hardware.rightLiftArm.set(0);
     }
 
-    public boolean getFullyLimited() {
-        return Hardware.leftLimitSwitch.get() && Hardware.rightLimitSwitch.get();
-    }
-
-    public boolean getLimited() {
-        return Hardware.leftLimitSwitch.get() || Hardware.rightLimitSwitch.get();
-    }
+    public boolean getLimitSwitch() { return Hardware.liftLimit.get(); }
 }
