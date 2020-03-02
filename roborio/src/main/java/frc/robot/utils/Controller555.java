@@ -5,25 +5,30 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class Controller555 {
 
-    public final Joystick This;
+    private Joystick joystick;
 
-    public final JoystickButton D_UP = new JoystickButton(This, 0);
-    public final JoystickButton D_DOWN = new JoystickButton(This, 2);
-    public final JoystickButton D_LEFT = new JoystickButton(This, 1);
-    public final JoystickButton D_RIGHT = new JoystickButton(This, 3);
+    public Joystick getUnderlying() {return joystick;}
 
-    public final JoystickButton RT = new JoystickButton(This, 0);
-    public final JoystickButton LT = new JoystickButton(This, 0);
-    public final JoystickButton RZ = new JoystickButton(This, 0);
-    public final JoystickButton LZ = new JoystickButton(This, 0);
+    public final JoystickButton RB = new JoystickButton(joystick, 4);
+    public final JoystickButton LB = new JoystickButton(joystick, 5);
 
-    public final JoystickButton SQUARE = new JoystickButton(This, 0);
-    public final JoystickButton CIRCLE = new JoystickButton(This, 0);
-    public final JoystickButton TRIANGLE = new JoystickButton(This, 0);
-    public final JoystickButton X = new JoystickButton(This, 0);
+    public final JoystickButton START = new JoystickButton(joystick, 6);
+    public final JoystickButton BACK = new JoystickButton(joystick, 7);
+
+    public final JoystickButton A = new JoystickButton(joystick, 0);
+    public final JoystickButton B = new JoystickButton(joystick, 1);
+    public final JoystickButton X = new JoystickButton(joystick, 3);
+    public final JoystickButton Y = new JoystickButton(joystick, 2);
+
+    public final JoystickButton RTR = new JoystickButton(joystick, 8);
+    public final JoystickButton LTR = new JoystickButton(joystick, 9);
 
     public Controller555(int port) {
-        This = new Joystick(port);
+        joystick = new Joystick(port);
+    }
+
+    public Controller555() {
+        this(0);
     }
 
 }
