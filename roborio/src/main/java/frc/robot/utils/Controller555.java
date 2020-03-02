@@ -1,7 +1,9 @@
 package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 public class Controller555 {
 
@@ -22,6 +24,11 @@ public class Controller555 {
 
     public final JoystickButton RTR = new JoystickButton(joystick, 8);
     public final JoystickButton LTR = new JoystickButton(joystick, 9);
+
+    public final POVButton D_RIGHT = new POVButton(joystick, 0);
+    public final POVButton D_UP = new POVButton(joystick, 90);
+    public final POVButton D_LEFT = new POVButton(joystick, 180);
+    public final POVButton D_DOWN = new POVButton(joystick, 270);
 
     public Controller555(int port) {
         joystick = new Joystick(port);

@@ -24,6 +24,7 @@ import frc.robot.utils.Controllers;
 import frc.robot.utils.Constants.Ports;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -53,11 +54,11 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  //TODO: FINALIZE PORTS
-  private final JoystickButton liftArmButton = Controllers.driver.Y;
-  private final JoystickButton lowerArmButton = Controllers.driver.A;
-  private final JoystickButton launchButton = Controllers.auxillary.LB;
-  private final JoystickButton transportButton = Controllers.auxillary.A;
+  //TODO: FINALIZE BUTTS
+  private final Button liftArmButton = Controllers.driver.Y;
+  private final Button lowerArmButton = Controllers.driver.A;
+  private final Button launchButton = Controllers.auxillary.LB;
+  private final Button transportButton = Controllers.auxillary.A;
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
