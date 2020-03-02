@@ -54,7 +54,7 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  //TODO: FINALIZE PORTS
+  //TODO: FINALIZE BUTTS
   private final Button liftArmButton = Controllers.driver.Y;
   private final Button lowerArmButton = Controllers.driver.A;
   private final Button launchButton = Controllers.auxillary.LB;
