@@ -23,7 +23,6 @@ public class ClimberSubsystem extends SubsystemBase {
         //See raiseArm comment
         Hardware.leftLiftArm.set(-LiftConstants.kLiftSpeed);
         Hardware.rightLiftArm.set(-LiftConstants.kLiftSpeed);
-        
     }
 
     public void stopArm() {
@@ -38,5 +37,4 @@ public class ClimberSubsystem extends SubsystemBase {
     public boolean getLimited() {
         return Hardware.leftLimitSwitch.get() || Hardware.rightLimitSwitch.get();
     }
-
 }

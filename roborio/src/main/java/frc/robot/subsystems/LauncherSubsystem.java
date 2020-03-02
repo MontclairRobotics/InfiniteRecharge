@@ -21,5 +21,5 @@ public class LauncherSubsystem extends SubsystemBase{
     public boolean getLauncherRevved() {
         return Hardware.shooter.getEncoder().getVelocity() >= kLauncherSpeed - kLauncherError;
     }
-
+    
 }
