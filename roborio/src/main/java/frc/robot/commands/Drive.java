@@ -6,7 +6,6 @@ public class Drive extends CommandBase {
     private final DriveSubsystem drive;
     private final double forward;
     private final double rotation;
-    private boolean inverted;
     
     public Drive(DriveSubsystem subsystem, double forward, double rotation){
         drive = subsystem;
@@ -23,13 +22,6 @@ public class Drive extends CommandBase {
 
     @Override
     public void execute(){
-        if (inverted) {
-            drive.arcadeDrive(forward, rotation);
-            
-        }
-        else {
-            drive.arcadeDrive(forward, rotation);
-        }
-        
+        drive.arcadeDrive(forward, rotation);
     }
 }
