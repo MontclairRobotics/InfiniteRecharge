@@ -34,8 +34,13 @@ public final class Constants {
         public static final int kDriver = 0;
         public static final int kOperator = 1;
 
-        public static final int kLeftJoystick = 4;
-        public static final int kRightJoystick = 5;
+        public static final int kLeftX = 0;
+        public static final int kLeftY = 1;
+
+        public static final int kRightX = 4;
+        public static final int kRightY = 5;
+
+
 
 
         //TODO: Confirm these, these numbers are placeholders
@@ -44,10 +49,14 @@ public final class Constants {
         public static final int kX = 3;
         public static final int kY = 4;
 
-        public static final int kLStick = 5;
+        public static final int kLB = 5;
+        public static final int kRB = 6;
 
-        public static final int kLB = 6;
-        public static final int kRB = 7;
+        public static final int kSelect = 7;
+        public static final int kStart = 8;
+
+        public static final int kLStick = 9;
+        public static final int kRStick = 10;
     }
     public static final class PIDConstants {
         //TODO: Tune
