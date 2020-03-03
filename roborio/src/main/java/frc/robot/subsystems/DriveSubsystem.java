@@ -16,6 +16,8 @@ public class DriveSubsystem extends SubsystemBase{
 
     private final AHRS navx = new AHRS(SPI.Port.kMXP);
 
+    private boolean inverted;
+
 
 
 
@@ -23,8 +25,10 @@ public class DriveSubsystem extends SubsystemBase{
         leftMotors = new SpeedControllerGroup(Hardware.DT_FL, Hardware.DT_BL);
         rightMotors = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
         driveTrain = new DifferentialDrive(leftMotors, rightMotors);
+
+        inverted = false;
     }
-    public void arcadeDrive(double forward, double rotation, boolean inverted){
+    public void arcadeDrive(double forward, double rotation){
         if(inverted){
             driveTrain.arcadeDrive(-forward, -rotation);
         }

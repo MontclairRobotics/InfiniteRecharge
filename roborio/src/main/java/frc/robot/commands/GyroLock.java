@@ -17,6 +17,7 @@ public class GyroLock extends CommandBase {
         addRequirements(drive);
     }
 
+    @Override
     public void initialize() {
         controller.setTolerance(0.5);
         controller.setSetpoint(0);
@@ -24,11 +25,14 @@ public class GyroLock extends CommandBase {
         drive.resetNavX();
     }
     
+    @Override
     public void execute() {
         rotation = controller.calculate(drive.getYaw());
-        drive.arcadeDrive(speed, rotation, false);
+        drive.arcadeDrive(speed, rotation);
     }
-    public void end(boolean inverted) {
+
+    @Override
+    public void end(boolean interrupted) {
         controller.reset();
     }
 }

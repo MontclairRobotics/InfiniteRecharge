@@ -12,14 +12,11 @@ public class Drive extends CommandBase {
     private final double rotation;
     private boolean inverted;
     
-    public Drive(DriveSubsystem subsystem, double forward, double rotation, boolean inverted){
+    public Drive(DriveSubsystem subsystem, double forward, double rotation){
         drive = subsystem;
         this.forward = forward;
         this.rotation = rotation;
         addRequirements(subsystem);
-    }
-    public Drive(DriveSubsystem subsystem, double forward, double rotation){
-        this(subsystem, forward, rotation, false);
     }
 
     @Override
@@ -31,11 +28,11 @@ public class Drive extends CommandBase {
     @Override
     public void execute(){
         if (inverted) {
-            drive.arcadeDrive(forward, rotation, true);
+            drive.arcadeDrive(forward, rotation);
             
         }
         else {
-            drive.arcadeDrive(forward, rotation, false);
+            drive.arcadeDrive(forward, rotation);
         }
         
     }
