@@ -67,22 +67,13 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Controllers.Buttons.raiseLift.whenPressed(liftArm);
-    Controllers.Buttons.raiseLift.negate().cancelWhenActive(liftArm);
+    liftArmButton.whenPressed(liftArm);
 
-    Controllers.Buttons.lowerLift.whenPressed(lowerArm);
-    Controllers.Buttons.lowerLift.negate().cancelWhenActive(lowerArm);
+    lowerArmButton.whenPressed(lowerArm);
 
-    Controllers.Buttons.shoot.whenPressed(launch);
-    Controllers.Buttons.shoot.negate().cancelWhenActive(launch);
+    launchButton.whenPressed(launch);
 
-    Controllers.Buttons.invert.whenPressed(new RunCommand(() -> driveSubsystem.invert()));
-
-
-
-    // Not sure if there is actually going to be a button that only does transport
-    // transportButton.whenPressed(transport);
-    // transportButton.negate().cancelWhenActive(transport);
+    transportButton.whenPressed(transport);
   }
 
     /////////////////////////
