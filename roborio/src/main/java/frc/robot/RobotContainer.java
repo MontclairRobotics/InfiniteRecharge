@@ -93,7 +93,6 @@ public class RobotContainer {
     Buttons.fullSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(1)));
     Buttons.fullSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5)));
 
-
     Buttons.quarterSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.25)));
     Buttons.quarterSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5)));
 
