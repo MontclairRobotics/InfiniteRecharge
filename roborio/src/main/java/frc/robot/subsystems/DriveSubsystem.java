@@ -18,9 +18,6 @@ public class DriveSubsystem extends SubsystemBase{
 
     private boolean inverted;
 
-
-
-
     public DriveSubsystem(){
         leftMotors = new SpeedControllerGroup(Hardware.DT_FL, Hardware.DT_BL);
         rightMotors = new SpeedControllerGroup(Hardware.DT_FR, Hardware.DT_BR);
