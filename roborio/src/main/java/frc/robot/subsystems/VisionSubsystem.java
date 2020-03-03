@@ -32,8 +32,7 @@ public class VisionSubsystem extends SubsystemBase {
                 <= Constants.VisionConstants.kAlignmentThreshold
             && Math.abs( getTargetPosition()[1] - VisionConstants.kTarget[1] ) 
                 <= Constants.VisionConstants.kAlignmentThreshold
-                :
-            false;
+            :false;
     }
 
 }
