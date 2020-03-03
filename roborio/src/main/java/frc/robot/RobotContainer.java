@@ -20,6 +20,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
+import frc.robot.utils.Controllers;
 import frc.robot.utils.Constants.ControlConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -45,23 +46,6 @@ public class RobotContainer {
   private final Launch launch = new Launch(launcherSubsystem, transportSubsystem);
   private final Transport transport = new Transport(transportSubsystem);
 
-
-  private final Joystick driver = new Joystick(ControlConstants.kDriver);
-  private final Joystick operator = new Joystick(ControlConstants.kOperator);
-
-  //Driver Buttons (Control Scheme will likely/definitely be changed)
-  private final JoystickButton gyroLock = new JoystickButton(driver, ControlConstants.kA);
-  private final JoystickButton fullSpeed = new JoystickButton(driver, ControlConstants.kLStick);
-  private final JoystickButton quarterSpeed = new JoystickButton(driver, ControlConstants.kLB);
-  private final JoystickButton shoot = new JoystickButton(driver, ControlConstants.kB);
-  private final JoystickButton invert = new JoystickButton(driver, ControlConstants.kRB);
-
-  //Operator Buttons (Control Scheme will likely/definitely be changed)
-  private final JoystickButton intake = new JoystickButton(operator, ControlConstants.kA);
-  private final JoystickButton raiseLift = new JoystickButton(operator, ControlConstants.kX);
-  private final JoystickButton lowerLift = new JoystickButton(operator, ControlConstants.kY);
-
-
   // private final Button liftArmButton = Controllers.driver.Y;
   // private final Button lowerArmButton = Controllers.driver.A;
   // private final Button launchButton = Controllers.auxillary.LB;
@@ -72,7 +56,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driver.getRawAxis(4), driver.getRawAxis(5)));
+    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, Controllers.driver.getRawAxis(4), Controllers.driver.getRawAxis(5)));
 
     configureButtonBindings();
   }
@@ -83,16 +67,16 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    raiseLift.whenPressed(liftArm);
-    raiseLift.negate().cancelWhenActive(liftArm);
+    Controllers.Buttons.raiseLift.whenPressed(liftArm);
+    Controllers.Buttons.raiseLift.negate().cancelWhenActive(liftArm);
 
-    lowerLift.whenPressed(lowerArm);
-    lowerLift.negate().cancelWhenActive(lowerArm);
+    Controllers.Buttons.lowerLift.whenPressed(lowerArm);
+    Controllers.Buttons.lowerLift.negate().cancelWhenActive(lowerArm);
 
-    shoot.whenPressed(launch);
-    shoot.negate().cancelWhenActive(launch);
+    Controllers.Buttons.shoot.whenPressed(launch);
+    Controllers.Buttons.shoot.negate().cancelWhenActive(launch);
 
-    invert.whenPressed(new RunCommand(() -> driveSubsystem.invert()));
+    Controllers.Buttons.invert.whenPressed(new RunCommand(() -> driveSubsystem.invert()));
 
 
 
