@@ -36,9 +36,4 @@ public class Launch extends CommandBase {
         transport.deactTransport();
     }
 
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
 }
