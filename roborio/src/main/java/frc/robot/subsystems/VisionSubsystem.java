@@ -14,23 +14,30 @@ public class VisionSubsystem extends SubsystemBase {
     public VisionSubsystem() {}
 
     public boolean getTargetVisible() {
-        isVisible = table.getEntry("Tgt Detected").getBoolean(isVisible);
+        try {
+            isVisible = table.getEntry("Tgt Detected").getBoolean(isVisible);
+        } finally {}
         return isVisible;
     }
 
-    public Double[] getTargetPosition() /*RETURN [x,y]*/ {
+    public Double[] getTargetPosition(boolean isVisible) /*RETURN [x,y]*/ {
         return new Double[]{
-            getTargetVisible() ? table.getEntry("x").getDouble(0) : -1, 
-            getTargetVisible() ? table.getEntry("y").getDouble(0) : -1
+            isVisible ? table.getEntry("x").getDouble(0) : -1, 
+            isVisible ? table.getEntry("y").getDouble(0) : -1
         };
+    }
+
+    public Double[] getTargetPosition() /*RETURN [x,y]*/ {
+        return getTargetPosition(true);
     }
     
     public boolean getAligned() {
+        boolean isCurVis = getTargetVisible();
         return  
-            getTargetVisible() ?
-            Math.abs( getTargetPosition()[0] - VisionConstants.kTarget[0] )
+            isCurVis ?
+            Math.abs( getTargetPosition(true)[0] - VisionConstants.kTarget[0] )
                 <= Constants.VisionConstants.kAlignmentThreshold
-            && Math.abs( getTargetPosition()[1] - VisionConstants.kTarget[1] ) 
+            && Math.abs( getTargetPosition(true)[1] - VisionConstants.kTarget[1] ) 
                 <= Constants.VisionConstants.kAlignmentThreshold
             :false;
     }

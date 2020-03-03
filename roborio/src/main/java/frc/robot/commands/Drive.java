@@ -20,6 +20,6 @@ public class Drive extends CommandBase {
 
     @Override
     public void execute(){
-        drive.arcadeDrive(forward, rotation);
+        drive.arcadeDrive(controller.getRawAxis(4), controller.getRawAxis(5));
     }
 }
