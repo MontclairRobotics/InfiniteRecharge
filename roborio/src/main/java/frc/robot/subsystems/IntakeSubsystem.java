@@ -6,34 +6,21 @@ import frc.robot.utils.Constants;
 import frc.robot.utils.Hardware;
 
 public class IntakeSubsystem extends SubsystemBase {
-    private SpeedControllerGroup intakeM;
-    private SpeedControllerGroup intakeL;
-    private SpeedControllerGroup intakeR;
 
     public IntakeSubsystem() {
-        intakeM = new SpeedControllerGroup(Hardware.intake);
-        intakeL = new SpeedControllerGroup(Hardware.intakeLeft);
-        intakeR = new SpeedControllerGroup(Hardware.intakeRight);
     }
 
-    public void startIntake(boolean in, boolean it) {
-        if (in) {
-            intakeL.set(1);            
-            intakeR.set(1);
-        }
-        if (it) {
-            intakeM.set(1);
-        } else {
-            intakeL.set(0);
-            intakeR.set(0);
-            intakeM.set(0);
-        }
-
+    public void startIntake() {
+        Hardware.intake.set(Constants.IntakeConstants.kIntakeSpeed);
     }
 
-
-    @Override
-    public void periodic() {
-
+    public void setArmSpeed(double speed) {
+        Hardware.intakeLeft.set(speed);
+        Hardware.intakeRight.set(speed);
     }
+
+    public void stopIntake() {
+        Hardware.intake.set(0);
+    }
+
 }
