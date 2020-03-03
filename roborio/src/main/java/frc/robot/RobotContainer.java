@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DoFor;
 import frc.robot.commands.Drive;
+import frc.robot.commands.Intake;
 import frc.robot.commands.Launch;
 import frc.robot.commands.LiftArm;
 import frc.robot.commands.LowerArm;
 import frc.robot.commands.Transport;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
 import frc.robot.utils.Controllers;
@@ -25,6 +27,7 @@ import frc.robot.utils.Constants.ControlConstants;
 import frc.robot.utils.Controllers.Buttons;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -41,11 +44,14 @@ public class RobotContainer {
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final TransportSubsystem transportSubsystem = new TransportSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
   private final LiftArm liftArm = new LiftArm(climberSubsystem);
   private final LowerArm lowerArm = new LowerArm(climberSubsystem);
   private final Launch launch = new Launch(launcherSubsystem, transportSubsystem);
   private final Transport transport = new Transport(transportSubsystem);
+  private final Intake intakeOnlyIntake = new Intake(intakeSubsystem);
+  private final ParallelCommandGroup intake = new ParallelCommandGroup(transport, intakeOnlyIntake);
 
   // private final Button liftArmButton = Controllers.driver.Y;
   // private final Button lowerArmButton = Controllers.driver.A;
@@ -74,19 +80,7 @@ public class RobotContainer {
 
     Buttons.shoot.whenPressed(launch);
 
-    
-  }
-
-    /////////////////////////
-   // AUTONOMOUS HANDLING //
-  /////////////////////////
-
-                            //            AUTONOMOUS ENUM            //
-  public enum AutonomousMode{ //add a value for each auto command you wish to run
-    SIMPLE(1), NONE(0);
-
-    int val; //store the index of the corresponding command in autoCommands here
-    AutonomousMode(int command) {val = command;}
+    Buttons.intake.whenActive(intake);
   }
 
   private final DoFor simpleAuto = 
@@ -94,10 +88,6 @@ public class RobotContainer {
     new Drive(driveSubsystem, 1.0, 0.0), 1000);
 
                           //            AUTONOMOUS MODES            //
-  private final CommandBase[] autoCommands = new CommandBase[]{null, simpleAuto}; //Add your auto functions here
-
-                          //            AUTONOMOUS MODE SETTING            //
-  public static AutonomousMode autonomousMode = AutonomousMode.SIMPLE;
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -106,6 +96,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return autoCommands[autonomousMode.val];
+    return simpleAuto;
   }
 }
