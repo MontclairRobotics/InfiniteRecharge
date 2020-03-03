@@ -83,12 +83,6 @@ public class RobotContainer {
     Buttons.intake.whenActive(intake);
   }
 
-  private final DoFor simpleAuto = 
-  new DoFor(
-    new Drive(driveSubsystem, 1.0, 0.0), 1000);
-
-                          //            AUTONOMOUS MODES            //
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

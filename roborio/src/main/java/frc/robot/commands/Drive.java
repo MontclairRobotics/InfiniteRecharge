@@ -19,7 +19,6 @@ public class Drive extends CommandBase {
         drive.setMaxSpeed(0.5);
     }
 
-
     @Override
     public void execute(){
         drive.arcadeDrive(forward, rotation);
