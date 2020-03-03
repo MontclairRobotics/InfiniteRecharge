@@ -23,6 +23,12 @@ public class Drive extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        drive.setMaxSpeed(0.5);
+    }
+
+
+    @Override
     public void execute(){
         if (inverted) {
             drive.arcadeDrive(forward, rotation, true);

@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.SPI;
 
 
 public class DriveSubsystem extends SubsystemBase{
-    private double maxSpeed;
-
     private SpeedControllerGroup leftMotors;
     private SpeedControllerGroup rightMotors;
     private final DifferentialDrive driveTrain;
@@ -43,6 +41,9 @@ public class DriveSubsystem extends SubsystemBase{
     
     public double getYaw() {
         return navx.getYaw();
+    }
+    public void invert() {
+        inverted = !inverted;
     }
     
 }
