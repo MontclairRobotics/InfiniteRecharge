@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DoFor;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveForward;
 import frc.robot.commands.Intake;
 import frc.robot.commands.Launch;
 import frc.robot.commands.LiftArm;
@@ -100,6 +101,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return simpleAuto;
+    return new DriveForward(driveSubsystem);
   }
 }
