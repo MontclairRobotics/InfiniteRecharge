@@ -69,6 +69,7 @@ public final class Constants {
     }
     public static final class IntakeConstants{
         public static final double kIntakeSpeed = 1;
+		public static final double kIntakeChange = 1;
     }
     public static final class LauncherConstants {
         public static final double kLauncherSpeed = 1; //TODO: Tune

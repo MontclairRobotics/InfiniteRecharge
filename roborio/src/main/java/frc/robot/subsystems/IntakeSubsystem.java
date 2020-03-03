@@ -23,4 +23,8 @@ public class IntakeSubsystem extends SubsystemBase {
         Hardware.intake.set(0);
     }
 
+    public void stopArm() {
+        setArmSpeed(0);
+    }
+
 }
