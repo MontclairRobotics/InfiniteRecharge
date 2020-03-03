@@ -22,6 +22,7 @@ import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
 import frc.robot.utils.Controllers;
 import frc.robot.utils.Constants.ControlConstants;
+import frc.robot.utils.Controllers.Buttons;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -67,13 +68,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    liftArmButton.whenPressed(liftArm);
+    Buttons.raiseLift.whenPressed(liftArm);
 
-    lowerArmButton.whenPressed(lowerArm);
+    Buttons.lowerLift.whenPressed(lowerArm);
 
-    launchButton.whenPressed(launch);
+    Buttons.shoot.whenPressed(launch);
 
-    transportButton.whenPressed(transport);
   }
 
     /////////////////////////
