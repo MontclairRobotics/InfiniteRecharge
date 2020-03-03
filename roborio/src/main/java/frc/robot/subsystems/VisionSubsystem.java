@@ -1,35 +1,39 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
-import frc.robot.utils.Hardware;
-import frc.robot.utils.Constants.LiftConstants;
+import frc.robot.utils.Constants.VisionConstants;
 
 public class VisionSubsystem extends SubsystemBase {
 
-    public VisionSubsystem() {        
-    }
+    private boolean isVisible = false;
+    private NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision/Port");
 
-    //TODO: implement funcs
+    public VisionSubsystem() {}
+
     public boolean getTargetVisible() {
-        return false; //TODO: implement
+        isVisible = table.getEntry("Tgt Detected").getBoolean(isVisible);
+        return isVisible;
     }
 
+    public Double[] getTargetPosition() /*RETURN [x,y]*/ {
+        return new Double[]{
+            getTargetVisible() ? table.getEntry("x").getDouble(0) : -1, 
+            getTargetVisible() ? table.getEntry("y").getDouble(0) : -1
+        };
+    }
+    
     public boolean getAligned() {
-        return Math.abs( 
-                    getCenteredTargetPosition()[0] - Constants.VisionConstants.kImageCenter[0] 
-               ) <= Constants.VisionConstants.kAlignmentThreshold
-               && Math.abs(
-                    getCenteredTargetPosition()[1] - Constants.VisionConstants.kImageCenter[1]
-               ) <= Constants.VisionConstants.kAlignmentThreshold;
-    }
-
-    public double[] getTargetPosition() /*RETURN [x,y]*/ {
-        return null; //TODO: implement
-    }
-
-    public double[] getCenteredTargetPosition() /*RETURN [x,y]*/ {
-        return getTargetPosition(); //TODO: implement
+        return  
+            getTargetVisible() ?
+            Math.abs( getTargetPosition()[0] - VisionConstants.kVisionTarget[0] )
+                <= Constants.VisionConstants.kAlignmentThreshold
+            && Math.abs( getTargetPosition()[1] - VisionConstants.kVisionTarget[1] ) 
+                <= Constants.VisionConstants.kAlignmentThreshold
+                :
+            false;
     }
 
 }
