@@ -28,7 +28,7 @@ public class VisionSubsystem extends SubsystemBase {
     }
 
     public Double[] getTargetPosition() /*RETURN [x,y]*/ {
-        return getTargetPosition(true);
+        return getTargetPosition(getTargetVisible());
     }
     
     public boolean getAligned() {

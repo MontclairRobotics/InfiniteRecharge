@@ -15,7 +15,10 @@ public class ReportVision extends CommandBase {
 
     @Override
     public void execute() {
+        boolean isVisible = vision.getTargetVisible();
         SmartDashboard.putBoolean("Target is in position", vision.getAligned());
+        SmartDashboard.putString("Target at X", isVisible ? Double.toString(vision.getTargetPosition(isVisible)[0]) : "NOT-VISIBLE");
+        SmartDashboard.putString("Target at Y", isVisible ? Double.toString(vision.getTargetPosition(isVisible)[1]) : "NOT-VISIBLE");
     }
 
 }
