@@ -28,9 +28,9 @@ public class VisionSubsystem extends SubsystemBase {
     public boolean getAligned() {
         return  
             getTargetVisible() ?
-            Math.abs( getTargetPosition()[0] - VisionConstants.kVisionTarget[0] )
+            Math.abs( getTargetPosition()[0] - VisionConstants.kTarget[0] )
                 <= Constants.VisionConstants.kAlignmentThreshold
-            && Math.abs( getTargetPosition()[1] - VisionConstants.kVisionTarget[1] ) 
+            && Math.abs( getTargetPosition()[1] - VisionConstants.kTarget[1] ) 
                 <= Constants.VisionConstants.kAlignmentThreshold
                 :
             false;
