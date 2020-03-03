@@ -17,5 +17,8 @@ public class Intake extends CommandBase {
         intake.startIntake();
     }
 
-    public 
+    @Override
+    public void execute() {
+        intake.stopIntake();
+    }
 }
