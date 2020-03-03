@@ -56,7 +56,10 @@ public final class Constants {
         public static final int kD_Gyro = 0;
     }
     public static final class TransportConstants{
-        public static final int kIntakeSpeed = 1;
+        public static final int kTransportSpeed = 1;
+    }
+    public static final class IntakeConstants{
+        public static final double kIntakeSpeed = 1;
     }
     public static final class LauncherConstants {
         public static final double kLauncherSpeed = 1; //TODO: Tune

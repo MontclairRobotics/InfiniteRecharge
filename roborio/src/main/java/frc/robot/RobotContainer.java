@@ -74,6 +74,10 @@ public class RobotContainer {
 
     Buttons.shoot.whenPressed(launch);
 
+<<<<<<< Updated upstream
+=======
+    Buttons.intake.whenPressed();
+>>>>>>> Stashed changes
   }
 
     /////////////////////////
