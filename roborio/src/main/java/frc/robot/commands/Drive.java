@@ -1,22 +1,36 @@
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.SPI;
 
 public class Drive extends CommandBase {
-    private final DriveSubsystem m_drive;
-    private final DoubleSupplier m_forward;
-    private final DoubleSupplier m_rotation;
-
-public Drive(DriveSubsystem subsystem, DoubleSupplier forward, DoubleSupplier rotation){
-        m_drive = subsystem;
-        m_forward = forward;
-        m_rotation = rotation;
+    private final DriveSubsystem drive;
+    private final double forward;
+    private final double rotation;
+    private boolean inverted;
+    
+    public Drive(DriveSubsystem subsystem, double forward, double rotation, boolean inverted){
+        drive = subsystem;
+        this.forward = forward;
+        this.rotation = rotation;
         addRequirements(subsystem);
-}
-@Override
-public void execute(){
-    m_drive.arcadeDrive(m_forward.getAsDouble(), m_rotation.getAsDouble(), false);
-}
+    }
+    public Drive(DriveSubsystem subsystem, double forward, double rotation){
+        this(subsystem, forward, rotation, false);
+    }
+
+    @Override
+    public void execute(){
+        if (inverted) {
+            drive.arcadeDrive(forward, rotation, true);
+            
+        }
+        else {
+            drive.arcadeDrive(forward, rotation, false);
+        }
+        
+    }
 }

@@ -30,6 +30,23 @@ public final class Constants {
         public static final int kIntakeLimit = 1;
         public static final int kLiftLimit = 2;
     }
+    public static final class Controllers {
+        public static final int kDriver = 0;
+        public static final int kOperator = 1;
+
+
+        //TODO: Confirm these, these numbers are placeholders
+        public static final int kA = 1;
+        public static final int kB = 2;
+        public static final int kX = 3;
+        public static final int kY = 4;
+    }
+    public static final class PIDConstants {
+        //TODO: Tune
+        public static final int kP_Gyro = 1;
+        public static final int kI_Gyro = 0;
+        public static final int kD_Gyro = 0;
+    }
     public static final class TransportConstants{
         public static final int kIntakeSpeed = 1;
     }

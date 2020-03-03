@@ -94,12 +94,7 @@ public class RobotContainer {
 
   private final DoFor simpleAuto = 
   new DoFor(
-    new Drive(
-      driveSubsystem, 
-      ()->1,
-      ()->0
-    ), 
-  1000);
+    new Drive(driveSubsystem, 1.0, 0.0), 1000);
 
                           //            AUTONOMOUS MODES            //
   private final CommandBase[] autoCommands = new CommandBase[]{null, simpleAuto}; //Add your auto functions here

@@ -12,7 +12,7 @@ public class VisionSubsystem extends SubsystemBase {
 
     //TODO: implement funcs
     public boolean getTargetVisible() {
-        return null; //TODO: implement
+        return false; //TODO: implement
     }
 
     public boolean getAligned() {
