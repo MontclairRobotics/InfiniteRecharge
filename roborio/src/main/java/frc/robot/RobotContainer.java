@@ -20,11 +20,10 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
-import frc.robot.utils.Controllers;
-import frc.robot.utils.Constants.Ports;
+import frc.robot.utils.Constants.ControlConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -46,20 +45,37 @@ public class RobotContainer {
   private final Launch launch = new Launch(launcherSubsystem, transportSubsystem);
   private final Transport transport = new Transport(transportSubsystem);
 
+
+  private final Joystick driver = new Joystick(ControlConstants.kDriver);
+  private final Joystick operator = new Joystick(ControlConstants.kOperator);
+
+  //Driver Buttons (Control Scheme will likely/definitely be changed)
+  private final JoystickButton gyroLock = new JoystickButton(driver, ControlConstants.kA);
+  private final JoystickButton fullSpeed = new JoystickButton(driver, ControlConstants.kLStick);
+  private final JoystickButton quarterSpeed = new JoystickButton(driver, ControlConstants.kLB);
+  private final JoystickButton shoot = new JoystickButton(driver, ControlConstants.kB);
+  private final JoystickButton invert = new JoystickButton(driver, ControlConstants.kRB);
+
+  //Operator Buttons (Control Scheme will likely/definitely be changed)
+  private final JoystickButton intake = new JoystickButton(operator, ControlConstants.kA);
+  private final JoystickButton raiseLift = new JoystickButton(operator, ControlConstants.kX);
+  private final JoystickButton lowerLift = new JoystickButton(operator, ControlConstants.kY);
+
+
+  // private final Button liftArmButton = Controllers.driver.Y;
+  // private final Button lowerArmButton = Controllers.driver.A;
+  // private final Button launchButton = Controllers.auxillary.LB;
+  // private final Button transportButton = Controllers.auxillary.A;
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
+    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driver.getRawAxis(4), driver.getRawAxis(5)));
+
     configureButtonBindings();
   }
-
-  //TODO: FINALIZE BUTTS
-  private final Button liftArmButton = Controllers.driver.Y;
-  private final Button lowerArmButton = Controllers.driver.A;
-  private final Button launchButton = Controllers.auxillary.LB;
-  private final Button transportButton = Controllers.auxillary.A;
-
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -67,17 +83,22 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    liftArmButton.whenPressed(liftArm);
-    liftArmButton.negate().cancelWhenActive(liftArm);
+    raiseLift.whenPressed(liftArm);
+    raiseLift.negate().cancelWhenActive(liftArm);
 
-    lowerArmButton.whenPressed(lowerArm);
-    lowerArmButton.negate().cancelWhenActive(lowerArm);
+    lowerLift.whenPressed(lowerArm);
+    lowerLift.negate().cancelWhenActive(lowerArm);
 
-    launchButton.whenPressed(launch);
-    launchButton.negate().cancelWhenActive(launch);
+    shoot.whenPressed(launch);
+    shoot.negate().cancelWhenActive(launch);
 
-    transportButton.whenPressed(transport);
-    transportButton.negate().cancelWhenActive(transport);
+    invert.whenPressed(new RunCommand(() -> driveSubsystem.invert()));
+
+
+
+    // Not sure if there is actually going to be a button that only does transport
+    // transportButton.whenPressed(transport);
+    // transportButton.negate().cancelWhenActive(transport);
   }
 
     /////////////////////////

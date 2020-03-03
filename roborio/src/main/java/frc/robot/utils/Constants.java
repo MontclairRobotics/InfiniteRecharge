@@ -30,9 +30,12 @@ public final class Constants {
         public static final int kIntakeLimit = 1;
         public static final int kLiftLimit = 2;
     }
-    public static final class Controllers {
+    public static final class ControlConstants {
         public static final int kDriver = 0;
         public static final int kOperator = 1;
+
+        public static final int kLeftJoystick = 4;
+        public static final int kRightJoystick = 5;
 
 
         //TODO: Confirm these, these numbers are placeholders
@@ -40,6 +43,11 @@ public final class Constants {
         public static final int kB = 2;
         public static final int kX = 3;
         public static final int kY = 4;
+
+        public static final int kLStick = 5;
+
+        public static final int kLB = 6;
+        public static final int kRB = 7;
     }
     public static final class PIDConstants {
         //TODO: Tune
