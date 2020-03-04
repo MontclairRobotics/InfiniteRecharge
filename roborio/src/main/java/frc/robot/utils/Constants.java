@@ -16,6 +16,11 @@ package frc.robot.utils;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final class DriveConstants {
+        public static final double kThetaCorrectionSpeed = 1; //TODO: TUNE
+        public static final double kThetaCorrectionThreshold = 1; //TODO: TUNE
+        public static final double kThetaCorrectionOffset = 1; //TODO: TUNE
+    }
     public static final class LiftConstants {
         public static final double kLiftSpeed = 1; //TODO: Tune
         public static final double kClimbSpeed = 1; //TODO: Tune

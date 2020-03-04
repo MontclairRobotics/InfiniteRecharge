@@ -43,8 +43,15 @@ public class DriveSubsystem extends SubsystemBase{
     public double getYaw() {
         return navx.getYaw();
     }
+    public double getAngle() {
+        return navx.getAngle();
+    }
     public void invert() {
         inverted = !inverted;
+    }
+
+    public AHRS getNavx() {
+        return navx;
     }
     
 }
