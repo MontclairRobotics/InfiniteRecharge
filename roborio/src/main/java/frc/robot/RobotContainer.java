@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.commands.Drive;
+import frc.robot.commands.ControllerDrive;
 import frc.robot.commands.DriveForward;
 import frc.robot.commands.Intake;
 import frc.robot.commands.Launch;
@@ -69,7 +69,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, Controllers.driver));
+    driveSubsystem.setDefaultCommand(new ControllerDrive(driveSubsystem, Controllers.driver));
     visionSubsystem.setDefaultCommand(reportVision);
 
     configureButtonBindings();
