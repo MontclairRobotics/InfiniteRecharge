@@ -5,6 +5,9 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.utils.Constants;
 import frc.robot.utils.Controllers;
 
+
+// TODO: Shouldn't this be split up into two different commands? One to control the movement of the intake arms
+// TODO: And another one to control the spinning of the intake
 public class Intake extends CommandBase {
     private final IntakeSubsystem intake;
 
@@ -16,7 +19,7 @@ public class Intake extends CommandBase {
 
     @Override
     public void initialize() {
-        intake.startIntake();
+        intake.startIntake(); 
     }
 
     @Override

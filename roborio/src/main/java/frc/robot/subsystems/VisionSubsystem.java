@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.VisionConstants;
@@ -14,9 +15,13 @@ public class VisionSubsystem extends SubsystemBase {
     public VisionSubsystem() {}
 
     public boolean getTargetVisible() {
-        try {
+        try{
             isVisible = table.getEntry("Tgt Detected").getBoolean(isVisible);
-        } finally {}
+            SmartDashboard.putBoolean("Vision Targeting System Status:", true);
+        } catch (NullPointerException e){
+            SmartDashboard.putBoolean("Vision Targeting System Status:", false);
+            System.out.println("Vision System Not running");
+        }
         return isVisible;
     }
 

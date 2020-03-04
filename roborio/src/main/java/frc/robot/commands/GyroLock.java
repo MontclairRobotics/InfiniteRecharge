@@ -8,8 +8,8 @@ import frc.robot.utils.Constants.PIDConstants;
 
 public class GyroLock extends CommandBase {
     private final DriveSubsystem drive;
-    private final PIDController controller = new PIDController(PIDConstants.kP_Gyro, PIDConstants.kI_Gyro, PIDConstants.kD_Gyro);
-    private double speed;
+    private final PIDController controller = new PIDController(PIDConstants.kP_Gyro, PIDConstants.kI_Gyro, PIDConstants.kD_Gyro); // 
+    private double speed; // TODO: Set speed
     private double rotation;
 
     public GyroLock(DriveSubsystem subsystem) {
@@ -19,8 +19,8 @@ public class GyroLock extends CommandBase {
 
     @Override
     public void initialize() {
-        controller.setTolerance(0.5);
-        controller.setSetpoint(0);
+        controller.setTolerance(0.5); // TODO: Move to constants
+        controller.setSetpoint(0); // TODO: Allow for changing of target heading
         controller.enableContinuousInput(-180, 180);
         drive.resetNavX();
     }

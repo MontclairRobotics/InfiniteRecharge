@@ -15,9 +15,9 @@ public class TransportSubsystem extends SubsystemBase{
         
     }
     public void actTransport(){
-            bottomTransport.set(Constants.TransportConstants.kTransportSpeed);
-            topTransport.set(-(Constants.TransportConstants.kTransportSpeed));
-        }
+        bottomTransport.set(Constants.TransportConstants.kTransportSpeed);
+        topTransport.set(-(Constants.TransportConstants.kTransportSpeed));
+    }
     public void deactTransport(){
         bottomTransport.set(0);
         topTransport.set(0);

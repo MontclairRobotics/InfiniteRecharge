@@ -28,7 +28,7 @@ public class DriveForward extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        return System.currentTimeMillis() - startTime <= 5000;
+        return System.currentTimeMillis() - startTime >= 5000; // TODO: Pass in as a parameter
     }
 
 }
