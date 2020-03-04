@@ -36,19 +36,6 @@ public final class Constants {
 
         public static final double kTurnToleranceDeg = 5;
         public static final double kTurnRateToleranceDegPerS = 10; // degrees per second
-
-        public static final double ksVolts = 0.22; //TODO
-        public static final double kvVoltSecondsPerMeter = 1.98; //TODO
-        public static final double kaVoltSecondsSquaredPerMeter = 0.2; //TODO
-
-        public static final double kPDriveVel = 8.5; //TODO
-
-        public static final double kMaxSpeedMetersPerSecond = 3; //TODO
-        public static final double kMaxAccelerationMetersPerSecondSquared = 3; //TODO
-
-        public static final double kRamseteB = 2; //TODO
-        public static final double kRamseteZeta = 0.7; //TODO
-
     }
 
     public static final class ShooterConstants {
@@ -61,15 +48,15 @@ public final class Constants {
     }
 
     public static final class IntakeConstants{
-        public static final int kIntakeDeployLeftPort = 13;
-        public static final int kIntakeDeployRightPort = 4;
-        public static final int kIntakeWheelPort = 10; //TODO: TBD
-        public static final int kIntakeDeployLimitSwitchPort = 0;
+        public static final int kIntakeDeployLeftPort = 12;
+        public static final int kIntakeDeployRightPort = 11;
+        public static final int kIntakeWheelPort = 18;
+        public static final int kIntakeLimitSwitchPort = 1;
     }
 
     public static final class LiftConstants{
-        public static final int kLiftMainPort = 2;
-        public static final int kLiftWinchPort = 4; //TODO: TBD
+        public static final int kLiftPort = 2;
+        public static final int kWinchPort = 4; //TODO: TBD
     }
 
     public static final class ControlPanelManipulatorConstants {
@@ -81,10 +68,6 @@ public final class Constants {
         public static final double kVisionTurnP = 1;
         public static final double kVisionTurnI = 0;
         public static final double kVisionTurnD = 0;
-
-        public static final double kVisionDistP = 1;
-        public static final double kVisionDistI = 0;
-        public static final double kVisionDistD = 0;
     }
 
     public static final class IOConstants {

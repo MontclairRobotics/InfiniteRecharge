@@ -6,6 +6,8 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless;
@@ -39,21 +41,12 @@ public class DriveSubsystem extends SubsystemBase {
         rightEncoder.setPositionConversionFactor(kEncoderDistancePerPulse);
 
         differentialDrive.setRightSideInverted(true);
+        differentialDrive.setMaxOutput(0.75);
     }
 
     public void arcadeDrive(double fwd, double rot) {
         differentialDrive.arcadeDrive(fwd, rot);
     }
-
-    public void arcadeDrive(double fwd, double rot, boolean inverted){
-        if(inverted){
-            differentialDrive.arcadeDrive(-fwd,-rot);
-        } else {
-            arcadeDrive(fwd, rot);
-        }
-    }
-
-
 
     public void resetEncoders() {
         leftEncoder.setPosition(0);

@@ -9,7 +9,9 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -100,7 +102,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
   }
 
-  CANSparkMax test = new CANSparkMax(14, CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax test = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushless);
+  XboxController xboxController = new XboxController(1);
 
   @Override
   public void testInit() {
@@ -115,6 +118,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    test.set(1);
+    test.set(xboxController.getY(GenericHID.Hand.kLeft));
   }
 }

@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import static frc.robot.Constants.DriveConstants.*;
 import static frc.robot.RobotContainer.driveSubsystem;
 
 public class DriveStraight extends CommandBase {
@@ -11,7 +12,7 @@ public class DriveStraight extends CommandBase {
 
     public DriveStraight(double distance){
         distanceController = new PIDController(1,0,0);
-        distanceController.setSetpoint(distance*1/0.3); // TODO: Tune rot/meter
+        distanceController.setSetpoint(distance*1/8*Math.PI); // TODO: Tune rot/in
         distanceController.setTolerance(0.1);
     }
 
@@ -28,5 +29,10 @@ public class DriveStraight extends CommandBase {
     @Override
     public boolean isFinished() {
         return distanceController.atSetpoint();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        driveSubsystem.arcadeDrive(0,0);
     }
 }

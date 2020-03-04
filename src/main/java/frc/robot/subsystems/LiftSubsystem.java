@@ -1,24 +1,33 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-
+import edu.wpi.first.wpilibj.CAN;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless;
-import static frc.robot.Constants.LiftConstants.kLiftMainPort;
-import static frc.robot.Constants.LiftConstants.kLiftWinchPort;
+import static frc.robot.Constants.IntakeConstants.kIntakeDeployLeftPort;
+import static frc.robot.Constants.IntakeConstants.kIntakeDeployRightPort;
+import static frc.robot.Constants.LiftConstants.kLiftPort;
+import static frc.robot.Constants.LiftConstants.kWinchPort;
 
-public class LiftSubsystem {
+public class LiftSubsystem extends SubsystemBase {
 
-    CANSparkMax main = new CANSparkMax(kLiftMainPort, kBrushless);
-    CANSparkMax winch = new CANSparkMax(kLiftWinchPort, kBrushless);
+    private final CANSparkMax lift = new CANSparkMax(kLiftPort, kBrushless);
+    private final CANSparkMax winch = new CANSparkMax(kWinchPort, kBrushless);
 
-    public LiftSubsystem(){}
+    private final DigitalInput limitSwitch = new DigitalInput(2);
 
-    public void setMainSpeed(double speed){
-        main.set(speed);
+    public void setLiftSpeed(double speed){
+        lift.set(speed);
     }
 
     public void setWinchSpeed(double speed){
-        winch.set(speed);
+        winch.set(-speed);
     }
+
+    public boolean atLimit(){
+        return limitSwitch.get();
+    }
+
 }

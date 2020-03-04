@@ -8,7 +8,7 @@ public class LowerIntake extends CommandBase {
 
     @Override
     public void execute() {
-        intakeSubsystem.setDeploySpeed(0.5);
+        intakeSubsystem.setDeploySpeed(-0.25);
         intakeSubsystem.setIntakeSpeed(1);
     }
 
@@ -19,6 +19,6 @@ public class LowerIntake extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return intakeSubsystem.getLimitSwitch();
+        return intakeSubsystem.atLimit();
     }
 }

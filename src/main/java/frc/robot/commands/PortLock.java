@@ -12,16 +12,11 @@ import static frc.robot.utils.Utils.*;
 
 public class PortLock extends CommandBase {
 
-    private final PIDController dist;
     private final PIDController turn;
 
     private final NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision/Port");
 
     public PortLock() {
-        this.dist = new PIDController(kVisionDistP, kVisionDistI, kVisionDistD);
-        this.dist.setSetpoint(240);
-        this.dist.enableContinuousInput(0, 480);
-        this.dist.setTolerance(3);
 
         this.turn = new PIDController(kVisionTurnP, kVisionTurnI, kVisionTurnD);
         this.turn.setSetpoint(320);
@@ -31,20 +26,18 @@ public class PortLock extends CommandBase {
 
     @Override
     public void execute() {
-        double fwd, rot;
+        double rot;
         if(table.getEntry("Detected").getBoolean(false)){
-            fwd = table.getEntry("Y").getDouble(0);
-            rot = table.getEntry("X").getDouble(0);
+            rot = turn.calculate(table.getEntry("X").getDouble(320));
         } else {
-            fwd = driverController.getY(GenericHID.Hand.kLeft);
             rot = driverController.getX(GenericHID.Hand.kRight);
         }
-        driveSubsystem.arcadeDrive(fwd, rot);
+        driveSubsystem.arcadeDrive(driverController.getY(GenericHID.Hand.kLeft), rot);
     }
 
     @Override
     public boolean isFinished() {
-        boolean isFinished = dist.atSetpoint() && turn.atSetpoint();
+        boolean isFinished = turn.atSetpoint();
         rumble(isFinished);
         return isFinished;
     }
