@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ControlPanelManipulatorSubsystem;
 
-public class RotateControlPanel extends CommandBase {
+public class PositionalControlPanel extends CommandBase {
 
     ControlPanelManipulatorSubsystem controlPanelManipulatorSubsystem;
 
     ControlPanelManipulatorSubsystem.Colors tgtColor;
 
-    public RotateControlPanel(ControlPanelManipulatorSubsystem controlPanelManipulatorSubsystem){
+    public PositionalControlPanel(ControlPanelManipulatorSubsystem controlPanelManipulatorSubsystem){
         this.controlPanelManipulatorSubsystem = controlPanelManipulatorSubsystem;
     }
 

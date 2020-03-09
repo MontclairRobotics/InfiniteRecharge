@@ -5,7 +5,6 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -35,7 +34,6 @@ public class DriveSubsystem extends SubsystemBase {
 
     private final AHRS navx = new AHRS(SPI.Port.kMXP);
 
-    private final PIDController turnController = new PIDController(0,0,0);
 
     public DriveSubsystem() {
         leftEncoder.setPositionConversionFactor(kEncoderDistancePerPulse);
@@ -74,4 +72,6 @@ public class DriveSubsystem extends SubsystemBase {
     public void setMaxOutput(double maxOutput) {
         differentialDrive.setMaxOutput(maxOutput);
     }
+
+
 }
