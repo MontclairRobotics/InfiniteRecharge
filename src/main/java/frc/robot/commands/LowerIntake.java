@@ -8,13 +8,13 @@ public class LowerIntake extends CommandBase {
 
     @Override
     public void execute() {
-        intakeSubsystem.setDeploySpeed(-0.25);
+        //intakeSubsystem.setDeploySpeed(-0.25);
         intakeSubsystem.setIntakeSpeed(1);
     }
 
     @Override
     public void end(boolean interrupted) {
-        intakeSubsystem.setDeploySpeed(0);
+        //intakeSubsystem.setDeploySpeed(0);
     }
 
     @Override

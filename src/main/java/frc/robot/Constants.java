@@ -48,15 +48,14 @@ public final class Constants {
     }
 
     public static final class IntakeConstants{
-        public static final int kIntakeDeployLeftPort = 12;
-        public static final int kIntakeDeployRightPort = 11;
+        public static final int kIntakeDeployPort = 14;
         public static final int kIntakeWheelPort = 18;
         public static final int kIntakeLimitSwitchPort = 1;
     }
 
     public static final class LiftConstants{
-        public static final int kLiftPort = 2;
-        public static final int kWinchPort = 4; //TODO: TBD
+        public static final int kLiftPort = 4;
+        public static final int kWinchPort = 2; 
     }
 
     public static final class ControlPanelManipulatorConstants {

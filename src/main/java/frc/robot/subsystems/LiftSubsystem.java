@@ -1,13 +1,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless;
-import static frc.robot.Constants.IntakeConstants.kIntakeDeployLeftPort;
-import static frc.robot.Constants.IntakeConstants.kIntakeDeployRightPort;
 import static frc.robot.Constants.LiftConstants.kLiftPort;
 import static frc.robot.Constants.LiftConstants.kWinchPort;
 

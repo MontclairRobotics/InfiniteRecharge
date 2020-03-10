@@ -3,7 +3,6 @@ package frc.robot.commands.sequences;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.PortLock;
-import frc.robot.subsystems.TransportSubsystem;
 
 import static frc.robot.RobotContainer.shooterSubsystem;
 import static frc.robot.RobotContainer.transportSubsystem;

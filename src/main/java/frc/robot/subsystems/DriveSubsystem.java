@@ -6,8 +6,6 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless;
@@ -55,6 +53,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     public double getAverageEncoderDistance() {
         return (leftEncoder.getPosition() + rightEncoder.getPosition()) / 2.0;
+    }
+
+    public double getAverageEncoderSpeed(){
+        return (leftEncoder.getVelocity() + rightEncoder.getVelocity() / 2.0) / 3973.2;
     }
 
     public CANEncoder getLeftEncoder() {
