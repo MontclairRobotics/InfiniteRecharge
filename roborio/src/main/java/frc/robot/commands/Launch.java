@@ -23,9 +23,6 @@ public class Launch extends CommandBase {
         launcher.startLauncher();
     }
 
-
-    // TODO: Rework code so that there is a delay betwee shots. The shooter motor has to rev up before another one can be shot. 
-    // TODO: Test...
     @Override
     public void execute() {
         if(launcher.getLauncherRevved()) {
