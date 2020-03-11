@@ -5,19 +5,24 @@ import frc.robot.subsystems.DriveSubsystem;
 
 public class AutoDrive extends CommandBase {
     private final DriveSubsystem drive;
-    private final double speed, rotation, startTime;
+    private final double startTime;
+    private double time;
 
-    public AutoDrive(DriveSubsystem subsystem, double speed, double rotation, double time) {
+    /**
+     * 
+     * @param subsystem - the drive subsystem that will be used by AutoDrive
+     * @param time - time the robot will drive forwards for (in ms)
+     */
+    public AutoDrive(DriveSubsystem subsystem, double time) {
         drive = subsystem;
-        this.speed = speed;
-        this.rotation = rotation;
+        time = time;
         startTime = System.currentTimeMillis();
         addRequirements(subsystem);
     }
 
     @Override
     public void execute(){
-        drive.arcadeDrive(speed, rotation);
+        //drive.arcadeDrive(speed, rotation);
     }
 
     @Override 

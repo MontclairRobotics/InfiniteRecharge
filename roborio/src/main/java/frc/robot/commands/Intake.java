@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.utils.Constants;
 import frc.robot.utils.Controllers;
+import frc.robot.utils.Constants.IntakeConstants;
 
 
 // TODO: Shouldn't this be split up into two different commands? One to control the movement of the intake arms
@@ -19,17 +20,15 @@ public class Intake extends CommandBase {
 
     @Override
     public void initialize() {
-        intake.startIntake(); 
+        intake.setIntakeSpeed(IntakeConstants.kIntakeSpeed);
     }
 
     @Override
     public void execute() {
-        intake.setArmSpeed(Constants.IntakeConstants.kIntakeChange * Controllers.operator.getRawAxis(Constants.ControlConstants.kRightY));
     }
 
     @Override
     public void end(boolean interrupted) {
         intake.stopIntake();
-        intake.stopArm();
     }
 }

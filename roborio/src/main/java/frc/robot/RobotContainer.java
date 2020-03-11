@@ -20,7 +20,7 @@ import frc.robot.commands.Intake;
 import frc.robot.commands.Launch;
 import frc.robot.commands.LiftArm;
 import frc.robot.commands.LowerArm;
-import frc.robot.commands.ReportVision;
+//import frc.robot.commands.ReportVision;
 import frc.robot.commands.Transport;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -29,6 +29,7 @@ import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.TransportSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.utils.Controllers;
+import frc.robot.utils.Constants.ControlConstants;
 import frc.robot.utils.Controllers.Buttons;
 
 /**
@@ -52,7 +53,7 @@ public class RobotContainer {
   private final Launch launch = new Launch(launcherSubsystem, transportSubsystem);
   private final Transport transport = new Transport(transportSubsystem);
   private final Intake intakeOnlyIntake = new Intake(intakeSubsystem);
-  private final ReportVision reportVision = new ReportVision(visionSubsystem);
+  //private final ReportVision reportVision = new ReportVision(visionSubsystem);
   private final ParallelCommandGroup intake = new ParallelCommandGroup(transport, intakeOnlyIntake);
 
   private final DriveForward simpleAuto = new DriveForward(driveSubsystem);
@@ -69,8 +70,14 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    driveSubsystem.setDefaultCommand(new ControllerDrive(driveSubsystem, Controllers.driver));
-    visionSubsystem.setDefaultCommand(reportVision);
+    driveSubsystem.setDefaultCommand(new RunCommand(
+      () -> driveSubsystem.arcadeDrive(
+          Controllers.driver.getRawAxis(ControlConstants.kLeftY), 
+          Controllers.driver.getRawAxis(ControlConstants.kRightX)
+          )
+      )
+    );
+    //visionSubsystem.setDefaultCommand(reportVision);
 
     configureButtonBindings();
   }
@@ -87,7 +94,7 @@ public class RobotContainer {
 
     Buttons.shoot.whenPressed(launch);
 
-    Buttons.intake.whenActive(intake);
+    Buttons.intake.whenActive(intakeOnlyIntake);
     Buttons.invert.whenPressed(new RunCommand( () -> driveSubsystem.invert()));
 
     Buttons.fullSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(1)));
@@ -95,6 +102,9 @@ public class RobotContainer {
 
     Buttons.quarterSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.25)));
     Buttons.quarterSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5)));
+
+
+    Buttons.intake.whenPressed(intake);
 
     autoChooser.initSendable(new SendableBuilderImpl());
     autoChooser.addOption("SIMPLE", simpleAuto);

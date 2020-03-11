@@ -15,8 +15,7 @@ public class ControllerDrive extends CommandBase {
 
     @Override
     public void initialize() {
-        drive.setMaxSpeed(0.5); // TODO: Limit Deceleration to prevent robot from tipping over
-                                // TODO: Limit should be declared in the constants class
+        drive.setMaxSpeed(0.5);
     }
 
     @Override

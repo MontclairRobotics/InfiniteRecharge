@@ -10,9 +10,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public IntakeSubsystem() {
     }
-
-    public void startIntake() {
-        Hardware.intake.set(Constants.IntakeConstants.kIntakeSpeed);
+    public void setIntakeSpeed(double speed) {
+        Hardware.intake.set(speed);
     }
 
     public void setArmSpeed(double speed) {
