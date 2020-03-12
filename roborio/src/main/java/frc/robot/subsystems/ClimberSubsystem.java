@@ -15,17 +15,17 @@ public class ClimberSubsystem extends SubsystemBase {
 
     public void raiseArm() {
         //This is not final, but individual motors should be tested before grouping them
-        Hardware.leftLiftArm.set(LiftConstants.kLiftSpeed);
+        //Hardware.leftLiftArm.set(LiftConstants.kLiftSpeed);
     }
 
     public void lowerArm() {
         //See raiseArm comment
-        Hardware.leftLiftArm.set(-LiftConstants.kLiftSpeed);
+        //Hardware.leftLiftArm.set(-LiftConstants.kLiftSpeed);
     }
 
     public void stopArm() {
-        Hardware.leftLiftArm.set(0);
+        //Hardware.leftLiftArm.set(0);
     }
 
-    public boolean getLimitSwitch() { return Hardware.liftLimit.get(); }
+    //public boolean getLimitSwitch() { return Hardware.liftLimit.get(); }
 }

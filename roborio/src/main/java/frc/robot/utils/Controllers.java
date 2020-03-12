@@ -16,14 +16,17 @@ public class Controllers {
         public static final JoystickButton gyroLock = new JoystickButton(driver, ControlConstants.kA);
         public static final JoystickButton fullSpeed = new JoystickButton(driver, ControlConstants.kLStick);
         public static final JoystickButton quarterSpeed = new JoystickButton(driver, ControlConstants.kLB);
-        public static final JoystickButton shoot = new JoystickButton(driver, ControlConstants.kB);
         public static final JoystickButton invert = new JoystickButton(driver, ControlConstants.kRB);
+
 
         
         //Operator Buttons (Control Scheme will likely/definitely be changed)
         public static final JoystickButton intake = new JoystickButton(operator, ControlConstants.kA);
         public static final JoystickButton raiseLift = new JoystickButton(operator, ControlConstants.kX);
         public static final JoystickButton lowerLift = new JoystickButton(operator, ControlConstants.kY);
+        public static final JoystickButton transport = new JoystickButton(operator, ControlConstants.kB);
+        public static final JoystickButton shoot = new JoystickButton(operator, ControlConstants.kLB);
+
 
     }
 }

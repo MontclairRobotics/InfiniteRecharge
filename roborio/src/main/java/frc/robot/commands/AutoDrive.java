@@ -15,7 +15,7 @@ public class AutoDrive extends CommandBase {
      */
     public AutoDrive(DriveSubsystem subsystem, double time) {
         drive = subsystem;
-        time = time;
+        this.time = time;
         startTime = System.currentTimeMillis();
         addRequirements(subsystem);
     }

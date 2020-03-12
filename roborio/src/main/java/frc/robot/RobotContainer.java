@@ -41,29 +41,20 @@ import frc.robot.utils.Controllers.Buttons;
 public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
-  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final TransportSubsystem transportSubsystem = new TransportSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final VisionSubsystem visionSubsystem = new VisionSubsystem();
+  //private final VisionSubsystem visionSubsystem = new VisionSubsystem();
 
-  private final LiftArm liftArm = new LiftArm(climberSubsystem);
-  private final LowerArm lowerArm = new LowerArm(climberSubsystem);
-  private final Launch launch = new Launch(launcherSubsystem, transportSubsystem);
-  private final Transport transport = new Transport(transportSubsystem);
-  private final Intake intakeOnlyIntake = new Intake(intakeSubsystem);
+
   //private final ReportVision reportVision = new ReportVision(visionSubsystem);
-  private final ParallelCommandGroup intake = new ParallelCommandGroup(transport, intakeOnlyIntake);
+  //private final ParallelCommandGroup intake = new ParallelCommandGroup(transport, intakeOnlyIntake);
 
   private final DriveForward simpleAuto = new DriveForward(driveSubsystem);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-
-  // private final Button liftArmButton = Controllers.driver.Y;
-  // private final Button lowerArmButton = Controllers.driver.A;
-  // private final Button launchButton = Controllers.auxillary.LB;
-  // private final Button transportButton = Controllers.auxillary.A;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -71,14 +62,13 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     driveSubsystem.setDefaultCommand(new RunCommand(
-      () -> driveSubsystem.arcadeDrive(
+      () -> 
+          driveSubsystem.arcadeDrive(
           Controllers.driver.getRawAxis(ControlConstants.kLeftY), 
           Controllers.driver.getRawAxis(ControlConstants.kRightX)
-          )
+          ), driveSubsystem
       )
     );
-    //visionSubsystem.setDefaultCommand(reportVision);
-
     configureButtonBindings();
   }
   /**
@@ -88,26 +78,19 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Buttons.raiseLift.whenPressed(liftArm);
+    //Buttons.invert.whenPressed(new RunCommand( () -> driveSubsystem.invert()));
 
-    Buttons.lowerLift.whenPressed(lowerArm);
+    Buttons.fullSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(1), driveSubsystem));
+    Buttons.fullSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5), driveSubsystem));
 
-    Buttons.shoot.whenPressed(launch);
+    Buttons.quarterSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.25), driveSubsystem));
+    Buttons.quarterSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5), driveSubsystem));
 
-    Buttons.intake.whenActive(intakeOnlyIntake);
-    Buttons.invert.whenPressed(new RunCommand( () -> driveSubsystem.invert()));
+    Buttons.shoot.whenPressed(new Launch(launcherSubsystem));
+    Buttons.intake.whenPressed(new Intake(intakeSubsystem));
 
-    Buttons.fullSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(1)));
-    Buttons.fullSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5)));
-
-    Buttons.quarterSpeed.whenPressed(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.25)));
-    Buttons.quarterSpeed.whenReleased(new RunCommand(() -> driveSubsystem.setMaxSpeed(0.5)));
-
-
-    Buttons.intake.whenPressed(intake);
-
-    autoChooser.initSendable(new SendableBuilderImpl());
-    autoChooser.addOption("SIMPLE", simpleAuto);
+    //autoChooser.initSendable(new SendableBuilderImpl());
+    //autoChooser.addOption("SIMPLE", simpleAuto);
     
   }
 

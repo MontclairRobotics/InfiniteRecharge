@@ -10,12 +10,10 @@ import frc.robot.subsystems.TransportSubsystem;
 public class Launch extends CommandBase {
 
     private final LauncherSubsystem launcher;
-    private final TransportSubsystem transport;
 
-    public Launch(LauncherSubsystem launcher, TransportSubsystem transport) {
+    public Launch(LauncherSubsystem launcher) {
         this.launcher = launcher;
-        this.transport = transport;
-        addRequirements(launcher, transport);
+        addRequirements(launcher);
     }
 
     @Override
@@ -25,15 +23,11 @@ public class Launch extends CommandBase {
 
     @Override
     public void execute() {
-        if(launcher.getLauncherRevved()) {
-            transport.actTransport();
-        }
     }
 
     @Override
     public void end(boolean interrupted) {
         launcher.stopLauncher();
-        transport.deactTransport();
     }
 
 }
