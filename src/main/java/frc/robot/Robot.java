@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
   }
 
-  CANSparkMax test = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax test = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
   XboxController xboxController = new XboxController(1);
 
   @Override

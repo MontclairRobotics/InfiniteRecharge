@@ -45,7 +45,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     configureButtonBindings();
-    MotionProfile profiler = new MotionProfile(() -> driverController.getY(), () -> driveSubsystem.getAverageEncoderSpeed(), 1);
+    //MotionProfile profiler = new MotionProfile(() -> driverController.getY(), () -> driveSubsystem.getAverageEncoderSpeed(), 1);
     autoChooser.setDefaultOption("Auto Test", new AutoDrive());
     SmartDashboard.putData("Auto Modes", autoChooser);
 
@@ -116,12 +116,11 @@ public class RobotContainer {
     // Automatic Transport Stall
     new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
             .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1,-1)))
-            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0)));
+            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0.2, -0.2)));
 
     // Manual Transport Release
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperLeft.value)
-            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1)))
-            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0)));
+            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1)));
 
     // Manual Shoot
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperRight.value)
