@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.sequences.AutoDrive;
 import frc.robot.subsystems.*;
-import frc.robot.utils.MotionProfile;
+//import frc.robot.utils.MotionProfile;
 
 import static frc.robot.Constants.IOConstants.kAuxiliaryControllerPort;
 import static frc.robot.Constants.IOConstants.kDriverControllerPort;
@@ -105,7 +105,7 @@ public class RobotContainer {
 
     // intake movement
     new JoystickButton(auxiliaryController, XboxController.Button.kStart.value)
-            .whenHeld(new RunCommand(()->intakeSubsystem.setIntakeSpeed(1)))
+            .whenHeld(new RunCommand(()->intakeSubsystem.setIntakeSpeed(-0.75)))
             .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
 
     // intake movement intaking from above
@@ -115,12 +115,13 @@ public class RobotContainer {
 
     // Automatic Transport Stall
     new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
-            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1,-1)))
-            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0.2, -0.2)));
+            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1,-0.7)))
+            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
 
     // Manual Transport Release
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperLeft.value)
-            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1)));
+            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1, 0.7)))
+            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
 
     // Manual Shoot
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperRight.value)
