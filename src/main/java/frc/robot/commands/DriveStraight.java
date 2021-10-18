@@ -8,7 +8,7 @@ import static frc.robot.RobotContainer.driveSubsystem;
 public class DriveStraight extends CommandBase {
 
     private final PIDController distanceController;
-
+    //distance is in feet
     public DriveStraight(double distance){
         distanceController = new PIDController(1,0,0);
         distanceController.setSetpoint(distance*1/8*Math.PI); 

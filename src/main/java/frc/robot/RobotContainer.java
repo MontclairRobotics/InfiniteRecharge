@@ -70,7 +70,7 @@ public class RobotContainer {
     // ----------------------------------- Driver Controller --------------------------------------------------
 
     // Max Speed Button
-    new JoystickButton(driverController, XboxController.Button.kBumperRight.value)
+    /*new JoystickButton(driverController, XboxController.Button.kBumperRight.value)
             .whenPressed(() -> driveSubsystem.setMaxOutput(1))
             .whenReleased(() -> driveSubsystem.setMaxOutput(0.75));
 
@@ -78,7 +78,7 @@ public class RobotContainer {
     new JoystickButton(driverController, XboxController.Button.kBumperLeft.value)
             .whenPressed(() -> driveSubsystem.setMaxOutput(0.75/2))
             .whenReleased(() -> driveSubsystem.setMaxOutput(0.75));
-
+        */
     // heading lock
     /*new JoystickButton(driverController, XboxController.Button.kStickLeft.value)
             .whenHeld(
@@ -97,8 +97,7 @@ public class RobotContainer {
     /*new JoystickButton(driverController, XboxController.Button.kA.value)
             .whenHeld(new ShootSequence());*/
 
-
-
+      
 
     // -------------------------------- Auxiliary Controller ---------------------------------------------------
 
@@ -118,17 +117,17 @@ public class RobotContainer {
             .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1,-0.7)))
             .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
 
-    // Manual Transport Release
+    // Manual Transport Run
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperLeft.value)
-            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1, 0.7)))
+            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1, 1)))
             .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
-
+        
     // Manual Shoot
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperRight.value)
             .whenHeld(new RunCommand(()-> shooterSubsystem.setSpeed(1)))
             .whenReleased(()->shooterSubsystem.setSpeed(0));
     // Lift
-    new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
+    /*new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
             .whenHeld(new RunCommand(()-> liftSubsystem.setLiftSpeed(-0.2)))
             .whenHeld(new RunCommand(()-> liftSubsystem.setWinchSpeed(-0.2)))
             .whenReleased(new RunCommand(()-> liftSubsystem.setWinchSpeed(0)))
@@ -138,7 +137,7 @@ public class RobotContainer {
             .whenHeld(new RunCommand(()-> liftSubsystem.setWinchSpeed(-0.4)))
             .whenHeld(new RunCommand(()-> liftSubsystem.setLiftSpeed(0.1)))
             .whenReleased(new RunCommand(()-> liftSubsystem.setLiftSpeed(0)))
-            .whenReleased(new RunCommand(()-> liftSubsystem.setWinchSpeed(0)));
+            .whenReleased(new RunCommand(()-> liftSubsystem.setWinchSpeed(0)));*/
   }
 
 
@@ -147,7 +146,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousCommand() {     
     return autoChooser.getSelected();
   }
 }
