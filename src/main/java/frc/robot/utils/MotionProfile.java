@@ -34,7 +34,7 @@ public class MotionProfile {
 
         if (dTime > accelLimit) {
             output += 0.05 * dir;
-            output = Utils.constrain(output, -.25, .25);
+            output = Utils.clamp(output, -.25, .25);
             lastTime = System.currentTimeMillis();
         }
         SmartDashboard.putNumber("motionOutput", output);

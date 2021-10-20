@@ -39,7 +39,7 @@ public class DriveSubsystem extends SubsystemBase {
         rightEncoder.setPositionConversionFactor(kEncoderDistancePerPulse);
 
         differentialDrive.setRightSideInverted(true);
-        differentialDrive.setMaxOutput(0.75);
+        differentialDrive.setMaxOutput(0.6);
     }
 
     public void arcadeDrive(double fwd, double rot) {

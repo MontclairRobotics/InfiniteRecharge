@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.I2C;
  */
 public final class Constants {
     public static final class DriveConstants {
-        public static final int kFrontLeftMotorPort = 7;
-        public static final int kFrontRightMotorPort = 1;
-        public static final int kBackLeftMotorPort = 9;
-        public static final int kBackRightMotorPort = 3;
+        public static final int kFrontLeftMotorPort = 3;
+        public static final int kFrontRightMotorPort = 9;
+        public static final int kBackLeftMotorPort = 1;
+        public static final int kBackRightMotorPort = 7;
 
         public static final int kEncoderCPR = 1024;
         public static final double kWheelDiameterInches = 6;

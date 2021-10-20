@@ -7,11 +7,16 @@ import static frc.robot.RobotContainer.driverController;
 
 public class Utils {
 
-    public static boolean threshold(double input, double min, double max) {
+    public static boolean isAtMostMag(double input, double max) {
+        return -max <= input && input <= max;
+    }
+
+
+    public static boolean isBetween(double input, double min, double max) {
         return (input >= min && input <= max);
     }
 
-    public static double constrain(double input, double min, double max) {
+    public static double clamp(double input, double min, double max) {
         if (input < min) {
             return min;
         }

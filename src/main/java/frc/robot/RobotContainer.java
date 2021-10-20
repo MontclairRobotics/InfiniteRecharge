@@ -41,6 +41,8 @@ public class RobotContainer {
 
   private static final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
+
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -115,9 +117,9 @@ public class RobotContainer {
             .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
 
     // Automatic Transport Stall
-    new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
+    /*new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
             .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1,-0.7)))
-            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
+            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));*/
 
     // Manual Transport Run
     new JoystickButton(auxiliaryController, XboxController.Button.kBumperLeft.value)
@@ -125,7 +127,7 @@ public class RobotContainer {
             .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
         
     // Manual Shoot
-    new JoystickButton(auxiliaryController, XboxController.Button.kBumperRight.value)
+    new JoystickButton(auxiliaryController, XboxController.Button.kA.value)
             .whenHeld(new RunCommand(()-> shooterSubsystem.setSpeed(1)))
             .whenReleased(()->shooterSubsystem.setSpeed(0));
     // Lift
