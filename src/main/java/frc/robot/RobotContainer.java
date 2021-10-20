@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.sequences.AutoDrive;
+import frc.robot.commands.sequences.ShootSequence;
 import frc.robot.subsystems.*;
 //import frc.robot.utils.MotionProfile;
 
@@ -46,7 +47,8 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     //MotionProfile profiler = new MotionProfile(() -> driverController.getY(), () -> driveSubsystem.getAverageEncoderSpeed(), 1);
-    autoChooser.setDefaultOption("Auto Test", new AutoDrive());
+    autoChooser.setDefaultOption("Auto Drive", new AutoDrive());
+    autoChooser.addOption("Auto Shoot", new ShootSequence());
     SmartDashboard.putData("Auto Modes", autoChooser);
 
     driveSubsystem.setDefaultCommand(
@@ -73,12 +75,12 @@ public class RobotContainer {
     /*new JoystickButton(driverController, XboxController.Button.kBumperRight.value)
             .whenPressed(() -> driveSubsystem.setMaxOutput(1))
             .whenReleased(() -> driveSubsystem.setMaxOutput(0.75));
-
+*/
     // 1/2 Speed
     new JoystickButton(driverController, XboxController.Button.kBumperLeft.value)
             .whenPressed(() -> driveSubsystem.setMaxOutput(0.75/2))
             .whenReleased(() -> driveSubsystem.setMaxOutput(0.75));
-        */
+        
     // heading lock
     /*new JoystickButton(driverController, XboxController.Button.kStickLeft.value)
             .whenHeld(
@@ -109,7 +111,7 @@ public class RobotContainer {
 
     // intake movement intaking from above
     new JoystickButton(auxiliaryController, XboxController.Button.kBack.value)
-            .whenHeld(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(-1)))
+            .whenHeld(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(1)))
             .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
 
     // Automatic Transport Stall
@@ -147,6 +149,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {     
+    //autoChooser.addOption("Move off line", new AutoDrive());
     return autoChooser.getSelected();
   }
 }

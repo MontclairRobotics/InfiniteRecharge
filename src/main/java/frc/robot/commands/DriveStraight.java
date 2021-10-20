@@ -11,7 +11,7 @@ public class DriveStraight extends CommandBase {
     //distance is in feet
     public DriveStraight(double distance){
         distanceController = new PIDController(1,0,0);
-        distanceController.setSetpoint(distance*1/8*Math.PI); 
+        distanceController.setSetpoint(distance*8*Math.PI * 1/6); 
         distanceController.setTolerance(0.1);
     }
 

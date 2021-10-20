@@ -9,7 +9,7 @@ public class AutoDrive extends SequentialCommandGroup {
     public AutoDrive() {
         addCommands(
                 //new LowerIntake(),
-                new DriveStraight(5)
+                new DriveStraight(1)
         );
     }
 }
