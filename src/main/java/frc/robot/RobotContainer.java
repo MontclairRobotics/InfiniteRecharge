@@ -131,13 +131,11 @@ public class RobotContainer {
             .whenHeld(new RunCommand(()-> shooterSubsystem.setSpeed(1)))
             .whenReleased(()->shooterSubsystem.setSpeed(0));
     // Lift
-    /*new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
-            .whenHeld(new RunCommand(()-> liftSubsystem.setLiftSpeed(-0.2)))
-            .whenHeld(new RunCommand(()-> liftSubsystem.setWinchSpeed(-0.2)))
-            .whenReleased(new RunCommand(()-> liftSubsystem.setWinchSpeed(0)))
-            .whenReleased(new RunCommand(()->liftSubsystem.setLiftSpeed(0)));
+    new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
+            .whenHeld(new RunCommand(()-> liftSubsystem.setLiftSpeed(0.5)))
+            .whenReleased(new RunCommand(()-> liftSubsystem.setLiftSpeed(0)));
     // Winch
-    new JoystickButton(auxiliaryController, XboxController.Button.kY.value)
+    /*new JoystickButton(auxiliaryController, XboxController.Button.kY.value)
             .whenHeld(new RunCommand(()-> liftSubsystem.setWinchSpeed(-0.4)))
             .whenHeld(new RunCommand(()-> liftSubsystem.setLiftSpeed(0.1)))
             .whenReleased(new RunCommand(()-> liftSubsystem.setLiftSpeed(0)))
