@@ -1,7 +1,7 @@
 package frc.robot.utils;
 
 @FunctionalInterface
-public interface Input<T> 
+public interface DoubleInput
 {
-    T get();
+    double get();
 }

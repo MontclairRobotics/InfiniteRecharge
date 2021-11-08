@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static frc.robot.RobotContainer.driveSubsystem;
@@ -11,7 +12,7 @@ public class DriveStraight extends CommandBase {
     //distance is in feet
     public DriveStraight(double distance){
         distanceController = new PIDController(1,0,0);
-        distanceController.setSetpoint(distance*8*Math.PI * 1/6); 
+        distanceController.setSetpoint(distance); 
         distanceController.setTolerance(0.1);
     }
 
@@ -22,7 +23,8 @@ public class DriveStraight extends CommandBase {
 
     @Override
     public void execute() {
-        driveSubsystem.arcadeDrive(distanceController.calculate(driveSubsystem.getAverageEncoderDistance()),0);
+        driveSubsystem.arcadeDriveDirect(distanceController.calculate(driveSubsystem.getAverageDistance()),0);
+        SmartDashboard.putNumber("Average distance", driveSubsystem.getAverageDistance());
     }
 
     @Override
@@ -32,6 +34,6 @@ public class DriveStraight extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        driveSubsystem.arcadeDrive(0,0);
+        driveSubsystem.arcadeDriveDirect(0,0);
     }
 }

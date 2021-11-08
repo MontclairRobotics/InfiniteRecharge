@@ -12,7 +12,7 @@ public class ShootSequence extends SequentialCommandGroup {
     public ShootSequence(){
         addCommands(
                 
-                new DriveStraight(1), // Drive into the wall
+                new DriveStraight(10), // Drive into the wall
                 
                 
                 new InstantCommand(()-> shooterSubsystem.setSpeed(1)),

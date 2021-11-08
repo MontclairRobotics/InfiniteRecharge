@@ -5,11 +5,10 @@ import frc.robot.commands.DriveStraight;
 
 public class AutoDrive extends SequentialCommandGroup {
 
-    // Test Mode that will drive a distance of 5 "units"
+    // Test Mode that will drive a distance of 1 foot
     public AutoDrive() {
         addCommands(
-                //new LowerIntake(),
-                new DriveStraight(1)
+                new DriveStraight(12)
         );
     }
 }

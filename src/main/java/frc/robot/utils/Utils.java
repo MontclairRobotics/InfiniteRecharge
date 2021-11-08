@@ -24,7 +24,28 @@ public class Utils {
             return max;
         }
         return input;
+    }
 
+    public static double clampUnordered(double input, double a, double b)
+    {
+        return a < b ? clamp(input, a, b) : clamp(input, b, a);
+    }
+
+    public static double signZero(double v)
+    {
+        if(v < 0) return -1;
+        else if(v == 0) return 0;
+        else return 1;
+    }
+
+    public static boolean signsDiffer(double a, double b)
+    {
+        return (a <= 0) ^ (b <= 0);
+    }
+
+    public static double roundToNearest(double input, double step)
+    {
+        return Math.round(input / step) * step;
     }
 
     public static void rumbleDriver(boolean rumble) {

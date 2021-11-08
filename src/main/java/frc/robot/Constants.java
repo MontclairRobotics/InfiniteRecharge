@@ -18,17 +18,19 @@ import edu.wpi.first.wpilibj.I2C;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
     public static final class DriveConstants {
         public static final int kFrontLeftMotorPort = 3;
         public static final int kFrontRightMotorPort = 9;
         public static final int kBackLeftMotorPort = 11;
         public static final int kBackRightMotorPort = 7;
 
-        public static final int kEncoderCPR = 1024;
+        public static final double kEncoderCPR = 42;
         public static final double kWheelDiameterInches = 6;
+        public static final double kGearboxRatioMotorToOut = 8.0 / 1.0;
         public static final double kEncoderDistancePerPulse =
-                // Assumes the encoders are directly mounted on the wheel shafts
-                (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+            // Assumes the encoders are on a 8:1 gearbox
+            ((kWheelDiameterInches/*in*/ * Math.PI /*r o*/) / /*r m*/ kGearboxRatioMotorToOut) / kEncoderCPR;
 
         public static final double kTurnP = 1;
         public static final double kTurnI = 0;
@@ -36,6 +38,16 @@ public final class Constants {
 
         public static final double kTurnToleranceDeg = 5;
         public static final double kTurnRateToleranceDegPerS = 10; // degrees per second
+
+        private static final double kTimeForEase = 0.25;
+        public static final double kDriveSlope = 1 / (kTimeForEase * 1000);
+        
+        private static final double kTimeForTurnEase = 0.1;
+        public static final double kDriveTurnSlope = 1 / (kTimeForTurnEase * 1000);
+        
+        public static final double kDriveSnapFactor = 0.3;
+
+        public static final double kTurnFactor = 0.7;
     }
 
     public static final class ShooterConstants {
