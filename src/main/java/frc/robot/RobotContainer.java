@@ -64,12 +64,12 @@ public class RobotContainer {
      */
     public RobotContainer() 
     {
-        
         configureButtonBindings();
 
         //MotionProfile profiler = new MotionProfile(() -> driverController.getY(), () -> driveSubsystem.getAverageEncoderSpeed(), 1);
-        autoChooser.setDefaultOption("Auto Drive", new AutoDrive());
-        autoChooser.addOption("Auto Shoot", new ShootSequence());
+        autoChooser.setDefaultOption("Auto Drive", new AutoDrive(3));
+        autoChooser.addOption("Auto Shoot 3s", new ShootSequence(3));
+        autoChooser.addOption("Auto Shoot 5s", new ShootSequence(5));
         SmartDashboard.putData("Auto Modes", autoChooser);
 
         driveStateChooser.setDefaultOption("Simple", DriveState.SIMPLE);
@@ -77,8 +77,8 @@ public class RobotContainer {
         SmartDashboard.putData(driveStateChooser);
 
         //this will start the cameras (have to begin recording for them to render)
-        //Shuffleboard.startRecording();
-        //Shuffleboard.stopRecording();
+        Shuffleboard.startRecording();
+        Shuffleboard.stopRecording();
 
         driveSubsystem.init(
             new LinearProfile(
@@ -93,9 +93,11 @@ public class RobotContainer {
         );
 
         driveSubsystem.setDefaultCommand(
-            new RunCommand(() -> driveSubsystem
-                .arcadeDrive(driverController.getY(Hand.kLeft),
-                    driverController.getX(Hand.kRight)), driveSubsystem));
+            new RunCommand(
+                () -> driveSubsystem.exec(), 
+                driveSubsystem
+            )
+        );
 
     }
 
@@ -143,12 +145,12 @@ public class RobotContainer {
 
 
         // intake movement
-        new JoystickButton(auxiliaryController, XboxController.Button.kStart.value)
+        new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
             .whenHeld(new RunCommand(()->intakeSubsystem.setIntakeSpeed(-0.75)))
             .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
 
         // intake movement intaking from above
-        new JoystickButton(auxiliaryController, XboxController.Button.kBack.value)
+        new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
             .whenHeld(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(1)))
             .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
 

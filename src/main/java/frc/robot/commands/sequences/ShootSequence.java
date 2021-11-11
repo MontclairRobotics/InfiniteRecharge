@@ -1,5 +1,6 @@
 package frc.robot.commands.sequences;
 
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.DriveStraight;
 
@@ -9,15 +10,14 @@ import static frc.robot.RobotContainer.transportSubsystem;
 
 public class ShootSequence extends SequentialCommandGroup {
 
-    public ShootSequence(){
+    public ShootSequence(double timeSeconds){
         addCommands(
-                
-                new DriveStraight(10), // Drive into the wall
-                
+                new AutoDrive(timeSeconds), // Drive into the wall
                 
                 new InstantCommand(()-> shooterSubsystem.setSpeed(1)),
-                new WaitUntilCommand(()-> (shooterSubsystem.getRPM()>100)),
-                new InstantCommand(() -> transportSubsystem.setTransportSpeed(1))
+                new WaitUntilCommand(()-> (shooterSubsystem.getRPM()>1000)),
+                new InstantCommand(() -> transportSubsystem.setTransportSpeed(1)),
+                new edu.wpi.first.wpilibj2.command.WaitCommand(1)
         );
     }
 

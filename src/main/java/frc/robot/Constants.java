@@ -30,7 +30,7 @@ public final class Constants {
         public static final double kGearboxRatioMotorToOut = 8.0 / 1.0;
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are on a 8:1 gearbox
-            ((kWheelDiameterInches/*in*/ * Math.PI /*r o*/) / /*r m*/ kGearboxRatioMotorToOut) / kEncoderCPR;
+            ((kWheelDiameterInches/*in*/ * Math.PI /*r o*/) / /*r m*/ kGearboxRatioMotorToOut); // / kEncoderCPR; //take off encoder cpr
 
         public static final double kTurnP = 1;
         public static final double kTurnI = 0;

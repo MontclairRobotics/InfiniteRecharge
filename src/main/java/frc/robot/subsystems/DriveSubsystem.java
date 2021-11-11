@@ -8,10 +8,12 @@ import edu.wpi.first.networktables.LogMessage;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.utils.Input;
 import frc.robot.utils.Profile;
 
@@ -51,6 +53,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     private Input<DriveState> currentState;
 
+    private boolean acceptingInput = false;
+
     // Construction
     public DriveSubsystem() 
     {
@@ -68,6 +72,16 @@ public class DriveSubsystem extends SubsystemBase {
         this.fwdProfile = fwdProfile;
         this.rotProfile = rotProfile;
         this.currentState = currentState;
+    }
+
+    public void exec()
+    {
+        if(acceptingInput)
+        {
+            var cont = RobotContainer.driverController;
+            arcadeDrive(cont.getY(Hand.kLeft),
+                        cont.getX(Hand.kRight));
+        }
     }
 
     public void arcadeDrive(double fwd, double rot) 
@@ -126,7 +140,13 @@ public class DriveSubsystem extends SubsystemBase {
         navx.reset();
     }
 
-    public void setMaxOutput(double maxOutput) {
+    public void setMaxOutput(double maxOutput) 
+    {
         differentialDrive.setMaxOutput(maxOutput);
+    }
+
+    public void setAcceptingInput(boolean value) 
+    {
+        acceptingInput = value;
     }
 }
