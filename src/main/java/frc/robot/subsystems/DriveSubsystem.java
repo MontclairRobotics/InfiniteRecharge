@@ -16,11 +16,15 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.utils.Input;
 import frc.robot.utils.Profile;
+import frc.robot.utils.Utils;
 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless;
 import static frc.robot.Constants.DriveConstants.*;
 
 public class DriveSubsystem extends SubsystemBase {
+
+    public static final DriveState kStartDriveState = DriveState.EASED;
+    public static final DriveState kAltDriveState = DriveState.SIMPLE;
 
     private final CANSparkMax frontLeftMotor = new CANSparkMax(kFrontLeftMotorPort, kBrushless);
     private final CANSparkMax frontRightMotor = new CANSparkMax(kFrontRightMotorPort, kBrushless);
@@ -47,11 +51,11 @@ public class DriveSubsystem extends SubsystemBase {
     private Profile rotProfile;
 
     private double previousFwd = 0;
-    private double previousRot = 0;
+    private double previousRot = Constants.DriveConstants.kTurnCompensate;
 
     private long previousTime;
 
-    private Input<DriveState> currentState;
+    private DriveState currentState;
 
     private boolean acceptingInput = false;
 
@@ -62,16 +66,16 @@ public class DriveSubsystem extends SubsystemBase {
         rightEncoder.setPositionConversionFactor(kEncoderDistancePerPulse);
 
         differentialDrive.setRightSideInverted(true);
-        differentialDrive.setMaxOutput(0.6);
+        differentialDrive.setMaxOutput(0.75);
 
         previousTime = System.currentTimeMillis();
     }
 
-    public void init(Profile fwdProfile, Profile rotProfile, Input<DriveState> currentState)
+    public void init(Profile fwdProfile, Profile rotProfile)
     {
         this.fwdProfile = fwdProfile;
         this.rotProfile = rotProfile;
-        this.currentState = currentState;
+        this.currentState = kStartDriveState;
     }
 
     public void exec()
@@ -82,6 +86,8 @@ public class DriveSubsystem extends SubsystemBase {
             arcadeDrive(cont.getY(Hand.kLeft),
                         cont.getX(Hand.kRight));
         }
+
+        SmartDashboard.putString("Drive Mode", currentState.name());
     }
 
     public void arcadeDrive(double fwd, double rot) 
@@ -89,7 +95,7 @@ public class DriveSubsystem extends SubsystemBase {
         //System.out.println("Rot In: " + rot);
         var currentTime = System.currentTimeMillis();
 
-        if(currentState.get() == DriveState.EASED)
+        if(currentState == DriveState.EASED)
         {
             fwd = fwdProfile.profile(fwd, previousFwd, currentTime - previousTime);
             rot = rotProfile.profile(rot, previousRot, currentTime - previousTime);
@@ -108,7 +114,15 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void arcadeDriveDirect(double fwd, double rot)
     {
-        differentialDrive.arcadeDrive(fwd, rot * Constants.DriveConstants.kTurnFactor);
+        // Account for turn compensation
+        rot = rot * Constants.DriveConstants.kTurnFactor;
+        if(Math.abs(fwd) >= 0.1)
+        {
+            rot += Constants.DriveConstants.kTurnCompensate;
+        }
+        rot = Utils.clamp(rot, -1, 1);
+
+        differentialDrive.arcadeDrive(fwd, rot);
     }
 
     public void resetEncoders() {
@@ -148,5 +162,10 @@ public class DriveSubsystem extends SubsystemBase {
     public void setAcceptingInput(boolean value) 
     {
         acceptingInput = value;
+    }
+
+    public void setCurrentDriveState(DriveState state)
+    {
+        currentState = state;
     }
 }

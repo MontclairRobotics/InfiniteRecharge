@@ -47,7 +47,8 @@ public final class Constants {
         
         public static final double kDriveSnapFactor = 0.3;
 
-        public static final double kTurnFactor = 0.7;
+        public static final double kTurnFactor = 0.9;
+        public static final double kTurnCompensate = -0.05;
     }
 
     public static final class ShooterConstants {

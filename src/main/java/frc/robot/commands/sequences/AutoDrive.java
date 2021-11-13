@@ -11,10 +11,13 @@ import static frc.robot.RobotContainer.driveSubsystem;
 public class AutoDrive extends SequentialCommandGroup {
 
     // Test Mode that will drive a distance of 1 foot
-    public AutoDrive(double timeSeconds) {
+    public AutoDrive(double timeSeconds) 
+    {
         addCommands(
-            new DoForSecondsCommand(() -> driveSubsystem.arcadeDriveDirect(0.7, 0), timeSeconds, driveSubsystem),
+            new DoForSecondsCommand(() -> driveSubsystem.arcadeDriveDirect(0.5, 0), timeSeconds, driveSubsystem),
             new DoForSecondsCommand(() -> driveSubsystem.arcadeDriveDirect(0,0),    0.1,         driveSubsystem)
         );
+
+        addRequirements(driveSubsystem);
     }
 }

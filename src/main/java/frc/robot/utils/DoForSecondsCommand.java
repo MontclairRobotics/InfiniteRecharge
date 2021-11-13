@@ -6,6 +6,12 @@ public class DoForSecondsCommand extends WhileCommand
 {
     private long startTimeMillis;
     private long targetTimeLength;
+    
+    @Override
+    public void initialize() 
+    {
+        startTimeMillis = System.currentTimeMillis();
+    }
 
     public DoForSecondsCommand(Runnable runnable, double time, SubsystemBase... requirements)
     {
@@ -14,12 +20,11 @@ public class DoForSecondsCommand extends WhileCommand
             (WhileCommand inst) -> 
             {
                 var instR = (DoForSecondsCommand)inst;
-                return System.currentTimeMillis() - instR.startTimeMillis > instR.targetTimeLength;
+                return System.currentTimeMillis() - instR.startTimeMillis < instR.targetTimeLength;
             },
             requirements
         );
 
-        this.startTimeMillis = System.currentTimeMillis();
         this.targetTimeLength = (long)(time * 1000);
     }
 }

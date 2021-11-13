@@ -42,7 +42,6 @@ public class RobotContainer {
 
     //- FIELDS -//
     private static final SendableChooser<Command> autoChooser = new SendableChooser<>();
-    private static final SendableChooser<DriveState> driveStateChooser = new SendableChooser<>();
 
     public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
@@ -69,13 +68,12 @@ public class RobotContainer {
         //MotionProfile profiler = new MotionProfile(() -> driverController.getY(), () -> driveSubsystem.getAverageEncoderSpeed(), 1);
         autoChooser.setDefaultOption("Auto Drive 2s", new AutoDrive(2));
         autoChooser.addOption("Auto Drive 4s", new AutoDrive(4));
+        autoChooser.addOption("Auto Shoot 1s", new ShootSequence(1));
+        autoChooser.addOption("Auto Shoot 1.5s", new ShootSequence(1.5));
         autoChooser.addOption("Auto Shoot 2s", new ShootSequence(2));
+        autoChooser.addOption("Auto Shoot 3s", new ShootSequence(3));
         autoChooser.addOption("Auto Shoot 4s", new ShootSequence(4));
         SmartDashboard.putData("Auto Modes", autoChooser);
-
-        driveStateChooser.setDefaultOption("Simple", DriveState.SIMPLE);
-        driveStateChooser.addOption("Eased", DriveState.EASED);
-        SmartDashboard.putData(driveStateChooser);
 
         //this will start the cameras (have to begin recording for them to render)
         Shuffleboard.startRecording();
@@ -89,8 +87,7 @@ public class RobotContainer {
             new LinearProfile(
                 () -> Constants.DriveConstants.kDriveTurnSlope,
                 () -> 1
-            ),
-            () -> driveStateChooser.getSelected()
+            )
         );
 
         driveSubsystem.setDefaultCommand(
@@ -122,6 +119,11 @@ public class RobotContainer {
             .whenPressed(() -> driveSubsystem.setMaxOutput(0.75/2))
             .whenReleased(() -> driveSubsystem.setMaxOutput(0.75));
 
+        // Simple Mode
+        new JoystickButton(driverController, XboxController.Button.kA.value)
+            .whenPressed(() -> driveSubsystem.setCurrentDriveState(DriveSubsystem.kAltDriveState))
+            .whenReleased(() -> driveSubsystem.setCurrentDriveState(DriveSubsystem.kStartDriveState));
+
         // heading lock
         /*new JoystickButton(driverController, XboxController.Button.kStickLeft.value)
             .whenHeld(
@@ -147,13 +149,13 @@ public class RobotContainer {
 
         // intake movement
         new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
-            .whenHeld(new RunCommand(()->intakeSubsystem.setIntakeSpeed(-0.75)))
-            .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
+            .whileHeld(() -> intakeSubsystem.setIntakeSpeed(-0.75))
+            .whenReleased(() -> intakeSubsystem.setIntakeSpeed(0));
 
         // intake movement intaking from above
-        new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
-            .whenHeld(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(1)))
-            .whenReleased(new RunCommand(()-> intakeSubsystem.setIntakeSpeed(0)));
+        new JoystickButton(auxiliaryController, XboxController.Button.kY.value)
+            .whileHeld(() -> intakeSubsystem.setIntakeSpeed(1))
+            .whenReleased(() -> intakeSubsystem.setIntakeSpeed(0));
 
         // Automatic Transport Stall
         /*new JoystickButton(auxiliaryController, XboxController.Button.kB.value)
@@ -161,14 +163,15 @@ public class RobotContainer {
             .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));*/
 
         // Manual Transport Run
-        new JoystickButton(auxiliaryController, XboxController.Button.kBumperLeft.value)
-            .whenHeld(new RunCommand(()-> transportSubsystem.setTransportSpeed(1, 1)))
-            .whenReleased(new RunCommand(()-> transportSubsystem.setTransportSpeed(0, 0)));
+        new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
+            .whileHeld(() -> transportSubsystem.setTransportSpeed(1, 1))
+            .whenReleased(() -> transportSubsystem.setTransportSpeed(0, 0));
 
         // Manual Shoot
         new JoystickButton(auxiliaryController, XboxController.Button.kA.value)
-            .whenHeld(new RunCommand(()-> shooterSubsystem.setSpeed(1)))
+            .whileHeld(()-> shooterSubsystem.setSpeed(0.8))
             .whenReleased(()->shooterSubsystem.setSpeed(0));
+        
         // Lift
         /*new JoystickButton(auxiliaryController, XboxController.Button.kX.value)
             .whenHeld(new RunCommand(()-> liftSubsystem.setLiftSpeed(0.5)))
