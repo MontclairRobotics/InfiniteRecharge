@@ -67,9 +67,10 @@ public class RobotContainer {
         configureButtonBindings();
 
         //MotionProfile profiler = new MotionProfile(() -> driverController.getY(), () -> driveSubsystem.getAverageEncoderSpeed(), 1);
-        autoChooser.setDefaultOption("Auto Drive", new AutoDrive(3));
-        autoChooser.addOption("Auto Shoot 3s", new ShootSequence(3));
-        autoChooser.addOption("Auto Shoot 5s", new ShootSequence(5));
+        autoChooser.setDefaultOption("Auto Drive 2s", new AutoDrive(2));
+        autoChooser.addOption("Auto Drive 4s", new AutoDrive(4));
+        autoChooser.addOption("Auto Shoot 2s", new ShootSequence(2));
+        autoChooser.addOption("Auto Shoot 4s", new ShootSequence(4));
         SmartDashboard.putData("Auto Modes", autoChooser);
 
         driveStateChooser.setDefaultOption("Simple", DriveState.SIMPLE);
